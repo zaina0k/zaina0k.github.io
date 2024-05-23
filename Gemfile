@@ -6,3 +6,14 @@ gem "jekyll", "~> 3.7"
 gem "minimal-mistakes-jekyll"
 
 gem "webrick"
+gem "jekyll-archives"
+
+group :jekyll_plugins do
+    gem "jekyll-feed"
+    gem "jekyll-seo-tag"
+    gem "jekyll-sitemap"
+    gem "jekyll-paginate"
+    gem "jekyll-include-cache"
+    gem "jekyll-algolia"
+  end
+  
