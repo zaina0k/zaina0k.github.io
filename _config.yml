@@ -28,7 +28,7 @@ url                      : "https://zainaltaf.dev"# the base hostname & protocol
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "zaina0k/zaina0k.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
+logo                     : "assets/images/profile picture1.JPG" # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 breadcrumbs              : true # true, false (default)
 words_per_minute         : 200
@@ -116,7 +116,7 @@ analytics:
 # Site Author
 author:
   name             : "Zain Altaf"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "assets/images/profile picture1.JPG" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Professional Human"
   location         : "Manchester, UK"
   email            :
@@ -126,7 +126,7 @@ author:
       url: "mailto:zainaltaf2233@gmail.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://zainaltaf.dev"
+      # url: "https://zainaltaf.dev"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/zain_a0k"
@@ -145,7 +145,7 @@ footer:
   links:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/zain_a0k"
+      # url: "https://twitter.com/zain_a0k"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url:
@@ -160,7 +160,7 @@ footer:
       # url:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/zaina0k"
+      # url: "https://instagram.com/zaina0k"
 
 
 # Reading Files
@@ -229,11 +229,11 @@ sass:
 
 # Outputting
 permalink: /:categories/:title/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: "Europe/London" # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
 # Pagination with jekyll-paginate
-paginate: 5 # amount of posts to show
+paginate: 3 # amount of posts to show
 paginate_path: /page:num/
 
 # Pagination with jekyll-paginate-v2
@@ -287,12 +287,11 @@ whitelist:
 #  - <base_path>/categories/my-awesome-category/index.html ~> path: /categories/
 #  - <base_path>/my-awesome-category/index.html ~> path: /
 category_archive:
-  type: liquid
+  type: jekyll-archives
   path: /categories/
 tag_archive:
-  type: liquid
+  type: jekyll-archives
   path: /tags/
-# https://github.com/jekyll/jekyll-archives
 jekyll-archives:
   enabled:
     - categories
@@ -321,7 +320,7 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: #true
+      author_profile: true
       read_time: true
       comments: #true
       share: #true
