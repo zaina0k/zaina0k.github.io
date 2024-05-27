@@ -6,7 +6,7 @@ gem "jekyll", "~> 3.7"
 gem "minimal-mistakes-jekyll"
 
 gem "webrick"
-gem "jekyll-archives"
+
 
 group :jekyll_plugins do
     gem "jekyll-feed"
