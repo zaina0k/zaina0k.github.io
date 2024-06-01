@@ -118,7 +118,7 @@ author:
   name             : "Zain Altaf"
   avatar           : "assets/images/profile picture1.JPG" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Professional Human"
-  location         : "Manchester, UK"
+  location         : 
   email            :
   links:
     - label: "Email"
@@ -151,7 +151,7 @@ footer:
       # url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/zaina0k"
+      # url: "https://github.com/zaina0k"
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       # url:
@@ -161,6 +161,8 @@ footer:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/zaina0k"
+    - label: Contact me
+      url: "/contact/"
 
 
 # Reading Files
