@@ -163,6 +163,10 @@ footer:
       # url: "https://instagram.com/zaina0k"
     - label: Contact me
       url: "/contact/"
+      icon: "none"
+    - label: Support me
+      icon: "none"
+      url: "https://buymeacoffee.com/zainaltaf"
 
 
 # Reading Files
