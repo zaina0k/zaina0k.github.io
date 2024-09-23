@@ -9,16 +9,22 @@ canonical_url: "https://zainaltaf.dev/projects"
 
 
 <div class="project-tiles">
+    <a href="/projects/unity_flappy_bird/" class="tile" style="background-image: url('/assets/images/Flappy bird gameplay.png');">
+        <div class="overlay">
+            <h3>Flappy Bird</h3>
+            <p>A clone of the old iPhone game</p>
+        </div>
+    </a>
+    <a href="/projects/unity_snowboarder/" class="tile" style="background-image: url('/assets/images/Snow Boarder 1.png');">
+        <div class="overlay">
+            <h3>Snow Boarder</h3>
+            <p>Sidescroling Snowboarding Game</p>
+        </div>
+    </a>
     <a href="/projects/unity_pizza_delivery" class="tile" style="background-image: url('/assets/images/Pizza Delivery1.png');">
         <div class="overlay">
             <h3>Pizza Delivery</h3>
             <p>Intro to game development pizza devlivery game</p>
-        </div>
-    </a>
-    <a href="/projects/project2" class="tile" style="background-image: url('/assets/images/Snow Boarder 1.png');">
-        <div class="overlay">
-            <h3>Snow Boarder</h3>
-            <p>Sidescroling Snowboarding Game</p>
         </div>
     </a>
     <!-- Add more tiles as needed -->
