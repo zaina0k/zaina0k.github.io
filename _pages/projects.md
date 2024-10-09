@@ -9,6 +9,18 @@ canonical_url: "https://zainaltaf.dev/projects"
 
 
 <div class="project-tiles">
+    <a href="/projects/sign_language_translator/" class="tile" style="background-image: url('/assets/images/SLT4.jpeg');">
+        <div class="overlay">
+            <h3>Sign Language Translator</h3>
+            <p>A-Level project</p>
+        </div>
+    </a>
+    <a href="/projects/elo_ranking/" class="tile" style="background-image: url('/assets/images/elo_ranking2.jpeg');">
+        <div class="overlay">
+            <h3>Elo Ranking</h3>
+            <p>A picture ranking system</p>
+        </div>
+    </a>
     <a href="/projects/unity_flappy_bird/" class="tile" style="background-image: url('/assets/images/Flappy bird gameplay.png');">
         <div class="overlay">
             <h3>Flappy Bird</h3>
