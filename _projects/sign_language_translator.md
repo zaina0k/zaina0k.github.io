@@ -1,5 +1,6 @@
 ---
 layout: posts
+
 title: "Sign Language Translator"
 permalink: /projects/sign_language_translator/
 date: 2021-01-01
