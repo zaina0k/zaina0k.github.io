@@ -9,6 +9,12 @@ canonical_url: "https://zainaltaf.dev/projects"
 
 
 <div class="project-tiles">
+    <a href="/projects/MSCodingChallenge2024/" class="tile" style="background-image: url('/assets/images/MS image 3.jpg');">
+        <div class="overlay">
+            <h3>Morgan Stanley Coding Challenge</h3>
+            <p>Currency Exchange Bot</p>
+        </div>
+    </a>
     <a href="/projects/sign_language_translator/" class="tile" style="background-image: url('/assets/images/SLT4.jpeg');">
         <div class="overlay">
             <h3>Sign Language Translator</h3>
