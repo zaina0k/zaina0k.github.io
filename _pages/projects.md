@@ -9,6 +9,12 @@ canonical_url: "https://zainaltaf.dev/projects"
 
 
 <div class="project-tiles">
+    <a href="/projects/LetsHackLeicester2024/" class="tile" style="background-image: url('/assets/images/LHL2024 image 1.png');">
+        <div class="overlay">
+            <h3>Let's Hack Leicester Hackathon</h3>
+            <p>Project Group Social Media</p>
+        </div>
+    </a>
     <a href="/projects/MSCodingChallenge2024/" class="tile" style="background-image: url('/assets/images/MS image 3.jpg');">
         <div class="overlay">
             <h3>Morgan Stanley Coding Challenge</h3>
