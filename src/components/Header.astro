@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from './ThemeToggle.tsx';
+
 const navLinks = [
   { href: '/',          label: 'Home'     },
   { href: '/projects',  label: 'Projects' },
@@ -39,8 +41,7 @@ const currentPath = Astro.url.pathname;
         ))}
       </ul>
 
-      <!-- ThemeToggle injected here in Increment 7 -->
-      <slot name="theme-toggle" />
+      <ThemeToggle client:load />
     </div>
   </nav>
 </header>

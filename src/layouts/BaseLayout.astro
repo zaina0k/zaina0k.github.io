@@ -38,7 +38,16 @@ const pageTitle = `${title} | Zain Altaf`;
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Anti-flash theme init — reads localStorage before first paint (added in Increment 7) -->
+    <!-- Reads localStorage before first paint to prevent flash of wrong theme -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
   <body class="flex min-h-screen flex-col">
     <Header />
