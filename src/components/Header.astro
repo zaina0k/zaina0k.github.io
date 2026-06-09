@@ -1,0 +1,46 @@
+---
+const navLinks = [
+  { href: '/',          label: 'Home'     },
+  { href: '/projects',  label: 'Projects' },
+  { href: '/about',     label: 'About'    },
+  { href: '/contact',   label: 'Contact'  },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]">
+  <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <!-- Site name / logo -->
+    <a
+      href="/"
+      class="text-lg font-semibold tracking-tight text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors"
+    >
+      Zain Altaf
+    </a>
+
+    <!-- Nav links + ThemeToggle slot -->
+    <div class="flex items-center gap-6">
+      <ul class="hidden sm:flex items-center gap-6 text-sm font-medium">
+        {navLinks.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              class:list={[
+                'transition-colors hover:text-[var(--color-accent)]',
+                currentPath === href
+                  ? 'text-[var(--color-accent)]'
+                  : 'text-[var(--color-text-muted)]',
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- ThemeToggle injected here in Increment 7 -->
+      <slot name="theme-toggle" />
+    </div>
+  </nav>
+</header>
