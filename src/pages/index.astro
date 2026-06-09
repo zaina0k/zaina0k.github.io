@@ -1,11 +1,20 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title="Home"
+  description="Zain Altaf — Software engineer and CS graduate. Portfolio showcasing full-stack projects built with Python, Next.js, Flask, and more."
+>
+  <div class="mx-auto max-w-5xl px-6 py-24 text-center">
+    <h1 class="text-4xl font-bold tracking-tight text-[var(--color-text)] sm:text-5xl">
+      Zain Altaf
+    </h1>
+    <p class="mt-4 text-lg text-[var(--color-text-muted)]">
+      Software Engineer · CS Graduate · Building full-stack projects
+    </p>
+    <p class="mt-6 text-sm text-[var(--color-text-muted)]">
+      Homepage coming in Checkpoint 2.
+    </p>
+  </div>
+</BaseLayout>
