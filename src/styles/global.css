@@ -1,1 +1,51 @@
 @import "tailwindcss";
+
+/* Class-based dark mode — toggles on <html class="dark"> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light theme */
+:root {
+  --color-bg:          #f5f0e8;  /* cream */
+  --color-bg-subtle:   #ede8df;  /* slightly darker cream for cards/sections */
+  --color-text:        #2c2c2c;  /* near-black */
+  --color-text-muted:  #6b6b6b;  /* secondary text */
+  --color-accent:      #6b7c4a;  /* olive */
+  --color-accent-hover:#556139;  /* darker olive on hover */
+  --color-border:      #d4cec4;  /* subtle border */
+  --color-surface:     #ffffff;  /* card/panel backgrounds */
+}
+
+/* Dark theme */
+.dark {
+  --color-bg:          #1a1a16;  /* near-black with warm tint */
+  --color-bg-subtle:   #232320;  /* slightly lighter for cards/sections */
+  --color-text:        #e8e3d8;  /* warm off-white */
+  --color-text-muted:  #9e9b93;  /* muted warm grey */
+  --color-accent:      #8fa05e;  /* lighter olive for dark bg */
+  --color-accent-hover:#a3b670;  /* even lighter on hover */
+  --color-border:      #333330;  /* subtle dark border */
+  --color-surface:     #252520;  /* card/panel backgrounds */
+}
+
+/* Map CSS vars into Tailwind theme tokens */
+@theme inline {
+  --color-bg:          var(--color-bg);
+  --color-bg-subtle:   var(--color-bg-subtle);
+  --color-text:        var(--color-text);
+  --color-text-muted:  var(--color-text-muted);
+  --color-accent:      var(--color-accent);
+  --color-accent-hover:var(--color-accent-hover);
+  --color-border:      var(--color-border);
+  --color-surface:     var(--color-surface);
+}
+
+/* Base resets */
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+body {
+  min-height: 100vh;
+  font-family: system-ui, sans-serif;
+}
