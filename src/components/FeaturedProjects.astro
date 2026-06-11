@@ -1,44 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
 
-const projects = [
-  {
-    number: '01',
-    title: "Let's Hack Leicester",
-    year: '2024',
-    summary: 'Collaborative portfolio platform for CS students',
-    detail: 'Led a team of 5 to build a full-stack web app in 24 hours. Next.js frontend, Flask API, SQLite database.',
-    tags: ['Team Lead', 'Full-stack', 'Hackathon'],
-    href: '/projects/lets-hack-leicester',
-  },
-  {
-    number: '02',
-    title: 'Morgan Stanley Coding Challenge',
-    year: '2024',
-    summary: 'Currency exchange trading bot',
-    detail: 'Built an EMA-based algorithmic trading strategy. Placed 7th out of 27 teams in a Morgan Stanley-hosted competition.',
-    tags: ['Algorithms', 'Python', 'Competition'],
-    href: '/projects/morgan-stanley-challenge',
-  },
-  {
-    number: '03',
-    title: 'Sign Language Translator',
-    year: '2023',
-    summary: 'Real-time sign language recognition using computer vision',
-    detail: 'Machine learning model trained to classify hand gestures from webcam input and translate them to text.',
-    tags: ['Python', 'Computer Vision', 'ML'],
-    href: '/projects/sign-language-translator',
-  },
-  {
-    number: '04',
-    title: 'Elo Ranking System',
-    year: '2023',
-    summary: 'Competitive ranking engine with match history',
-    detail: 'Full-stack application implementing the Elo rating algorithm with a REST API backend and interactive frontend.',
-    tags: ['Full-stack', 'Algorithms', 'REST API'],
-    href: '/projects/elo-ranking',
-  },
-];
+const allProjects = await getCollection('projects', ({ data }) => data.featured);
+const projects = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 ---
 
 <section class="mx-auto max-w-5xl px-6 py-16">
@@ -64,7 +29,15 @@ const projects = [
   <!-- Cards grid -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     {projects.map((project) => (
-      <ProjectCard {...project} />
+      <ProjectCard
+        number={String(project.data.sortOrder).padStart(2, '0')}
+        title={project.data.title}
+        year={String(project.data.date.getFullYear())}
+        summary={project.data.summary}
+        detail={project.data.detail}
+        tags={project.data.tags}
+        href={`/projects/${project.id}`}
+      />
     ))}
   </div>
 
