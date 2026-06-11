@@ -7,9 +7,10 @@ Personal portfolio site for Zain Altaf, a software engineer and Computer Science
 ## Tech stack
 
 - [Astro](https://astro.build) — static site generation, file-based routing, content collections
-- [Tailwind CSS](https://tailwindcss.com) — utility-first styling, dark/light theme via `darkMode: 'class'`
+- [Tailwind CSS v4](https://tailwindcss.com) — utility-first styling via `@tailwindcss/vite`; dark/light theme via `@custom-variant dark`
 - [React](https://react.dev) — used only for interactive "islands" (theme toggle, contact form)
-- Markdown + typed frontmatter (Astro Content Collections) — drives the project case studies
+- [Inter](https://fontsource.org/fonts/inter) + [JetBrains Mono](https://fontsource.org/fonts/jetbrains-mono) — self-hosted via `@fontsource`
+- Markdown + typed frontmatter (Astro Content Collections) — drives the project case studies (scaffolded in Checkpoint 3)
 
 ## Getting started
 
@@ -32,23 +33,38 @@ npm run dev        # starts local dev server at localhost:4321
 
 ```
 website/
-├── public/                  # Static files served as-is (favicon, CNAME, og-image)
+├── public/                  # Static files served as-is (favicon, CNAME)
 ├── src/
-│   ├── content/
-│   │   ├── config.ts        # Content Collection schemas (typed frontmatter)
-│   │   └── projects/        # One Markdown file per project case study
-│   ├── pages/               # File-based routing (index, about, contact, projects/[slug])
-│   ├── layouts/             # Page wrappers (BaseLayout: header, footer, SEO head)
-│   ├── components/          # Reusable UI — .astro for static, .tsx for interactive islands
-│   ├── styles/              # Tailwind directives + CSS custom properties (theme colours)
-│   └── assets/              # Images, CV PDF, video assets
+│   ├── content/             # Not yet scaffolded — Markdown project files + schema added in Checkpoint 3
+│   ├── pages/
+│   │   ├── index.astro      # Homepage (hero, currently, featured projects, skills, footer CTA)
+│   │   ├── about.astro      # About page (stub)
+│   │   ├── cv.astro         # CV page (stub — PDF wired in Checkpoint 4)
+│   │   ├── contact.astro    # Contact page (stub)
+│   │   └── projects/
+│   │       └── index.astro  # Projects index (stub — upgraded in Checkpoint 3)
+│   ├── layouts/
+│   │   └── BaseLayout.astro # Page shell: SEO head, anti-flash script, Header, Footer
+│   ├── components/
+│   │   ├── Header.astro         # Sticky nav: ZA mark, role badge, links, hamburger, CTA
+│   │   ├── Footer.astro         # 3-column footer: branding / project links / connect
+│   │   ├── ThemeToggle.tsx      # React island: light/dark toggle, localStorage persistence
+│   │   ├── HeroSection.astro    # Hero: status dot, headline, subtitle, CTA buttons, stats
+│   │   ├── StatCard.astro       # Reusable stat display (value + label)
+│   │   ├── CurrentlySection.astro  # "01 / Now" cards: Building, Learning, Reading
+│   │   ├── ProjectCard.astro    # Reusable project card: number, title, year, summary, tags
+│   │   ├── FeaturedProjects.astro  # "02 / Projects" section with 4 ProjectCard instances
+│   │   ├── SkillsStrip.astro    # "03 / Skills" horizontal keyword rows
+│   │   └── FooterCTA.astro      # "Open to opportunities. Let's connect." CTA block
+│   └── styles/
+│       └── global.css       # Tailwind import, @custom-variant dark, CSS vars, font-family
 ├── astro.config.mjs
 └── package.json
 ```
 
 ## Content model
 
-Each project lives in `src/content/projects/<slug>.md` with a typed frontmatter schema (validated at build time by `src/content/config.ts`). To add a new project, copy an existing entry, fill in the required fields (`title`, `summary`, `techStack`, `role`, etc.), and Astro will pick it up automatically — the build fails with a clear error if a required field is missing.
+Project case studies will live in `src/content/projects/<slug>.md` with a typed frontmatter schema validated at build time by `src/content/config.ts`. This is not yet scaffolded — it will be added in the next development phase along with dynamic routing at `/projects/[slug]`.
 
 ## Deployment
 
@@ -56,4 +72,4 @@ Pushing to `main` triggers a GitHub Actions workflow that runs `npm ci`, builds 
 
 ## Theming
 
-Dark/light mode is handled by a React island (`ThemeToggle`) that toggles a `dark` class on `<html>`; Tailwind's `darkMode: 'class'` strategy and CSS custom properties in `global.css` handle the colour swap. Default follows system preference and persists to `localStorage`.
+Dark/light mode is handled by a React island (`ThemeToggle`) that toggles a `dark` class on `<html>`. **Light is the default** — first-time visitors always see the light theme; dark is opt-in via the toggle and persists to `localStorage`. An inline `<script>` in `BaseLayout.astro` applies the stored preference before first paint to prevent flash. Colour tokens are CSS custom properties in `global.css`, mapped into Tailwind utilities via `@theme inline`.
