@@ -1,7 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import StatCard from './StatCard.astro';
-
-// No props — copy is hardcoded; swap photo placeholder in Checkpoint 5
+import profileImg from '../assets/profile.png';
 ---
 
 <section class="mx-auto max-w-5xl px-6 py-16 md:py-24">
@@ -62,11 +62,15 @@ import StatCard from './StatCard.astro';
       </div>
     </div>
 
-    <!-- Right: photo placeholder -->
+    <!-- Right: profile photo -->
     <div class="shrink-0 order-first md:order-last mb-8 md:mb-0">
-      <div class="w-48 h-48 md:w-64 md:h-64 rounded-xl bg-[var(--color-bg-subtle)] border border-[var(--color-border)] flex items-center justify-center">
-        <span class="text-[var(--color-text-muted)] text-sm tracking-wide">Photo</span>
-      </div>
+      <Image
+        src={profileImg}
+        alt="Zain Altaf"
+        width={256}
+        height={256}
+        class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-[var(--color-border)]"
+      />
     </div>
 
   </div>
