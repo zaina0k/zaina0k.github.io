@@ -1,10 +1,46 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import FooterCTA from '../../components/FooterCTA.astro';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 ---
 
-<BaseLayout title="Projects" description="Projects by Zain Altaf — CS graduate and software engineer.">
-  <div class="mx-auto max-w-5xl px-6 py-20">
-    <h1 class="text-3xl font-semibold text-[var(--color-text)]">Projects</h1>
-    <p class="mt-4 text-[var(--color-text-muted)]">Coming soon.</p>
+<BaseLayout
+  title="Projects"
+  description="Software engineering projects by Zain Altaf: hackathon builds, trading bots, accessible-tech applications, and more."
+>
+
+  <div class="mx-auto max-w-5xl px-6 pt-16 pb-10">
+
+    <!-- Page header -->
+    <div class="mb-10">
+      <p class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3">Work</p>
+      <h1 class="text-3xl font-semibold tracking-tight text-[var(--color-text)] mb-4">All Projects</h1>
+      <p class="text-[var(--color-text-muted)] max-w-lg">
+        Four projects that show how I think, build, and collaborate.
+      </p>
+    </div>
+
+    <!-- Project grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {projects.map((project) => (
+        <ProjectCard
+          number={String(project.data.sortOrder).padStart(2, '0')}
+          title={project.data.title}
+          year={String(project.data.date.getFullYear())}
+          summary={project.data.summary}
+          detail={project.data.detail}
+          tags={project.data.tags}
+          href={`/projects/${project.id}`}
+        />
+      ))}
+    </div>
+
   </div>
+
+  <FooterCTA />
+
 </BaseLayout>
