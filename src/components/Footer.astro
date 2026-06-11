@@ -1,28 +1,77 @@
 ---
 const year = new Date().getFullYear();
+
+const projectLinks = [
+  { href: '/projects/lets-hack-leicester',    label: "Let's Hack Leicester"        },
+  { href: '/projects/morgan-stanley-challenge', label: 'Morgan Stanley Challenge'  },
+  { href: '/projects/sign-language-translator', label: 'Sign Language Translator'  },
+  { href: '/projects/elo-ranking',            label: 'Elo Ranking'                 },
+];
 ---
 
 <footer class="border-t border-[var(--color-border)] bg-[var(--color-bg)]">
-  <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-6 text-sm text-[var(--color-text-muted)]">
-    <span>© {year} Zain Altaf</span>
+  <div class="mx-auto max-w-5xl px-6 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
 
-    <div class="flex items-center gap-4">
-      <a
-        href="https://github.com/zainaltaf"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hover:text-[var(--color-accent)] transition-colors"
-      >
-        GitHub
-      </a>
-      <a
-        href="https://linkedin.com/in/zainaltaf"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hover:text-[var(--color-accent)] transition-colors"
-      >
-        LinkedIn
-      </a>
+      <!-- Column 1: Branding -->
+      <div class="flex flex-col gap-2">
+        <span class="text-sm font-semibold text-[var(--color-text)]">© {year} Zain Altaf</span>
+        <span class="text-xs text-[var(--color-text-muted)]">Built in Leicester.</span>
+        <span class="text-xs text-[var(--color-text-muted)]">Code, coffee, and curiosity.</span>
+      </div>
+
+      <!-- Column 2: Projects -->
+      <div class="flex flex-col gap-3">
+        <span class="text-[10px] font-bold tracking-widest uppercase text-[var(--color-text-muted)]">Projects</span>
+        <ul class="flex flex-col gap-2">
+          {projectLinks.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 3: Connect -->
+      <div class="flex flex-col gap-3">
+        <span class="text-[10px] font-bold tracking-widest uppercase text-[var(--color-text-muted)]">Connect</span>
+        <ul class="flex flex-col gap-2">
+          <li>
+            <a
+              href="mailto:dev@zainaltaf.com"
+              class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+            >
+              Email
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://linkedin.com/in/zainaltaf"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+            >
+              LinkedIn ↗
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/zainaltaf"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+            >
+              GitHub ↗
+            </a>
+          </li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </footer>
