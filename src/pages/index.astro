@@ -5,12 +5,29 @@ import CurrentlySection from '../components/CurrentlySection.astro';
 import FeaturedProjects from '../components/FeaturedProjects.astro';
 import SkillsStrip from '../components/SkillsStrip.astro';
 import FooterCTA from '../components/FooterCTA.astro';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Zain Altaf',
+  url: 'https://zainaltaf.dev',
+  jobTitle: 'Software Engineer',
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'University of Leicester',
+  },
+  sameAs: [
+    'https://github.com/zainaltaf',
+    'https://linkedin.com/in/zainaltaf',
+  ],
+};
 ---
 
 <BaseLayout
   title="Home"
   description="Zain Altaf — CS graduate and software engineer. Full-stack projects with Python, JavaScript, and a bias towards shipping."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <HeroSection />
   <CurrentlySection />
   <FeaturedProjects />
