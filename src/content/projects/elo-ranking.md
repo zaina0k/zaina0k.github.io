@@ -2,6 +2,7 @@
 title: "Elo Ranking System — Competitive Rating Engine"
 summary: "Full-stack application implementing the Elo rating algorithm with match history and an interactive desktop interface."
 detail: "Full-stack application implementing the Elo rating algorithm with a REST API backend and interactive frontend."
+thumbnail: "../../assets/thumbnails/elo-ranking.png"
 date: 2023-11-10
 sortOrder: 4
 featured: true
