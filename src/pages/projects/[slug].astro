@@ -1,6 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FooterCTA from '../../components/FooterCTA.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -12,6 +13,7 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { data } = project;
+const { Content } = await render(project);
 ---
 
 <BaseLayout title={data.title} description={data.summary}>
@@ -85,5 +87,36 @@ const { data } = project;
     </div>
 
   </div>
+
+  <!-- Tech stack badges -->
+  <div class="mx-auto max-w-4xl px-6 pb-10">
+    <p class="text-[10px] font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3">Tech Stack</p>
+    <div class="flex flex-wrap gap-2">
+      {data.techStack.map((tech) => (
+        <span class="px-3 py-1 rounded-full text-xs font-semibold tracking-wide border border-[var(--color-border)] text-[var(--color-text-muted)] bg-[var(--color-bg-subtle)]">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Case study body -->
+  <div class="mx-auto max-w-4xl px-6 pb-20">
+    <article class="prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-[var(--color-text)] prose-p:text-[var(--color-text-muted)] prose-p:leading-relaxed prose-li:text-[var(--color-text-muted)] prose-code:font-mono prose-code:text-sm prose-pre:bg-[var(--color-bg-subtle)] prose-pre:rounded-xl prose-pre:p-5 prose-pre:overflow-x-auto max-w-none space-y-6">
+      <Content />
+    </article>
+  </div>
+
+  <!-- Back nav -->
+  <div class="mx-auto max-w-4xl px-6 pb-10 border-t border-[var(--color-border)] pt-8">
+    <a
+      href="/projects"
+      class="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+    >
+      ← All projects
+    </a>
+  </div>
+
+  <FooterCTA />
 
 </BaseLayout>
