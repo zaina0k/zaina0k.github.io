@@ -1,4 +1,11 @@
+import { useState } from 'react';
+
 export default function ContactForm() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [botcheck, setBotcheck] = useState('');
+
   return (
     <div
       className="rounded-lg border border-[var(--color-border)] overflow-hidden"
@@ -31,6 +38,8 @@ export default function ContactForm() {
             type="text"
             name="name"
             placeholder="Jane Smith"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="w-full bg-transparent border-b border-[var(--color-border)] focus:border-[var(--color-accent)] outline-none text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] py-1 transition-colors"
           />
         </div>
@@ -45,6 +54,8 @@ export default function ContactForm() {
             type="email"
             name="email"
             placeholder="jane@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full bg-transparent border-b border-[var(--color-border)] focus:border-[var(--color-accent)] outline-none text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] py-1 transition-colors"
           />
         </div>
@@ -59,9 +70,23 @@ export default function ContactForm() {
             name="message"
             rows={4}
             placeholder="Tell me about it..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             className="w-full bg-transparent border-b border-[var(--color-border)] focus:border-[var(--color-accent)] outline-none text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] py-1 resize-none transition-colors"
           />
         </div>
+
+        {/* Honeypot — hidden from real users, catches bots that fill all fields */}
+        <input
+          type="checkbox"
+          name="botcheck"
+          checked={botcheck === 'on'}
+          onChange={(e) => setBotcheck(e.target.checked ? 'on' : '')}
+          className="hidden"
+          aria-hidden="true"
+          tabIndex={-1}
+          autoComplete="off"
+        />
 
         {/* Send button */}
         <div className="pt-2 flex justify-end">
