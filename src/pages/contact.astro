@@ -1,10 +1,60 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm';
+import FooterCTA from '../components/FooterCTA.astro';
 ---
 
-<BaseLayout title="Contact" description="Get in touch with Zain Altaf.">
+<BaseLayout title="Contact" description="Get in touch with Zain Altaf — CS graduate and software engineer.">
   <div class="mx-auto max-w-5xl px-6 py-20">
-    <h1 class="text-3xl font-semibold text-[var(--color-text)]">Contact</h1>
-    <p class="mt-4 text-[var(--color-text-muted)]">Coming soon.</p>
+
+    <div class="flex flex-col lg:flex-row lg:gap-20">
+
+      <!-- Left column: intro text + fallback links -->
+      <div class="lg:w-80 shrink-0 mb-12 lg:mb-0">
+        <h1 class="text-4xl md:text-5xl font-semibold leading-tight tracking-tight text-[var(--color-text)] mb-6">
+          Open to opportunities.<br />
+          <span class="text-[var(--color-accent)]">Let's connect.</span>
+        </h1>
+
+        <p class="text-[var(--color-text-muted)] leading-relaxed mb-8">
+          I'm looking for my first software engineering role and open to
+          conversations about engineering, collaboration, and interesting
+          problems. I read every message.
+        </p>
+
+        <!-- Fallback contact links -->
+        <div class="flex flex-col gap-3">
+          <a
+            href="mailto:dev@zainaltaf.com"
+            class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
+          >
+            dev@zainaltaf.com →
+          </a>
+          <a
+            href="https://linkedin.com/in/zainaltaf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+          >
+            LinkedIn ↗
+          </a>
+          <a
+            href="https://github.com/zainaltaf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+          >
+            GitHub ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Right column: terminal contact form -->
+      <div class="flex-1">
+        <ContactForm client:visible />
+      </div>
+
+    </div>
   </div>
+  <FooterCTA />
 </BaseLayout>
