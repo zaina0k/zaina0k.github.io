@@ -1,4 +1,6 @@
 ---
+import StatCard from './StatCard.astro';
+
 // No props — copy is hardcoded; swap photo placeholder in Checkpoint 5
 ---
 
@@ -27,6 +29,37 @@
         Full-stack software engineering with Python, JavaScript,
         and a bias towards shipping. University of Leicester CS graduate.
       </p>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-wrap gap-3 mb-12">
+        <a
+          href="/projects"
+          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold bg-[var(--color-accent)] text-[var(--color-bg)] hover:bg-[var(--color-accent-hover)] transition-colors"
+        >
+          View Projects
+        </a>
+        <a
+          href="/cv"
+          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold border border-[var(--color-border)] text-[var(--color-text)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+        >
+          Download CV
+        </a>
+        <a
+          href="https://github.com/zainaltaf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold border border-[var(--color-border)] text-[var(--color-text)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+        >
+          GitHub ↗
+        </a>
+      </div>
+
+      <!-- Stats strip -->
+      <div class="flex flex-wrap gap-8 pt-8 border-t border-[var(--color-border)]">
+        <StatCard value="4" label="Projects Shipped" />
+        <StatCard value="2" label="Hackathons" />
+        <StatCard value="7th/27" label="Morgan Stanley Challenge" />
+      </div>
     </div>
 
     <!-- Right: photo placeholder -->
