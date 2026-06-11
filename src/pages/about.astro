@@ -1,5 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FooterCTA from '../components/FooterCTA.astro';
+import profileImg from '../assets/profile.png';
 
 const skillRows = [
   { category: 'Languages',   skills: ['Python', 'JavaScript', 'TypeScript', 'C#', 'SQL', 'HTML', 'CSS'] },
@@ -12,38 +15,57 @@ const skillRows = [
 <BaseLayout title="About" description="About Zain Altaf — CS graduate and software engineer.">
   <div class="mx-auto max-w-5xl px-6 py-20">
 
-    <!-- Status badge -->
-    <div class="flex items-center gap-2 mb-8">
-      <span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-      <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">
-        CS Graduate · Open to opportunities
-      </span>
-    </div>
+    <!-- Bio header: two-column on md+ (text left, photo right) -->
+    <div class="flex flex-col md:flex-row md:items-start md:gap-16">
 
-    <!-- Heading -->
-    <h1 class="text-4xl md:text-5xl font-semibold leading-tight tracking-tight text-[var(--color-text)] mb-10">
-      Zain Altaf
-    </h1>
+      <!-- Left: status, heading, bio -->
+      <div class="flex-1">
+        <!-- Status badge -->
+        <div class="flex items-center gap-2 mb-8">
+          <span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+          <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">
+            CS Graduate · Open to opportunities
+          </span>
+        </div>
 
-    <!-- Bio paragraphs -->
-    <div class="max-w-2xl space-y-5 text-[var(--color-text-muted)] leading-relaxed">
-      <p>
-        I'm a Computer Science graduate from the University of Leicester, where I built
-        a foundation across algorithms, systems, and software design. I wrote my first
-        line of code to automate something tedious, and that instinct — build it rather
-        than endure it — has stuck.
-      </p>
-      <p>
-        I work primarily with Python and JavaScript, and I'm comfortable across the
-        stack: REST APIs, database design, front-end interfaces, and the deployment
-        pipelines that tie them together. My projects tend toward tools with real users
-        — things that needed to exist and didn't yet.
-      </p>
-      <p>
-        I'm looking for my first full-time software engineering role and open to
-        conversations about engineering, collaboration, and interesting problems.
-        If something you're building sounds like a good fit, I'd like to hear about it.
-      </p>
+        <!-- Heading -->
+        <h1 class="text-4xl md:text-5xl font-semibold leading-tight tracking-tight text-[var(--color-text)] mb-10">
+          Zain Altaf
+        </h1>
+
+        <!-- Bio paragraphs -->
+        <div class="space-y-5 text-[var(--color-text-muted)] leading-relaxed">
+          <p>
+            I'm a Computer Science graduate from the University of Leicester, where I built
+            a foundation across algorithms, systems, and software design. I wrote my first
+            line of code to automate something tedious, and that instinct — build it rather
+            than endure it — has stuck.
+          </p>
+          <p>
+            I work primarily with Python and JavaScript, and I'm comfortable across the
+            stack: REST APIs, database design, front-end interfaces, and the deployment
+            pipelines that tie them together. My projects tend toward tools with real users
+            — things that needed to exist and didn't yet.
+          </p>
+          <p>
+            I'm looking for my first full-time software engineering role and open to
+            conversations about engineering, collaboration, and interesting problems.
+            If something you're building sounds like a good fit, I'd like to hear about it.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: profile photo -->
+      <div class="shrink-0 order-first md:order-last mb-8 md:mb-0">
+        <Image
+          src={profileImg}
+          alt="Zain Altaf"
+          width={256}
+          height={256}
+          class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-[var(--color-border)]"
+        />
+      </div>
+
     </div>
 
     <!-- Skills grid -->
@@ -155,4 +177,5 @@ const skillRows = [
     </div>
 
   </div>
+  <FooterCTA />
 </BaseLayout>
