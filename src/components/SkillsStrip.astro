@@ -1,0 +1,48 @@
+---
+const rows = [
+  {
+    category: 'Languages',
+    skills: ['Python', 'JavaScript', 'TypeScript', 'C#', 'SQL', 'HTML', 'CSS'],
+  },
+  {
+    category: 'Frameworks',
+    skills: ['Next.js', 'Flask', 'React', 'Unity'],
+  },
+  {
+    category: 'Tools',
+    skills: ['Git', 'GitHub', 'REST APIs', 'SQLite', 'VS Code'],
+  },
+  {
+    category: 'Concepts',
+    skills: ['Algorithms', 'Data Structures', 'API Design', 'Agile', 'TDD'],
+  },
+];
+---
+
+<section class="bg-[var(--color-bg-subtle)]">
+  <div class="mx-auto max-w-5xl px-6 py-16">
+
+    <!-- Section header -->
+    <div class="flex items-baseline gap-4 mb-10">
+      <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">03 / Skills</span>
+      <h2 class="text-2xl font-semibold tracking-tight text-[var(--color-text)]">What I Work With</h2>
+    </div>
+
+    <!-- Rows -->
+    <div class="flex flex-col divide-y divide-[var(--color-border)]">
+      {rows.map(({ category, skills }) => (
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-3 sm:gap-8 py-5">
+          <span class="w-28 shrink-0 text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">
+            {category}
+          </span>
+          <div class="flex flex-wrap gap-x-4 gap-y-2">
+            {skills.map((skill) => (
+              <span class="text-sm text-[var(--color-text)]">{skill}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
