@@ -1,0 +1,71 @@
+---
+import ProjectCard from './ProjectCard.astro';
+
+const projects = [
+  {
+    number: '01',
+    title: "Let's Hack Leicester",
+    year: '2024',
+    summary: 'Collaborative portfolio platform for CS students',
+    detail: 'Led a team of 5 to build a full-stack web app in 24 hours. Next.js frontend, Flask API, SQLite database.',
+    tags: ['Team Lead', 'Full-stack', 'Hackathon'],
+    href: '/projects/lets-hack-leicester',
+  },
+  {
+    number: '02',
+    title: 'Morgan Stanley Coding Challenge',
+    year: '2024',
+    summary: 'Currency exchange trading bot',
+    detail: 'Built an EMA-based algorithmic trading strategy. Placed 7th out of 27 teams in a Morgan Stanley-hosted competition.',
+    tags: ['Algorithms', 'Python', 'Competition'],
+    href: '/projects/morgan-stanley-challenge',
+  },
+  {
+    number: '03',
+    title: 'Sign Language Translator',
+    year: '2023',
+    summary: 'Real-time sign language recognition using computer vision',
+    detail: 'Machine learning model trained to classify hand gestures from webcam input and translate them to text.',
+    tags: ['Python', 'Computer Vision', 'ML'],
+    href: '/projects/sign-language-translator',
+  },
+  {
+    number: '04',
+    title: 'Elo Ranking System',
+    year: '2023',
+    summary: 'Competitive ranking engine with match history',
+    detail: 'Full-stack application implementing the Elo rating algorithm with a REST API backend and interactive frontend.',
+    tags: ['Full-stack', 'Algorithms', 'REST API'],
+    href: '/projects/elo-ranking',
+  },
+];
+---
+
+<section class="mx-auto max-w-5xl px-6 py-16">
+
+  <!-- Section header -->
+  <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-10 gap-4">
+    <div class="flex items-baseline gap-4">
+      <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">02 / Projects</span>
+      <h2 class="text-2xl font-semibold tracking-tight text-[var(--color-text)]">Selected Work</h2>
+    </div>
+    <a
+      href="/projects"
+      class="text-sm font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
+    >
+      View all projects ↗
+    </a>
+  </div>
+
+  <p class="text-[var(--color-text-muted)] mb-10 max-w-lg">
+    Four projects that show how I think, build, and collaborate.
+  </p>
+
+  <!-- Cards grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {projects.map((project) => (
+      <ProjectCard {...project} />
+    ))}
+  </div>
+
+</section>
