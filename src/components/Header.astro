@@ -5,6 +5,7 @@ const navLinks = [
   { href: '/',          label: 'Home'     },
   { href: '/projects',  label: 'Projects' },
   { href: '/about',     label: 'About'    },
+  { href: '/cv',        label: 'CV'       },
   { href: '/contact',   label: 'Contact'  },
 ];
 
@@ -13,16 +14,23 @@ const currentPath = Astro.url.pathname;
 
 <header class="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]">
   <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <!-- Site name / logo -->
-    <a
-      href="/"
-      class="text-lg font-semibold tracking-tight text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors"
-    >
-      Zain Altaf
+    <!-- Initials mark + name + role badge -->
+    <a href="/" class="flex items-center gap-3 group">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded text-xs font-bold tracking-widest border border-[var(--color-accent)] text-[var(--color-accent)] group-hover:bg-[var(--color-accent)] group-hover:text-[var(--color-bg)] transition-colors">
+        ZA
+      </span>
+      <span class="hidden sm:flex flex-col leading-none">
+        <span class="text-sm font-semibold tracking-tight text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
+          Zain Altaf
+        </span>
+        <span class="text-[10px] font-medium tracking-widest text-[var(--color-text-muted)] uppercase mt-0.5">
+          CS Graduate · SWE
+        </span>
+      </span>
     </a>
 
-    <!-- Nav links + ThemeToggle slot -->
-    <div class="flex items-center gap-6">
+    <!-- Nav links + ThemeToggle + CTA -->
+    <div class="flex items-center gap-4">
       <ul class="hidden sm:flex items-center gap-6 text-sm font-medium">
         {navLinks.map(({ href, label }) => (
           <li>
@@ -42,6 +50,13 @@ const currentPath = Astro.url.pathname;
       </ul>
 
       <ThemeToggle client:load />
+
+      <a
+        href="/contact"
+        class="hidden sm:inline-flex items-center gap-1 rounded px-3 py-1.5 text-xs font-semibold tracking-wide border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-colors"
+      >
+        Get in touch →
+      </a>
     </div>
   </nav>
 </header>
