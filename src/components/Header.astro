@@ -29,7 +29,7 @@ const currentPath = Astro.url.pathname;
       </span>
     </a>
 
-    <!-- Nav links + ThemeToggle + CTA -->
+    <!-- Nav links + ThemeToggle + CTA (desktop) -->
     <div class="flex items-center gap-4">
       <ul class="hidden sm:flex items-center gap-6 text-sm font-medium">
         {navLinks.map(({ href, label }) => (
@@ -57,6 +57,79 @@ const currentPath = Astro.url.pathname;
       >
         Get in touch →
       </a>
+
+      <!-- Hamburger button (mobile only) -->
+      <button
+        id="menu-toggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        class="sm:hidden rounded-md p-2 text-[var(--color-text-muted)] hover:text-[var(--color-accent)] hover:bg-[var(--color-bg-subtle)] transition-colors"
+      >
+        <!-- Hamburger icon -->
+        <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="6" x2="20" y2="6" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="18" x2="20" y2="18" />
+        </svg>
+        <!-- Close icon -->
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile nav drawer -->
+  <div id="mobile-nav" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]">
+    <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium">
+      {navLinks.map(({ href, label }) => (
+        <li>
+          <a
+            href={href}
+            class:list={[
+              'block transition-colors hover:text-[var(--color-accent)]',
+              currentPath === href
+                ? 'text-[var(--color-accent)]'
+                : 'text-[var(--color-text-muted)]',
+            ]}
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-1 rounded px-3 py-1.5 text-xs font-semibold tracking-wide border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-colors"
+        >
+          Get in touch →
+        </a>
+      </li>
+    </ul>
+  </div>
 </header>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('menu-toggle');
+    var nav = document.getElementById('mobile-nav');
+    var iconOpen = document.getElementById('icon-open');
+    var iconClose = document.getElementById('icon-close');
+    if (!btn || !nav) return;
+    btn.addEventListener('click', function () {
+      var isOpen = !nav.classList.contains('hidden');
+      if (isOpen) {
+        nav.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        nav.classList.remove('hidden');
+        iconOpen.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  })();
+</script>
