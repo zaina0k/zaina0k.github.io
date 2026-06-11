@@ -1,20 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CurrentlySection from '../components/CurrentlySection.astro';
+import FeaturedProjects from '../components/FeaturedProjects.astro';
+import SkillsStrip from '../components/SkillsStrip.astro';
+import FooterCTA from '../components/FooterCTA.astro';
 ---
 
 <BaseLayout
   title="Home"
-  description="Zain Altaf — Software engineer and CS graduate. Portfolio showcasing full-stack projects built with Python, Next.js, Flask, and more."
+  description="Zain Altaf — CS graduate and software engineer. Full-stack projects with Python, JavaScript, and a bias towards shipping."
 >
-  <div class="mx-auto max-w-5xl px-6 py-24 text-center">
-    <h1 class="text-4xl font-bold tracking-tight text-[var(--color-text)] sm:text-5xl">
-      Zain Altaf
-    </h1>
-    <p class="mt-4 text-lg text-[var(--color-text-muted)]">
-      Software Engineer · CS Graduate · Building full-stack projects
-    </p>
-    <p class="mt-6 text-sm text-[var(--color-text-muted)]">
-      Homepage coming in Checkpoint 2.
-    </p>
-  </div>
+  <HeroSection />
+  <CurrentlySection />
+  <FeaturedProjects />
+  <SkillsStrip />
+  <FooterCTA />
 </BaseLayout>
