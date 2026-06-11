@@ -1,10 +1,34 @@
 import { useState } from 'react';
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+type Errors = { name?: string; email?: string; message?: string };
+
+function validate(name: string, email: string, message: string): Errors {
+  const errors: Errors = {};
+  if (!name.trim()) errors.name = '[!] Name is required.';
+  if (!email.trim()) {
+    errors.email = '[!] Email is required.';
+  } else if (!EMAIL_RE.test(email.trim())) {
+    errors.email = '[!] Enter a valid email address.';
+  }
+  if (!message.trim()) errors.message = '[!] Message is required.';
+  return errors;
+}
+
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [botcheck, setBotcheck] = useState('');
+  const [errors, setErrors] = useState<Errors>({});
+
+  function handleSubmit() {
+    const errs = validate(name, email, message);
+    setErrors(errs);
+    if (Object.keys(errs).length > 0) return;
+    // Submission wired in increment 10
+  }
 
   return (
     <div
@@ -39,9 +63,10 @@ export default function ContactForm() {
             name="name"
             placeholder="Jane Smith"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => { setName(e.target.value); if (errors.name) setErrors((p) => ({ ...p, name: undefined })); }}
             className="w-full bg-transparent border-b border-[var(--color-border)] focus:border-[var(--color-accent)] outline-none text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] py-1 transition-colors"
           />
+          {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
         </div>
 
         {/* Email field */}
@@ -55,9 +80,10 @@ export default function ContactForm() {
             name="email"
             placeholder="jane@example.com"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors((p) => ({ ...p, email: undefined })); }}
             className="w-full bg-transparent border-b border-[var(--color-border)] focus:border-[var(--color-accent)] outline-none text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] py-1 transition-colors"
           />
+          {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
         </div>
 
         {/* Message field */}
@@ -71,9 +97,10 @@ export default function ContactForm() {
             rows={4}
             placeholder="Tell me about it..."
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => { setMessage(e.target.value); if (errors.message) setErrors((p) => ({ ...p, message: undefined })); }}
             className="w-full bg-transparent border-b border-[var(--color-border)] focus:border-[var(--color-accent)] outline-none text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] py-1 resize-none transition-colors"
           />
+          {errors.message && <p className="text-xs text-red-500 mt-1">{errors.message}</p>}
         </div>
 
         {/* Honeypot — hidden from real users, catches bots that fill all fields */}
@@ -92,6 +119,7 @@ export default function ContactForm() {
         <div className="pt-2 flex justify-end">
           <button
             type="button"
+            onClick={handleSubmit}
             className="px-5 py-2.5 rounded text-sm font-semibold bg-[var(--color-accent)] text-[var(--color-bg)] hover:bg-[var(--color-accent-hover)] transition-colors"
           >
             Send message →
