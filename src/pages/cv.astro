@@ -1,10 +1,50 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FooterCTA from '../components/FooterCTA.astro';
 ---
 
 <BaseLayout title="CV" description="CV of Zain Altaf — CS graduate and software engineer.">
   <div class="mx-auto max-w-5xl px-6 py-20">
-    <h1 class="text-3xl font-semibold text-[var(--color-text)]">CV</h1>
-    <p class="mt-4 text-[var(--color-text-muted)]">Coming soon.</p>
+
+    <!-- Header row -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
+      <h1 class="text-4xl md:text-5xl font-semibold leading-tight tracking-tight text-[var(--color-text)]">
+        Curriculum Vitae
+      </h1>
+      <a
+        href="/cv.pdf"
+        download
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded text-sm font-semibold bg-[var(--color-accent)] text-[var(--color-bg)] hover:bg-[var(--color-accent-hover)] transition-colors self-start sm:self-auto"
+      >
+        Download PDF ↗
+      </a>
+    </div>
+
+    <!-- PDF embed -->
+    <div class="rounded-lg border border-[var(--color-border)] overflow-hidden" style="height: 80vh; min-height: 500px;">
+      <object
+        data="/cv.pdf"
+        type="application/pdf"
+        class="w-full h-full"
+      >
+        <!-- Fallback for browsers that can't render the PDF inline -->
+        <div class="flex flex-col items-center justify-center h-full gap-4 bg-[var(--color-bg-subtle)] p-8 text-center">
+          <p class="text-[var(--color-text-muted)] text-sm leading-relaxed max-w-sm">
+            Your browser doesn't support inline PDF viewing.
+          </p>
+          <a
+            href="/cv.pdf"
+            download
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded text-sm font-semibold bg-[var(--color-accent)] text-[var(--color-bg)] hover:bg-[var(--color-accent-hover)] transition-colors"
+          >
+            Download PDF instead ↗
+          </a>
+        </div>
+      </object>
+    </div>
+
+    <p class="mt-4 text-xs text-[var(--color-text-muted)]">Last updated: June 2026</p>
+
   </div>
+  <FooterCTA />
 </BaseLayout>
