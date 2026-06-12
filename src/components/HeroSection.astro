@@ -1,7 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import StatCard from './StatCard.astro';
-import profileImg from '../assets/profile.png';
+import profileReal   from '../assets/profile real.png';
+import profileSketch from '../assets/profile sketch.png';
 ---
 
 <section class="mx-auto max-w-5xl px-6 py-16 md:py-24">
@@ -62,15 +63,23 @@ import profileImg from '../assets/profile.png';
       </div>
     </div>
 
-    <!-- Right: profile photo -->
+    <!-- Right: profile photo (light = real photo, dark = sketch) -->
     <div class="shrink-0 order-first md:order-last mb-8 md:mb-0">
       <Image
-        src={profileImg}
+        src={profileReal}
         alt="Zain Altaf"
         width={512}
         height={512}
         densities={[1, 2, 3]}
-        class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-[var(--color-border)]"
+        class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-[var(--color-border)] dark:hidden"
+      />
+      <Image
+        src={profileSketch}
+        alt="Zain Altaf"
+        width={512}
+        height={512}
+        densities={[1, 2, 3]}
+        class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-[var(--color-border)] hidden dark:block"
       />
     </div>
 
