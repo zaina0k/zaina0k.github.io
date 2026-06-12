@@ -1,0 +1,26 @@
+{
+  "name": "Zain Altaf — Software Engineer",
+  "short_name": "Zain Altaf",
+  "description": "Portfolio of Zain Altaf — CS graduate and software engineer, open to opportunities.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#2C3A1E",
+  "background_color": "#F5F0E8",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
