@@ -2,11 +2,11 @@
 import ThemeToggle from './ThemeToggle.tsx';
 
 const navLinks = [
-  { href: '/',          label: 'Home'     },
-  { href: '/projects',  label: 'Projects' },
-  { href: '/about',     label: 'About'    },
-  { href: '/cv',        label: 'CV'       },
-  { href: '/contact',   label: 'Contact'  },
+  { href: '/',           label: 'Home'     },
+  { href: '/projects/',  label: 'Projects' },
+  { href: '/about/',     label: 'About'    },
+  { href: '/cv/',        label: 'CV'       },
+  { href: '/contact/',   label: 'Contact'  },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -52,7 +52,7 @@ const currentPath = Astro.url.pathname;
       <ThemeToggle client:load />
 
       <a
-        href="/contact"
+        href="/contact/"
         class="hidden sm:inline-flex items-center gap-1 rounded px-3 py-1.5 text-xs font-semibold tracking-wide border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-colors"
       >
         Get in touch →
@@ -100,7 +100,7 @@ const currentPath = Astro.url.pathname;
       ))}
       <li>
         <a
-          href="/contact"
+          href="/contact/"
           class="inline-flex items-center gap-1 rounded px-3 py-1.5 text-xs font-semibold tracking-wide border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-colors"
         >
           Get in touch →
