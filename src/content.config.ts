@@ -21,6 +21,7 @@ const projects = defineCollection({
       role: z.string(),
       github: z.string().url().optional(),
       liveDemo: z.string().url().optional().or(z.literal('')),
+      ogImage: z.string().optional(),
       skills: z.array(z.string()),
     }),
 });
