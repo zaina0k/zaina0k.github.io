@@ -51,9 +51,11 @@ export default function ContactForm() {
         setEmail('');
         setMessage('');
       } else {
+        console.error('[ContactForm] Web3Forms rejected submission:', data);
         setStatus('error');
       }
-    } catch {
+    } catch (err) {
+      console.error('[ContactForm] Network error:', err);
       setStatus('error');
     }
   }
