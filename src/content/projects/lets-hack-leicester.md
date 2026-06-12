@@ -22,6 +22,7 @@ teamSize: 5
 role: "Team Lead & Backend Developer"
 github: "https://github.com/zainaltaf/lets-hack-leicester"
 liveDemo: ""
+ogImage: "/og/lets-hack-leicester.png"
 skills:
   - "Full-stack development"
   - "API design"

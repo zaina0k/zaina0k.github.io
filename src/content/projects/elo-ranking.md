@@ -20,6 +20,7 @@ category: "personal"
 role: "Sole Developer"
 github: "https://github.com/zainaltaf/elo-ranking"
 liveDemo: ""
+ogImage: "/og/elo-ranking.png"
 skills:
   - "Algorithm implementation"
   - "API design"

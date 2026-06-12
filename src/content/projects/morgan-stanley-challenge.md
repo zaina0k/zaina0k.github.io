@@ -21,6 +21,7 @@ teamSize: 2
 role: "Algorithm Developer"
 github: "https://github.com/zainaltaf/morgan-stanley-challenge"
 liveDemo: ""
+ogImage: "/og/morgan-stanley-challenge.png"
 skills:
   - "Algorithm design"
   - "Financial data analysis"

@@ -20,6 +20,7 @@ category: "personal"
 role: "Sole Developer"
 github: "https://github.com/zainaltaf/sign-language-translator"
 liveDemo: ""
+ogImage: "/og/sign-language-translator.png"
 skills:
   - "Machine learning"
   - "Computer vision"
