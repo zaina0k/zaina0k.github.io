@@ -4,6 +4,9 @@ summary: "Full-stack application implementing the Elo rating algorithm with matc
 detail: "Full-stack application implementing the Elo rating algorithm with a REST API backend and interactive frontend."
 thumbnail: "../../assets/thumbnails/elo-ranking.png"
 date: 2023-11-10
+startDate: 2023-10-01
+endDate: 2023-11-01
+status: shipped
 sortOrder: 4
 featured: true
 techStack:
