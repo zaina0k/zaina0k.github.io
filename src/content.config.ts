@@ -23,6 +23,9 @@ const projects = defineCollection({
       liveDemo: z.string().url().optional().or(z.literal('')),
       ogImage: z.string().optional(),
       skills: z.array(z.string()),
+      startDate: z.date().optional(),
+      endDate: z.date().nullable().optional(),
+      status: z.enum(['planned', 'in-progress', 'shipped', 'archived']).optional(),
     }),
 });
 
