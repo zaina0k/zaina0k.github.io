@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FooterCTA from '../../components/FooterCTA.astro';
+import { formatDateRange } from '../../lib/duration';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -28,7 +29,7 @@ const ogImage = data.ogImage ?? data.heroImage?.src ?? data.thumbnail?.src;
       <span class="mx-2">·</span>
       <span class="capitalize">{data.category}</span>
       <span class="mx-2">·</span>
-      <span>{data.date.getFullYear()}</span>
+      <span>{data.startDate!.getFullYear()}</span>
     </p>
 
     <!-- Title -->
@@ -54,8 +55,12 @@ const ogImage = data.ogImage ?? data.heroImage?.src ?? data.thumbnail?.src;
         </div>
       )}
       <div>
-        <dt class="text-[10px] font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-0.5">Year</dt>
-        <dd class="text-sm font-medium text-[var(--color-text)]">{data.date.getFullYear()}</dd>
+        <dt class="text-[10px] font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-0.5">Period</dt>
+        <dd class="text-sm font-medium text-[var(--color-text)]">{formatDateRange(data.startDate!, data.endDate)}</dd>
+      </div>
+      <div>
+        <dt class="text-[10px] font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-0.5">Status</dt>
+        <dd class="text-sm font-medium text-[var(--color-text)] capitalize">{data.status}</dd>
       </div>
       <div>
         <dt class="text-[10px] font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-0.5">Category</dt>
