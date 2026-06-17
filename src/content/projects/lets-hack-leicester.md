@@ -4,6 +4,9 @@ summary: "Full-stack web app for university students to find and join portfolio 
 detail: "Led a team of 5 to build a full-stack web app in 24 hours. Next.js frontend, Flask API, SQLite database."
 thumbnail: "../../assets/thumbnails/lets-hack-leicester.png"
 date: 2024-11-03
+startDate: 2024-11-01
+endDate: 2024-11-01
+status: shipped
 sortOrder: 1
 featured: true
 techStack:
