@@ -9,7 +9,6 @@ const projects = defineCollection({
       title: z.string(),
       summary: z.string().max(160),
       detail: z.string(),
-      date: z.date(),
       sortOrder: z.number(),
       featured: z.boolean().default(false),
       thumbnail: image().optional(),
@@ -23,9 +22,9 @@ const projects = defineCollection({
       liveDemo: z.string().url().optional().or(z.literal('')),
       ogImage: z.string().optional(),
       skills: z.array(z.string()),
-      startDate: z.date().optional(),
-      endDate: z.date().nullable().optional(),
-      status: z.enum(['planned', 'in-progress', 'shipped', 'archived']).optional(),
+      startDate: z.date(),
+      endDate: z.date().nullable(),
+      status: z.enum(['planned', 'in-progress', 'shipped', 'archived']),
     }),
 });
 

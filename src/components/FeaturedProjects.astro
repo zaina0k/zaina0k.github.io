@@ -32,7 +32,7 @@ const projects = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder)
       <ProjectCard
         number={String(project.data.sortOrder).padStart(2, '0')}
         title={project.data.title}
-        year={String(project.data.date.getFullYear())}
+        year={String(project.data.startDate.getFullYear())}
         summary={project.data.summary}
         detail={project.data.detail}
         tags={project.data.tags}
