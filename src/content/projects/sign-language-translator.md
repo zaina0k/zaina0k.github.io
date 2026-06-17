@@ -3,7 +3,6 @@ title: "Sign Language Translator — Real-Time Hand Gesture Recognition"
 summary: "Computer vision application that classifies hand gestures from webcam input and translates them to text in real time."
 detail: "Machine learning model trained to classify hand gestures from webcam input and translate them to text in real time."
 thumbnail: "../../assets/thumbnails/sign-language-translator.png"
-date: 2023-05-20
 startDate: 2023-03-01
 endDate: 2023-05-01
 status: shipped
