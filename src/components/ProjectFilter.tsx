@@ -26,6 +26,7 @@ function labelFor(group: string): string {
 export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props) {
   const [selectedGroups, setSelectedGroups] = useState<Set<string>>(new Set());
   const [currentPage, setCurrentPage] = useState(0);
+  const [isFilterOpen, setIsFilterOpen] = useState(true);
 
   const allGroups = useMemo(() => {
     const s = new Set(projects.flatMap((p) => p.groups));
@@ -98,11 +99,29 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
         className="border border-[var(--color-border)] rounded-lg p-5 flex flex-col gap-5 md:sticky md:top-8"
       >
 
-        {/* Panel header + clear all */}
-        <div className="flex items-center justify-between">
-          <p className="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">
-            Filter
-          </p>
+        {/* Panel header — toggle button + clear all */}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            aria-expanded={isFilterOpen}
+            aria-controls="filter-body"
+            onClick={() => setIsFilterOpen((v) => !v)}
+            className="flex items-center gap-2 flex-1 cursor-pointer group/toggle"
+          >
+            <span className="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] group-hover/toggle:text-[var(--color-accent)] transition-colors">
+              Filter
+            </span>
+            <svg
+              aria-hidden="true"
+              width="12"
+              height="12"
+              viewBox="0 0 12 12"
+              fill="none"
+              className={`ml-auto text-[var(--color-text-muted)] transition-transform duration-200 group-hover/toggle:text-[var(--color-accent)] ${isFilterOpen ? 'rotate-180' : 'rotate-0'}`}
+            >
+              <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
           {selectedGroups.size > 0 && (
             <button
               type="button"
@@ -111,42 +130,49 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
                 setSelectedGroups(new Set());
                 setCurrentPage(0);
               }}
-              className="text-xs text-[var(--color-accent)] hover:underline cursor-pointer"
+              className="text-xs text-[var(--color-accent)] hover:underline cursor-pointer shrink-0"
             >
               Clear all
             </button>
           )}
         </div>
 
-        {/* Favourites */}
-        <div>
-          <p
-            id="filter-favourites-label"
-            className="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3"
-          >
-            Favourites
-          </p>
-          <div role="group" aria-labelledby="filter-favourites-label" className="flex flex-col gap-2">
-            {FAVOURITES.filter((f) => allGroups.includes(f)).map((group) => (
-              <CheckboxRow key={group} group={group} />
-            ))}
-          </div>
-        </div>
+        {/* Collapsible body */}
+        {isFilterOpen && (
+          <div id="filter-body" className="flex flex-col gap-5">
 
-        {/* Full tag list — only shown if there are tags outside FAVOURITES */}
-        {fullTagList.length > 0 && (
-          <div className="border-t border-[var(--color-border)] pt-4">
-            <p
-              id="filter-more-label"
-              className="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3"
-            >
-              More
-            </p>
-            <div role="group" aria-labelledby="filter-more-label" className="flex flex-col gap-2">
-              {fullTagList.map((group) => (
-                <CheckboxRow key={group} group={group} />
-              ))}
+            {/* Favourites */}
+            <div>
+              <p
+                id="filter-favourites-label"
+                className="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3"
+              >
+                Favourites
+              </p>
+              <div role="group" aria-labelledby="filter-favourites-label" className="flex flex-col gap-2">
+                {FAVOURITES.filter((f) => allGroups.includes(f)).map((group) => (
+                  <CheckboxRow key={group} group={group} />
+                ))}
+              </div>
             </div>
+
+            {/* Full tag list — only shown if there are tags outside FAVOURITES */}
+            {fullTagList.length > 0 && (
+              <div className="border-t border-[var(--color-border)] pt-4">
+                <p
+                  id="filter-more-label"
+                  className="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3"
+                >
+                  More
+                </p>
+                <div role="group" aria-labelledby="filter-more-label" className="flex flex-col gap-2">
+                  {fullTagList.map((group) => (
+                    <CheckboxRow key={group} group={group} />
+                  ))}
+                </div>
+              </div>
+            )}
+
           </div>
         )}
       </div>
