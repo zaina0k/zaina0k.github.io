@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import FooterCTA from '../../components/FooterCTA.astro';
+import { formatDuration } from '../../lib/duration';
 
 const allProjects = await getCollection('projects');
 const projects = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
@@ -36,6 +37,8 @@ const projects = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder)
           detail={project.data.detail}
           tags={project.data.tags}
           href={`/projects/${project.id}/`}
+          thumbnail={project.data.thumbnail}
+          duration={formatDuration(project.data.startDate, project.data.endDate)}
         />
       ))}
     </div>
