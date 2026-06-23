@@ -1,92 +1,84 @@
 ---
-title: "Sign Language Translator — Real-Time Hand Gesture Recognition"
-summary: "Computer vision application that classifies hand gestures from webcam input and translates them to text in real time."
-detail: "Machine learning model trained to classify hand gestures from webcam input and translate them to text in real time."
-thumbnail: "../../assets/thumbnails/sign-language-translator.png"
-startDate: 2023-03-01
-endDate: 2023-05-01
+title: "Sign Language Translator"
+summary: "A Python BSL learning app with GIF-based sign demonstrations, adaptive learning, and an online user profile system."
+detail: "Built a British Sign Language learning tool with GIF demonstrations, speech input, an adaptive learning algorithm, and Google Sheets-backed user profiles."
+thumbnail: "../../assets/projects/sign-language-translator/slt-4.jpeg"
+startDate: 2021-01-01
+endDate: 2021-01-01
 status: shipped
 sortOrder: 3
 featured: true
 techStack:
   - "Python"
-  - "OpenCV"
-  - "TensorFlow"
-  - "MediaPipe"
-  - "NumPy"
+  - "GUIZERO"
+  - "Google Sheets API"
+  - "speech_recognition"
+  - "fuzzywuzzy"
+  - "pytube"
+  - "hashlib"
+  - "smtplib"
 tags:
   - "Python"
-  - "Computer Vision"
-  - "ML"
+  - "GUI"
+  - "BSL"
+  - "Personal"
 category: "personal"
 role: "Sole Developer"
-github: "https://github.com/zainaltaf/sign-language-translator"
-liveDemo: ""
+github: "https://github.com/zaina0k/Sign-Language-Translator"
 ogImage: "/og/sign-language-translator.png"
 skills:
-  - "Machine learning"
-  - "Computer vision"
-  - "Model training"
-  - "Real-time processing"
+  - "GUI development"
+  - "API integration"
+  - "Adaptive algorithms"
+  - "Password security"
+results:
+  - "Working BSL learning app with GIF demonstrations fetched from a YouTube playlist via pytube."
+  - "Online user profile system backed by Google Sheets via gspread — supports multiple users without a local database."
+  - "Adaptive learning algorithm that increases question frequency for phrases answered incorrectly and retires mastered phrases."
+  - "Custom search logic that finds the most efficient BSL signing for a query, including letter-by-letter fallback for names with no direct signing."
+  - "Email verification on sign-up using smtplib; passwords hashed via hashlib before storage."
+  - "Mic input via speech_recognition + Google API, and fuzzy text matching via fuzzywuzzy for tolerant search."
+reflection: |
+  <add content here — personal reflections on what you learned building this project>
 ---
 
-## The Problem
+## Overview
 
-Sign language is the primary communication mode for a significant portion of the deaf and hard-of-hearing community, yet most interfaces — screens, keyboards, voice assistants — are designed exclusively for spoken or written language. Bridging that gap typically requires a human interpreter or specialised hardware.
+Sign Language Translator is a Python project that uses a sign language bank alongside a GUI to allow users to learn BSL (British Sign Language) via GIFs showcasing each action. The project includes an online user profile system and an adaptive learning algorithm designed for better learning efficiency.
 
-This project explored whether a standard laptop webcam, combined with a trained classification model, could serve as a real-time sign language interpreter without additional hardware. The goal was a working proof of concept: point the camera at a hand, see the recognised gesture rendered as text.
+BSL is a visual language used by the deaf and hard of hearing as a primary form of communication. The program covers BSL phrases and actions, each represented as a GIF that demonstrates the signing in motion.
 
-## The Approach
+> **📷 Carousel — 5 images ready:** `slt-1.jpeg` (search page), `slt-2.jpeg` (email confirmation), `slt-3.jpeg` (online database), `slt-4.jpeg` (tailored consolidation), `slt-5.jpeg` (sign-up data flow)
+> *(Carousel component not yet implemented — CP9)*
 
-The pipeline has two distinct stages: hand landmark extraction and gesture classification.
+## Approach & Architecture
 
-**Stage 1 — Landmark extraction (MediaPipe Hands)**
-Rather than feeding raw pixels into a classifier, I used Google's MediaPipe Hands library to extract 21 3D hand landmarks per frame. This normalises for scale, position, and skin tone — challenges that would otherwise require a much larger and more diverse training dataset. The output of this stage is a fixed-length vector of (x, y, z) coordinates, not an image.
+The application is built around four core features:
 
-**Stage 2 — Gesture classification (TensorFlow / Keras)**
-The landmark vectors were fed into a small dense neural network: three fully connected layers with ReLU activations, dropout for regularisation, and a softmax output layer. The network was trained on a custom dataset I recorded for each gesture class.
+**Sign Language GIFs**
+BSL signings are stored and displayed as GIFs. The pytube library accesses a playlist of BSL signings from YouTube and converts them to locally stored GIFs on first access — subsequent lookups use the cached file for efficiency.
 
-## Architecture
+**User Profile System**
+A User class stores the user's name, username, hashed password, date joined, email, and custom learning path. This data is serialised and stored in Google Sheets via gspread, allowing multiple users to log in without needing a local profile database. Passwords are hashed with hashlib before storage. Email verification via smtplib is required on sign-up — a verification code is sent that the user must enter to proceed, and it also ensures no two accounts share the same email.
 
-```
-Webcam frame (BGR image)
-        │
-        ▼
-MediaPipe Hands
-  ├── Detect hand region
-  └── Extract 21 landmarks → [x0,y0,z0, x1,y1,z1, ..., x20,y20,z20]
-        │
-        ▼
-Normalisation (relative to wrist landmark)
-        │
-        ▼
-Dense Neural Network (TensorFlow/Keras)
-  ├── Dense(128, relu) + Dropout(0.2)
-  ├── Dense(64, relu)  + Dropout(0.2)
-  └── Dense(n_classes, softmax)
-        │
-        ▼
-Predicted gesture label → overlay on frame via OpenCV
-```
+**Tailored Consolidation (Adaptive Learning)**
+The user attempts to answer a question and is then shown the correct answer. They self-report whether they got it right or wrong, which updates a consolidation list stored in their profile. Phrases answered incorrectly appear more frequently; phrases consistently answered correctly are retired and replaced with new ones to learn.
 
-The full loop ran at approximately 20 frames per second on a standard laptop — fast enough for real-time feedback.
+**Custom Search Structure**
+Some signings are phrases rather than single words (e.g. "good morning"). BSL has signings for both the phrase and the individual words. The program locates the most efficient signing for what the user is searching. For names or words with no direct signing, the program outputs the letter-by-letter signing combination instead. Fuzzywuzzy provides fuzzy text matching — a tolerant autocorrect that finds the closest match in the word bank.
 
-## My Contribution
+## Development & Learning
 
-- Collected and labelled the training dataset: recorded 300+ samples per gesture class using the webcam, capturing variation in hand angle and distance
-- Built the MediaPipe integration and landmark normalisation pipeline
-- Designed and trained the classification network; iterated on architecture and dropout values to reduce overfitting
-- Built the OpenCV display loop that overlays the recognised gesture on the live camera feed
-- Evaluated accuracy per class and identified which gestures were systematically confused (similar landmark patterns)
+The GUI is built with GUIZERO (a tkinter-based library), displaying GIFs and menu navigation. Speech input is supported via the speech_recognition library, which captures mic audio and sends it to Google's speech API, returning a text string that is entered into the search field.
 
-## Key Outcomes
+Key modules integrated:
 
-- Achieved over 90% classification accuracy on the held-out test set across the implemented gesture classes
-- Real-time inference at 20 fps with no GPU required — runs on CPU on a standard laptop
-- The landmark-normalisation approach made the model robust to changes in hand position and scale without requiring a large dataset
+- **gspread** — Google Sheets API access for user profile storage and retrieval
+- **pytube** — YouTube playlist access to download and cache BSL signing GIFs locally
+- **speech_recognition** — Mic-to-text via Google Speech API
+- **fuzzywuzzy** — Fuzzy string matching for tolerant search against the word bank
+- **hashlib** — One-way password hashing before storage
+- **smtplib** — Email verification on account creation
+- **JSON** — Local caching of GIF metadata and progress state
 
-## What I Learned
-
-The landmark normalisation step was the key insight that made the project tractable. Training a CNN on raw images of hand gestures would have required thousands of examples per class and careful dataset diversity. By offloading the hard computer vision work to MediaPipe and giving the classifier a compact, normalised representation, the network could generalise well from a few hundred examples per class.
-
-The other lesson was about confusion analysis. Looking at which classes the model confused — rather than just the overall accuracy — revealed that a few gesture pairs with similar finger positions needed either more training data or a slight redesign of the gesture itself. Accuracy by class is more informative than accuracy overall.
+*Credit: Dan St Gallay ([danstg1](https://github.com/danstg1)) — help building the initial signing database.*
