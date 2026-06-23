@@ -89,13 +89,13 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
   const totalPages = pageCount(filtered.length, pageSize);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-[256px_1fr] gap-8 items-start">
 
-      {/* Filter panel */}
+      {/* Filter panel — left column */}
       <div
         role="search"
         aria-label="Filter projects"
-        className="border border-[var(--color-border)] rounded-lg p-5 flex flex-col gap-5"
+        className="border border-[var(--color-border)] rounded-lg p-5 flex flex-col gap-5 md:sticky md:top-8"
       >
 
         {/* Panel header + clear all */}
@@ -150,6 +150,9 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
           </div>
         )}
       </div>
+
+      {/* Right column — grid + pagination */}
+      <div className="flex flex-col gap-6">
 
       {/* Project grid */}
       {filtered.length === 0 ? (
@@ -246,6 +249,8 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
           )}
         </>
       )}
+
+      </div>{/* end right column */}
     </div>
   );
 }
