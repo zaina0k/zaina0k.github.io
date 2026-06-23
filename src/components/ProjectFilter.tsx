@@ -59,29 +59,44 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
   function CheckboxRow({ group }: { group: string }) {
     const checked = selectedGroups.has(group);
     const count = liveCounts.get(group) ?? 0;
+    const id = `filter-${group}`;
     return (
-      <label className="flex items-center gap-2 cursor-pointer group/cb select-none">
+      <label
+        htmlFor={id}
+        className="flex items-center gap-2 cursor-pointer group/cb select-none"
+      >
         <input
+          id={id}
           type="checkbox"
           checked={checked}
           onChange={() => toggle(group)}
+          aria-label={`Filter by ${labelFor(group)} (${count} project${count !== 1 ? 's' : ''})`}
           className="w-4 h-4 rounded border-[var(--color-border)] accent-[var(--color-accent)] cursor-pointer"
         />
         <span className="text-sm text-[var(--color-text)] group-hover/cb:text-[var(--color-accent)] transition-colors">
           {labelFor(group)}
         </span>
-        <span className="ml-auto text-xs text-[var(--color-text-muted)] tabular-nums">
+        <span
+          aria-hidden="true"
+          className="ml-auto text-xs text-[var(--color-text-muted)] tabular-nums"
+        >
           {count}
         </span>
       </label>
     );
   }
 
+  const totalPages = pageCount(filtered.length, pageSize);
+
   return (
     <div className="flex flex-col gap-8">
 
       {/* Filter panel */}
-      <div className="border border-[var(--color-border)] rounded-lg p-5 flex flex-col gap-5">
+      <div
+        role="search"
+        aria-label="Filter projects"
+        className="border border-[var(--color-border)] rounded-lg p-5 flex flex-col gap-5"
+      >
 
         {/* Panel header + clear all */}
         <div className="flex items-center justify-between">
@@ -91,6 +106,7 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
           {selectedGroups.size > 0 && (
             <button
               type="button"
+              aria-label="Clear all filters"
               onClick={() => {
                 setSelectedGroups(new Set());
                 setCurrentPage(0);
@@ -104,10 +120,13 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
 
         {/* Favourites */}
         <div>
-          <p className="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3">
+          <p
+            id="filter-favourites-label"
+            className="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3"
+          >
             Favourites
           </p>
-          <div className="flex flex-col gap-2">
+          <div role="group" aria-labelledby="filter-favourites-label" className="flex flex-col gap-2">
             {FAVOURITES.filter((f) => allGroups.includes(f)).map((group) => (
               <CheckboxRow key={group} group={group} />
             ))}
@@ -117,10 +136,13 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
         {/* Full tag list — only shown if there are tags outside FAVOURITES */}
         {fullTagList.length > 0 && (
           <div className="border-t border-[var(--color-border)] pt-4">
-            <p className="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3">
+            <p
+              id="filter-more-label"
+              className="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3"
+            >
               More
             </p>
-            <div className="flex flex-col gap-2">
+            <div role="group" aria-labelledby="filter-more-label" className="flex flex-col gap-2">
               {fullTagList.map((group) => (
                 <CheckboxRow key={group} group={group} />
               ))}
@@ -131,12 +153,17 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
 
       {/* Project grid */}
       {filtered.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-16 text-center">
+        <div
+          role="status"
+          aria-live="polite"
+          className="flex flex-col items-center justify-center py-16 text-center"
+        >
           <p className="text-[var(--color-text-muted)] text-sm mb-2">
             No projects match the selected filters.
           </p>
           <button
             type="button"
+            aria-label="Clear all filters"
             onClick={() => {
               setSelectedGroups(new Set());
               setCurrentPage(0);
@@ -149,41 +176,52 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
       ) : (
         <>
           {/* Result count + page info */}
-          <div className="flex items-center justify-between">
+          <div
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            className="flex items-center justify-between"
+          >
             <p className="text-sm text-[var(--color-text-muted)]">
               {filtered.length} project{filtered.length !== 1 ? 's' : ''}
             </p>
-            {pageCount(filtered.length, pageSize) > 1 && (
+            {totalPages > 1 && (
               <p className="text-sm text-[var(--color-text-muted)] tabular-nums">
-                Page {currentPage + 1} of {pageCount(filtered.length, pageSize)}
+                Page {currentPage + 1} of {totalPages}
               </p>
             )}
           </div>
 
           {/* Cards grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            aria-label="Projects list"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {paginateItems(filtered, currentPage, pageSize).map((project) => (
               <ProjectCardItem key={project.id} {...project} />
             ))}
           </div>
 
           {/* Pagination controls — only when more than one page */}
-          {pageCount(filtered.length, pageSize) > 1 && (
-            <div className="flex items-center justify-center gap-2">
+          {totalPages > 1 && (
+            <nav aria-label="Projects pagination" className="flex items-center justify-center gap-2">
               <button
                 type="button"
                 onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
                 disabled={currentPage === 0}
+                aria-label="Previous page"
                 className="px-3 py-1.5 text-sm rounded border border-[var(--color-border)] text-[var(--color-text)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
                 ← Prev
               </button>
 
-              {Array.from({ length: pageCount(filtered.length, pageSize) }, (_, i) => (
+              {Array.from({ length: totalPages }, (_, i) => (
                 <button
                   key={i}
                   type="button"
                   onClick={() => setCurrentPage(i)}
+                  aria-label={`Page ${i + 1}`}
+                  aria-current={i === currentPage ? 'page' : undefined}
                   className={[
                     'w-8 h-8 text-sm rounded border transition-colors',
                     i === currentPage
@@ -197,17 +235,14 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
 
               <button
                 type="button"
-                onClick={() =>
-                  setCurrentPage((p) =>
-                    Math.min(pageCount(filtered.length, pageSize) - 1, p + 1),
-                  )
-                }
-                disabled={currentPage === pageCount(filtered.length, pageSize) - 1}
+                onClick={() => setCurrentPage((p) => Math.min(totalPages - 1, p + 1))}
+                disabled={currentPage === totalPages - 1}
+                aria-label="Next page"
                 className="px-3 py-1.5 text-sm rounded border border-[var(--color-border)] text-[var(--color-text)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
                 Next →
               </button>
-            </div>
+            </nav>
           )}
         </>
       )}
