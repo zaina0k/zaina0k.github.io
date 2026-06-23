@@ -14,12 +14,11 @@ const projects = allProjects.sort(
 
   {projects.map((p) => {
     const ongoing = isOngoing(p.data.endDate);
-    const active = p.data.status === 'in-progress' || ongoing;
     return (
-      <div class="relative flex gap-6 pb-10" role="listitem">
+      <div class="relative flex gap-6 pb-10 group" role="listitem">
         <div
           aria-hidden="true"
-          class={`mt-1.5 w-4 h-4 shrink-0 rounded-full border-2 ${active ? `border-accent bg-accent${ongoing ? ' animate-pulse' : ''}` : 'border-border bg-bg'}`}
+          class="mt-1.5 w-4 h-4 shrink-0 rounded-full border-2 border-border bg-bg group-hover:border-accent group-hover:bg-accent transition-colors duration-200"
         ></div>
         <div>
           <p class="text-xs font-semibold tracking-widest uppercase text-text-muted mb-1">
