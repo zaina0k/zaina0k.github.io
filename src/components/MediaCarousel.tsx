@@ -16,8 +16,9 @@ type Props = {
 export default function MediaCarousel({ media }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [zoomed, setZoomed] = useState(false);
-  const [zoomStyle, setZoomStyle] = useState<React.CSSProperties>({});
+  const [magnifierActive, setMagnifierActive] = useState(false);
+  const [lensPos, setLensPos] = useState<{ x: number; y: number } | null>(null);
+  const [zoomScale, setZoomScale] = useState(1);
 
   // All refs declared before any early return (rules-of-hooks)
   const savedScrollY = useRef(0);
@@ -30,11 +31,6 @@ export default function MediaCarousel({ media }: Props) {
     thumbRefs.current[selectedIndex]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
   }, [selectedIndex]);
 
-  const resetZoom = () => {
-    setZoomed(false);
-    setZoomStyle({});
-  };
-
   const openLightbox = () => {
     savedScrollY.current = window.scrollY;
     document.body.style.cssText = `position:fixed;top:-${savedScrollY.current}px;width:100%;overflow:hidden`;
@@ -45,7 +41,8 @@ export default function MediaCarousel({ media }: Props) {
     const top = Math.abs(parseInt(document.body.style.top || '0'));
     document.body.style.cssText = '';
     window.scrollTo(0, top);
-    resetZoom();
+    setMagnifierActive(false);
+    setLensPos(null);
     setLightboxOpen(false);
   };
 
@@ -69,30 +66,21 @@ export default function MediaCarousel({ media }: Props) {
   const prev = () => setSelectedIndex(n(selectedIndex - 1, len));
   const next = () => setSelectedIndex(n(selectedIndex + 1, len));
 
-  const handleImageClick = (e: React.MouseEvent<HTMLImageElement>) => {
-    // Only wire click-zoom on pointer-capable (desktop) devices
+  const handleLightboxImageClick = () => {
     if (!window.matchMedia('(hover: hover)').matches) return;
 
-    if (zoomed) {
-      resetZoom();
+    if (magnifierActive) {
+      setMagnifierActive(false);
+      setLensPos(null);
       return;
     }
 
     const img = imgRef.current;
     if (!img) return;
     const rect = img.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
-
-    // Zoom to 1:1 native pixels, clamped between 1.5× and 4×
     const scale = Math.min(Math.max(img.naturalWidth / rect.width, 1.5), 4);
-
-    setZoomStyle({
-      transformOrigin: `${x * 100}% ${y * 100}%`,
-      transform: `scale(${scale})`,
-      transition: 'transform 300ms ease',
-    });
-    setZoomed(true);
+    setZoomScale(scale);
+    setMagnifierActive(true);
   };
 
   return (
@@ -182,16 +170,17 @@ export default function MediaCarousel({ media }: Props) {
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
-          {/* Image at native aspect ratio — zoom wrapper allows pan when overflowing; touch-action enables native pinch-zoom on mobile */}
+          {/* Image at native aspect ratio */}
           <div className="relative z-10 p-4 flex flex-col items-center max-w-full overflow-auto" style={{ touchAction: 'manipulation' }}>
-            <img
-              ref={imgRef}
-              src={active.src}
-              alt={active.alt ?? ''}
-              onClick={handleImageClick}
-              style={zoomStyle}
-              className={`max-w-full max-h-[90vh] object-contain ${zoomed ? '[@media(hover:hover)]:cursor-zoom-out' : '[@media(hover:hover)]:cursor-zoom-in'}`}
-            />
+            <div className="relative">
+              <img
+                ref={imgRef}
+                src={active.src}
+                alt={active.alt ?? ''}
+                onClick={handleLightboxImageClick}
+                className={`max-w-full max-h-[90vh] object-contain select-none ${magnifierActive ? 'cursor-crosshair' : '[@media(hover:hover)]:cursor-zoom-in'}`}
+              />
+            </div>
             {active.caption && (
               <p className="text-white/70 text-sm mt-3 text-center max-w-xl">{active.caption}</p>
             )}
