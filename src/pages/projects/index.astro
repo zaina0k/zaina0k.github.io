@@ -1,11 +1,40 @@
 ---
 import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
 import FooterCTA from '../../components/FooterCTA.astro';
+import ProjectFilter from '../../components/ProjectFilter';
+import type { ProjectFilterItem } from '../../lib/filter';
 
 const allProjects = await getCollection('projects');
-const projects = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+const sorted = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+
+const projects: ProjectFilterItem[] = await Promise.all(
+  sorted.map(async (project) => {
+    let thumbnail: ProjectFilterItem['thumbnail'] = null;
+    if (project.data.thumbnail) {
+      const img = await getImage({
+        src: project.data.thumbnail,
+        width: 800,
+        height: 450,
+        format: 'webp',
+      });
+      thumbnail = { src: img.src, width: 800, height: 450, format: 'webp' };
+    }
+    return {
+      id: project.id,
+      title: project.data.title,
+      summary: project.data.summary,
+      tags: project.data.tags,
+      groups: project.data.groups ?? [],
+      sortOrder: project.data.sortOrder,
+      startYear: project.data.startDate.getFullYear(),
+      status: project.data.status,
+      href: `/projects/${project.id}/`,
+      thumbnail,
+    };
+  }),
+);
 ---
 
 <BaseLayout
@@ -24,20 +53,8 @@ const projects = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder)
       </p>
     </div>
 
-    <!-- Project grid -->
-    <h2 class="sr-only">Project list</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {projects.map((project) => (
-        <ProjectCard
-          title={project.data.title}
-          year={String(project.data.startDate!.getFullYear())}
-          summary={project.data.summary}
-          tags={project.data.tags}
-          href={`/projects/${project.id}/`}
-          thumbnail={project.data.thumbnail}
-        />
-      ))}
-    </div>
+    <!-- Filter + project grid (React island) -->
+    <ProjectFilter client:load projects={projects} />
 
   </div>
 
