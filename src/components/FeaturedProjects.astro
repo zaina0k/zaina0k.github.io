@@ -31,7 +31,6 @@ const projects = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder)
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     {projects.map((project) => (
       <ProjectCard
-        number={String(project.data.sortOrder).padStart(2, '0')}
         title={project.data.title}
         year={String(project.data.startDate.getFullYear())}
         summary={project.data.summary}
