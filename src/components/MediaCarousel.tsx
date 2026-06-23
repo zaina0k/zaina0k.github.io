@@ -28,6 +28,16 @@ export default function MediaCarousel({ media }: Props) {
     thumbRefs.current[selectedIndex]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
   }, [selectedIndex]);
 
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === 'IFRAME') return;
+      if (e.key === 'ArrowLeft') setSelectedIndex(i => n(i - 1, len));
+      if (e.key === 'ArrowRight') setSelectedIndex(i => n(i + 1, len));
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [len]);
+
   return (
     <div className="group">
       {/* Main viewer */}
