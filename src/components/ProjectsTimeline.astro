@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort(
+  (a, b) => a.data.startDate.getTime() - b.data.startDate.getTime()
+);
+---
+
+<ul>
+  {projects.map((p) => (
+    <li>{p.data.title} — {p.data.startDate.toISOString().slice(0, 7)}</li>
+  ))}
+</ul>
