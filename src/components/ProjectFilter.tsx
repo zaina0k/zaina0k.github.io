@@ -4,7 +4,10 @@ import {
   FAVOURITES,
   filterProjects,
   computeLiveCounts,
+  paginateItems,
+  pageCount,
 } from '../lib/filter';
+import ProjectCardItem from './ProjectCardItem';
 
 export const PAGE_SIZE = 12;
 
@@ -126,10 +129,30 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
         )}
       </div>
 
-      {/* Project grid — increment 10 */}
-      <p className="text-[var(--color-text-muted)] text-sm">
-        {filtered.length} project{filtered.length !== 1 ? 's' : ''}
-      </p>
+      {/* Project grid */}
+      {filtered.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-16 text-center">
+          <p className="text-[var(--color-text-muted)] text-sm mb-2">
+            No projects match the selected filters.
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedGroups(new Set());
+              setCurrentPage(0);
+            }}
+            className="text-xs text-[var(--color-accent)] hover:underline cursor-pointer"
+          >
+            Clear filters
+          </button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {paginateItems(filtered, currentPage, pageSize).map((project) => (
+            <ProjectCardItem key={project.id} {...project} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
