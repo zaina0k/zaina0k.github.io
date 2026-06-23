@@ -14,7 +14,7 @@ interface Props {
   duration: string;
 }
 
-const { number, title, year, summary, tags, href, thumbnail, duration } = Astro.props;
+const { number, title, year, summary, tags, href, thumbnail } = Astro.props;
 const thumbnailAlt = `Screenshot of ${title}`;
 ---
 
@@ -49,17 +49,7 @@ const thumbnailAlt = `Screenshot of ${title}`;
       </div>
     </div>
 
-    <!-- Hover reveal panel (slides up from bottom) -->
-    <div class="absolute inset-x-0 bottom-0 z-20 translate-y-full group-hover:-translate-y-0 group-focus-visible:-translate-y-0 transition-transform duration-300 ease-out bg-black/85 backdrop-blur-sm px-4 pt-4 pb-3">
-      <p class="text-xs font-semibold tracking-widest uppercase text-[var(--color-accent)] mb-2">{duration}</p>
-      <div class="flex flex-wrap gap-1.5">
-        {tags.map((tag) => (
-          <span class="text-[10px] font-semibold tracking-widest uppercase px-2 py-0.5 rounded bg-white/10 text-white/80">
-            {tag}
-          </span>
-        ))}
-      </div>
-    </div>
+
   </div>
 
   <!-- Below-image strip -->
