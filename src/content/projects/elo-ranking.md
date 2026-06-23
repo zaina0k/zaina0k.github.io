@@ -39,6 +39,22 @@ groups:
   - "personal"
   - "python"
   - "algorithms"
+media:
+  - type: youtube
+    src: UhEKREfcWCc
+    caption: "Project demo"
+  - type: image
+    src: /projects/elo-ranking/elo-ranking-1.jpeg
+    alt: "Comparison GUI"
+  - type: image
+    src: /projects/elo-ranking/elo-ranking-2.jpeg
+    alt: "Individual rank history"
+  - type: image
+    src: /projects/elo-ranking/elo-ranking-3.jpeg
+    alt: "Group rank overlay"
+  - type: image
+    src: /projects/elo-ranking/elo-ranking-4.jpeg
+    alt: "Data flow diagram"
 ---
 
 ## Overview
@@ -46,9 +62,6 @@ groups:
 Elo Ranking is a Python project that showcases the Elo rating system — commonly used in chess — applied to the context of comparing photos. Rather than ranking players in a game, this tool ranks images by presenting them head-to-head and having the user choose a winner.
 
 The Elo system is designed to compare two items and adjust their ratings based on how likely each was to win. All items start with the same rating (1500). An item with 400 Elo more than its opponent is approximately 10× more likely to win — so upsets yield larger rating swings than expected victories.
-
-> **📷 Carousel — 4 images ready:** `elo-ranking-1.jpeg` (comparison GUI), `elo-ranking-2.jpeg` (individual rank history), `elo-ranking-3.jpeg` (group rank overlay), `elo-ranking-4.jpeg` (data flow diagram)
-> *(Carousel component not yet implemented — CP9)*
 
 ## Approach & Architecture
 

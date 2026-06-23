@@ -43,6 +43,22 @@ groups:
   - "competition"
   - "python"
   - "algorithms"
+media:
+  - type: youtube
+    src: UhEKREfcWCc
+    caption: "Project demo"
+  - type: image
+    src: /projects/morgan-stanley-challenge/ms-image-1.jpg
+    alt: "Screenshot 1"
+  - type: image
+    src: /projects/morgan-stanley-challenge/ms-image-2.jpg
+    alt: "Screenshot 2"
+  - type: image
+    src: /projects/morgan-stanley-challenge/ms-image-3.jpg
+    alt: "Screenshot 3"
+  - type: image
+    src: /projects/morgan-stanley-challenge/ms-image-4.jpeg
+    alt: "Screenshot 4"
 ---
 
 ## Overview
@@ -50,9 +66,6 @@ groups:
 Participating in the Morgan Stanley Coding Challenge, our task revolved around financial markets — specifically currency exchange between GBP and EUR. The EUR/GBP trading pair is a quotation on the current value of the Euro against the Pound.
 
 We were grouped into teams of 5 and given £1,000,000 in startup capital. Based on market predictions, we were to move our assets for the highest return while minimising losses, with final ranking determined by portfolio value at the close of the simulation.
-
-> **📷 Carousel — 4 images ready:** `ms-image-1.jpg`, `ms-image-2.jpg`, `ms-image-3.jpg`, `ms-image-4.jpeg`
-> *(Carousel component not yet implemented — CP9)*
 
 ## Approach & Architecture
 

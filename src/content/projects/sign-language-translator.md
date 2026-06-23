@@ -44,6 +44,25 @@ groups:
   - "university"
   - "python"
   - "accessibility"
+media:
+  - type: youtube
+    src: UhEKREfcWCc
+    caption: "Project demo"
+  - type: image
+    src: /projects/sign-language-translator/slt-1.jpeg
+    alt: "Search page"
+  - type: image
+    src: /projects/sign-language-translator/slt-2.jpeg
+    alt: "Email confirmation"
+  - type: image
+    src: /projects/sign-language-translator/slt-3.jpeg
+    alt: "Online database"
+  - type: image
+    src: /projects/sign-language-translator/slt-4.jpeg
+    alt: "Tailored consolidation"
+  - type: image
+    src: /projects/sign-language-translator/slt-5.jpeg
+    alt: "Sign-up data flow"
 ---
 
 ## Overview
@@ -51,9 +70,6 @@ groups:
 Sign Language Translator is a Python project that uses a sign language bank alongside a GUI to allow users to learn BSL (British Sign Language) via GIFs showcasing each action. The project includes an online user profile system and an adaptive learning algorithm designed for better learning efficiency.
 
 BSL is a visual language used by the deaf and hard of hearing as a primary form of communication. The program covers BSL phrases and actions, each represented as a GIF that demonstrates the signing in motion.
-
-> **📷 Carousel — 5 images ready:** `slt-1.jpeg` (search page), `slt-2.jpeg` (email confirmation), `slt-3.jpeg` (online database), `slt-4.jpeg` (tailored consolidation), `slt-5.jpeg` (sign-up data flow)
-> *(Carousel component not yet implemented — CP9)*
 
 ## Approach & Architecture
 

@@ -50,6 +50,19 @@ groups:
   - "web"
   - "hackathon"
   - "python"
+media:
+  - type: youtube
+    src: UhEKREfcWCc
+    caption: "Project demo"
+  - type: image
+    src: /projects/lets-hack-leicester/lhl-home-page.png
+    alt: "Home page"
+  - type: image
+    src: /projects/lets-hack-leicester/lhl-image-1.png
+    alt: "App screenshot"
+  - type: image
+    src: /projects/lets-hack-leicester/lhl-architecture-diagram.png
+    alt: "Architecture diagram"
 ---
 
 ## Overview
@@ -66,9 +79,6 @@ We were tasked with creating an application that would benefit people at the Uni
 - Presentation Quality
 
 We felt our idea provided a solution to University of Leicester CS students who were looking to expand their portfolio but were unsure where to start, or nervous about working alone.
-
-> **📷 Carousel — 3 images ready:** `lhl-image-1.png`, `lhl-architecture-diagram.png`, `lhl-home-page.png`
-> *(Carousel component not yet implemented — CP9)*
 
 ## Approach & Architecture
 
