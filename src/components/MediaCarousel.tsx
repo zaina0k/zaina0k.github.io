@@ -16,19 +16,24 @@ type Props = {
 export default function MediaCarousel({ media }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [zoomed, setZoomed] = useState(false);
+  const [zoomStyle, setZoomStyle] = useState<React.CSSProperties>({});
+
+  // All refs declared before any early return (rules-of-hooks)
   const savedScrollY = useRef(0);
-
-  if (!media || media.length === 0) return null;
-
-  const len = media.length;
-  const active = media[selectedIndex];
-  const prev = () => setSelectedIndex(n(selectedIndex - 1, len));
-  const next = () => setSelectedIndex(n(selectedIndex + 1, len));
-
   const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  const len = media?.length ?? 0;
+
   useEffect(() => {
     thumbRefs.current[selectedIndex]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
   }, [selectedIndex]);
+
+  const resetZoom = () => {
+    setZoomed(false);
+    setZoomStyle({});
+  };
 
   const openLightbox = () => {
     savedScrollY.current = window.scrollY;
@@ -40,6 +45,7 @@ export default function MediaCarousel({ media }: Props) {
     const top = Math.abs(parseInt(document.body.style.top || '0'));
     document.body.style.cssText = '';
     window.scrollTo(0, top);
+    resetZoom();
     setLightboxOpen(false);
   };
 
@@ -56,6 +62,38 @@ export default function MediaCarousel({ media }: Props) {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [len, lightboxOpen]);
+
+  if (!media || media.length === 0) return null;
+
+  const active = media[selectedIndex];
+  const prev = () => setSelectedIndex(n(selectedIndex - 1, len));
+  const next = () => setSelectedIndex(n(selectedIndex + 1, len));
+
+  const handleImageClick = (e: React.MouseEvent<HTMLImageElement>) => {
+    // Only wire click-zoom on pointer-capable (desktop) devices
+    if (!window.matchMedia('(hover: hover)').matches) return;
+
+    if (zoomed) {
+      resetZoom();
+      return;
+    }
+
+    const img = imgRef.current;
+    if (!img) return;
+    const rect = img.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+
+    // Zoom to 1:1 native pixels, clamped between 1.5× and 4×
+    const scale = Math.min(Math.max(img.naturalWidth / rect.width, 1.5), 4);
+
+    setZoomStyle({
+      transformOrigin: `${x * 100}% ${y * 100}%`,
+      transform: `scale(${scale})`,
+      transition: 'transform 300ms ease',
+    });
+    setZoomed(true);
+  };
 
   return (
     <>
@@ -97,6 +135,7 @@ export default function MediaCarousel({ media }: Props) {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
         </div>
+
         {/* Filmstrip */}
         <div className="flex overflow-x-auto gap-2 mt-2 pb-1">
           {media.map((item, i) => (
@@ -143,12 +182,15 @@ export default function MediaCarousel({ media }: Props) {
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
-          {/* Image at native aspect ratio */}
-          <div className="relative z-10 p-4 flex flex-col items-center max-w-full">
+          {/* Image at native aspect ratio — zoom wrapper allows pan when overflowing */}
+          <div className="relative z-10 p-4 flex flex-col items-center max-w-full overflow-auto">
             <img
+              ref={imgRef}
               src={active.src}
               alt={active.alt ?? ''}
-              className="max-w-full max-h-[90vh] object-contain [@media(hover:hover)]:cursor-zoom-in"
+              onClick={handleImageClick}
+              style={zoomStyle}
+              className={`max-w-full max-h-[90vh] object-contain ${zoomed ? '[@media(hover:hover)]:cursor-zoom-out' : '[@media(hover:hover)]:cursor-zoom-in'}`}
             />
             {active.caption && (
               <p className="text-white/70 text-sm mt-3 text-center max-w-xl">{active.caption}</p>
