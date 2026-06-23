@@ -28,6 +28,12 @@ const projects = defineCollection({
       results: z.array(z.string()).optional(),
       reflection: z.string().optional(),
       groups: z.array(z.string()).optional(),
+      media: z.array(z.object({
+        type: z.enum(['image', 'youtube']),
+        src: z.string(),
+        alt: z.string().optional(),
+        caption: z.string().optional(),
+      })).optional(),
     }),
 });
 
