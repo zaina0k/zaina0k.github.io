@@ -25,6 +25,8 @@ const projects = defineCollection({
       startDate: z.date(),
       endDate: z.date().nullable(),
       status: z.enum(['planned', 'in-progress', 'shipped', 'archived']),
+      results: z.array(z.string()).optional(),
+      reflection: z.string().optional(),
     }),
 });
 
