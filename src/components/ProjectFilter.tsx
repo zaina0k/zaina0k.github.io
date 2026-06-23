@@ -147,11 +147,69 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {paginateItems(filtered, currentPage, pageSize).map((project) => (
-            <ProjectCardItem key={project.id} {...project} />
-          ))}
-        </div>
+        <>
+          {/* Result count + page info */}
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-[var(--color-text-muted)]">
+              {filtered.length} project{filtered.length !== 1 ? 's' : ''}
+            </p>
+            {pageCount(filtered.length, pageSize) > 1 && (
+              <p className="text-sm text-[var(--color-text-muted)] tabular-nums">
+                Page {currentPage + 1} of {pageCount(filtered.length, pageSize)}
+              </p>
+            )}
+          </div>
+
+          {/* Cards grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {paginateItems(filtered, currentPage, pageSize).map((project) => (
+              <ProjectCardItem key={project.id} {...project} />
+            ))}
+          </div>
+
+          {/* Pagination controls — only when more than one page */}
+          {pageCount(filtered.length, pageSize) > 1 && (
+            <div className="flex items-center justify-center gap-2">
+              <button
+                type="button"
+                onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
+                disabled={currentPage === 0}
+                className="px-3 py-1.5 text-sm rounded border border-[var(--color-border)] text-[var(--color-text)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              >
+                ← Prev
+              </button>
+
+              {Array.from({ length: pageCount(filtered.length, pageSize) }, (_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setCurrentPage(i)}
+                  className={[
+                    'w-8 h-8 text-sm rounded border transition-colors',
+                    i === currentPage
+                      ? 'border-[var(--color-accent)] text-[var(--color-accent)] font-semibold'
+                      : 'border-[var(--color-border)] text-[var(--color-text)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]',
+                  ].join(' ')}
+                >
+                  {i + 1}
+                </button>
+              ))}
+
+              <button
+                type="button"
+                onClick={() =>
+                  setCurrentPage((p) =>
+                    Math.min(pageCount(filtered.length, pageSize) - 1, p + 1),
+                  )
+                }
+                disabled={currentPage === pageCount(filtered.length, pageSize) - 1}
+                className="px-3 py-1.5 text-sm rounded border border-[var(--color-border)] text-[var(--color-text)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              >
+                Next →
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
