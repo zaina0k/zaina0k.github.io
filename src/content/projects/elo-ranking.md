@@ -35,6 +35,10 @@ results:
   - "JSON-backed local persistence — all photo objects and rating histories saved and restored between sessions."
 reflection: |
   <add content here — personal reflections on what you learned building this project>
+groups:
+  - "personal"
+  - "python"
+  - "algorithms"
 ---
 
 ## Overview

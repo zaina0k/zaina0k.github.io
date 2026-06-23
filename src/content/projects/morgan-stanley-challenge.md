@@ -38,6 +38,11 @@ reflection: |
   The most significant lesson was around parameter tuning: a data point captured each second meant 5 and 20 periods represented a very short time window, likely causing excessive trades. Longer periods or adaptive tuning based on live volatility would have been more robust.
 
   <add content here — any personal reflections on what you learned beyond the technical points>
+groups:
+  - "university"
+  - "competition"
+  - "python"
+  - "algorithms"
 ---
 
 ## Overview

@@ -45,6 +45,11 @@ reflection: |
   Mentorship: pairing less experienced students with capable mentors through the CS society. Mentors would be community-recognised members with an incentive similar to committee membership — networking and community work to showcase to employers.
 
   Social media aspects: common social features to help users connect more easily. <add content here — original notes were incomplete>
+groups:
+  - "university"
+  - "web"
+  - "hackathon"
+  - "python"
 ---
 
 ## Overview

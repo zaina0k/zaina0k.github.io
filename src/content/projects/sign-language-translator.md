@@ -40,6 +40,10 @@ results:
   - "Mic input via speech_recognition + Google API, and fuzzy text matching via fuzzywuzzy for tolerant search."
 reflection: |
   <add content here — personal reflections on what you learned building this project>
+groups:
+  - "university"
+  - "python"
+  - "accessibility"
 ---
 
 ## Overview
