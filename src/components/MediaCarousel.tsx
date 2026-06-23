@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const n = (i: number, len: number) => ((i % len) + len) % len;
 
@@ -22,6 +22,11 @@ export default function MediaCarousel({ media }: Props) {
   const active = media[selectedIndex];
   const prev = () => setSelectedIndex(n(selectedIndex - 1, len));
   const next = () => setSelectedIndex(n(selectedIndex + 1, len));
+
+  const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  useEffect(() => {
+    thumbRefs.current[selectedIndex]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+  }, [selectedIndex]);
 
   return (
     <div className="group">
@@ -65,8 +70,9 @@ export default function MediaCarousel({ media }: Props) {
         {media.map((item, i) => (
           <button
             key={i}
+            ref={el => { thumbRefs.current[i] = el; }}
             onClick={() => setSelectedIndex(i)}
-            className="shrink-0 w-24 h-14 rounded overflow-hidden cursor-pointer focus:outline-none"
+            className={`shrink-0 w-24 h-14 rounded overflow-hidden cursor-pointer focus:outline-none ring-offset-1 ${i === selectedIndex ? 'ring-2 ring-accent' : ''}`}
             aria-label={item.alt ?? `Media ${i + 1}`}
           >
             <img
