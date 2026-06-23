@@ -1,8 +1,8 @@
 ---
-title: "Let's Hack Leicester — Collaborative Project Platform"
-summary: "Full-stack web app for university students to find and join portfolio projects."
-detail: "Led a team of 5 to build a full-stack web app in 24 hours. Next.js frontend, Flask API, SQLite database."
-thumbnail: "../../assets/thumbnails/lets-hack-leicester.png"
+title: "Let's Hack Leicester 2024"
+summary: "A portfolio project collaboration platform for CS students, built as a team of 5 in 24 hours at the Let's Hack Leicester hackathon."
+detail: "Led backend development and team coordination at Let's Hack Leicester 2024, building a Next.js + Flask + SQLite web app for students to find and join portfolio projects."
+thumbnail: "../../assets/projects/lets-hack-leicester/lhl-image-1.png"
 startDate: 2024-11-01
 endDate: 2024-11-01
 status: shipped
@@ -19,72 +19,74 @@ tags:
   - "Team Lead"
   - "Full-stack"
   - "Hackathon"
+  - "Backend"
 category: "hackathon"
 teamSize: 5
 role: "Team Lead & Backend Developer"
-github: "https://github.com/zainaltaf/lets-hack-leicester"
-liveDemo: ""
+github: "https://github.com/zaina0k/lets-hack-leicester"
 ogImage: "/og/lets-hack-leicester.png"
 skills:
   - "Full-stack development"
   - "API design"
   - "Team leadership"
   - "Database design"
+results:
+  - "Did not place — our presentation ran over the time limit and we were unable to complete speaking about our concept."
+  - "Two of five team members had difficulty contributing to the codebase, which significantly impacted how much we could complete within the time constraint."
+  - "Technical difficulties with the Next.js frontend prevented the application from reaching a presentable state for judges — the site was not hosted for judging."
+  - "The backend APIs were completed and integrated successfully; the bottleneck was the frontend presentation layer."
+reflection: |
+  The key lesson was time management under pressure. With 2 of 5 members unable to contribute effectively to the codebase, we should have reprioritised earlier — using a dummy backend and focusing all effort on a presentable frontend. A fully functional backend that cannot be seen is less valuable in a hackathon than a polished frontend backed by static data.
+
+  Had we taken our team constraints into account from the start, we could have built a dummy backend and redirected effort toward the frontend. In future hackathons, a strong frontend with hardcoded data first — then hook up a real backend — would be the more pragmatic approach.
+
+  Two planned features that were cut for time and would strengthen the platform significantly:
+
+  Mentorship: pairing less experienced students with capable mentors through the CS society. Mentors would be community-recognised members with an incentive similar to committee membership — networking and community work to showcase to employers.
+
+  Social media aspects: common social features to help users connect more easily. <add content here — original notes were incomplete>
 ---
 
-## The Problem
+## Overview
 
-University students building portfolio projects often struggle to find collaborators with complementary skills. Solo projects limit scope; finding teammates happens through word-of-mouth or chance. There was no dedicated platform for CS students at the University of Leicester to advertise projects, signal availability, or form teams deliberately.
+As a team of 5, we created a web application that would allow students to find projects to work on for their portfolio. By creating a user system, we allowed users to both post their project ideas and join other people's projects, encouraging collaboration.
 
-Let's Hack Leicester was a 24-hour hackathon sponsored by Capital One. The brief was open: build something that benefits the university student community. We identified the team-formation problem as high-impact and underserved, and spent the first hour aligning on scope before writing a line of code.
+Portfolio projects are an important part of building an understanding of technologies, and also portray to employers a genuine interest in the subject. More high-level and specific projects can allow students to demonstrate this interest towards certain fields such as Data Science, Game Dev, and many others.
 
-## The Approach
+We were tasked with creating an application that would benefit people at the University of Leicester or the wider local community. Projects were judged by a panel from the Computer Science society and proxies from Capital One, based on:
 
-Given 24 hours, scope discipline was everything. We defined a minimal viable feature set in the first 30 minutes:
+- Solution Viability
+- Technical Sophistication of Solution
+- Group Cohesion and Overall Teamwork
+- Presentation Quality
 
-- Students can post a project with a title, description, and required skills
-- Students can browse open projects and request to join
-- Project owners can accept or decline requests
+We felt our idea provided a solution to University of Leicester CS students who were looking to expand their portfolio but were unsure where to start, or nervous about working alone.
 
-Everything else — messaging, profiles, recommendations — was explicitly deferred. This kept the backend API surface small and the frontend navigable within the time constraint.
+> **📷 Carousel — 3 images ready:** `lhl-image-1.png`, `lhl-architecture-diagram.png`, `lhl-home-page.png`
+> *(Carousel component not yet implemented — CP9)*
 
-I took ownership of the backend and the team coordination. We split into two pairs: one on the Next.js frontend, one on the Flask API and database, with me bridging both.
+## Approach & Architecture
 
-## Architecture
+Given that we wanted to create a web application, we chose Next.js for the frontend and Python Flask for the backend. For the prototype, a simple database was necessary and we chose SQLite.
 
-```
-┌─────────────────────────┐      REST API       ┌─────────────────────────┐
-│   Next.js Frontend      │ ──────────────────► │   Flask Backend         │
-│   (React + Tailwind)    │ ◄────────────────── │   Python 3.11           │
-└─────────────────────────┘    JSON responses    └──────────┬──────────────┘
-                                                            │
-                                                            ▼
-                                                 ┌──────────────────────┐
-                                                 │   SQLite Database    │
-                                                 │   (users, projects,  │
-                                                 │    join requests)    │
-                                                 └──────────────────────┘
-```
+Next.js was chosen by the frontend team for quick setup and flexibility. Python Flask was chosen on the backend because the team was familiar with Python, and it integrated well with SQLite — a lightweight database suitable for prototyping.
 
-The Flask API exposed five endpoints covering project CRUD and join request handling. SQLite was chosen for portability — no database server to configure during a hackathon. The Next.js frontend consumed the API via `fetch`, with client-side state managed through React hooks.
+![LHL Architecture Diagram](../../assets/projects/lets-hack-leicester/lhl-architecture-diagram.png)
 
-## My Contribution
+The Flask API exposed endpoints covering project CRUD and join request handling. SQLite was chosen for portability — no database server to configure during a hackathon. The Next.js frontend consumed the API via `fetch`, with client-side state managed through React hooks.
 
-- Designed the database schema (three tables: users, projects, join_requests) and set up SQLite with SQLAlchemy ORM
-- Built all five Flask API endpoints with input validation and appropriate HTTP status codes
-- Wrote the API integration layer on the Next.js side — the `fetch` wrappers that the frontend team used
-- Coordinated stand-ups every two hours to surface blockers before they became blockers
-- Resolved a CORS misconfiguration thirty minutes before the presentation deadline
+## Development & Learning
 
-## Key Outcomes
+As teams were randomly allocated, the first priority was understanding each member's strengths so we could optimise production and fairly split the work. I volunteered as team lead, setting up the Git repository via GitHub and communication channels via Discord.
 
-- Delivered a working, demonstrable application within the 24-hour window
-- Successfully presented to a panel of Capital One engineers and university staff
-- The project formation and join-request flow worked end-to-end in the live demo
-- Team cohesion held throughout — no merge conflicts lost to poor coordination
+My programming role was to work on the backend, but as team lead I also ensured all participants were aligned with the project idea and that individual technical difficulties were resolved quickly — including integrating code from all team members, which required comprehensive understanding of every part of the project.
 
-## What I Learned
+To optimise our time, we split the group into a frontend sub-team and a backend sub-team. My contributions within the backend team:
 
-The biggest lesson was how much team coordination compounds under time pressure. When I didn't check in with the frontend pair for three hours, they built a component that expected a different API response shape than what I'd implemented. Catching that mismatch cost us 90 minutes. After that, I added a shared `api-contract.md` to the repo — a plain-text list of endpoint shapes — and we kept it updated in real time. It solved the problem completely.
+- Designed the database schema with the required tables for user data and project listings
+- Designed the APIs allowing the frontend to communicate with the database
+- Implemented those APIs and integrated them into the Next.js frontend
 
-Technically: SQLite is fine for a prototype, but I'd use PostgreSQL the moment persistence and concurrent writes matter. The ORM abstraction (SQLAlchemy) made the eventual-migration path clear.
+![LHL Home Page Mockup](../../assets/projects/lets-hack-leicester/lhl-home-page.png)
+
+*Mockup of the home page design*
