@@ -143,9 +143,16 @@ export default function MediaCarousel({ media }: Props) {
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
-          {/* Image placeholder — content added in increment 16 */}
-          <div className="relative z-10 p-4 flex flex-col items-center">
-            <span className="text-white/50 text-sm">Loading…</span>
+          {/* Image at native aspect ratio */}
+          <div className="relative z-10 p-4 flex flex-col items-center max-w-full">
+            <img
+              src={active.src}
+              alt={active.alt ?? ''}
+              className="max-w-full max-h-[90vh] object-contain [@media(hover:hover)]:cursor-zoom-in"
+            />
+            {active.caption && (
+              <p className="text-white/70 text-sm mt-3 text-center max-w-xl">{active.caption}</p>
+            )}
           </div>
         </div>
       )}
