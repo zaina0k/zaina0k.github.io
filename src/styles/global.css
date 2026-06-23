@@ -16,7 +16,7 @@
   --color-text-muted:  #6b6b6b;  /* secondary text */
   --color-accent:      #6b7c4a;  /* olive */
   --color-accent-hover:#556139;  /* darker olive on hover */
-  --color-border:      #d4cec4;  /* subtle border */
+  --color-border:      #a8a099;  /* border — increased contrast against cream bg */
   --color-surface:     #ffffff;  /* card/panel backgrounds */
 }
 
@@ -28,7 +28,7 @@
   --color-text-muted:  #9e9b93;  /* muted warm grey */
   --color-accent:      #8fa05e;  /* lighter olive for dark bg */
   --color-accent-hover:#a3b670;  /* even lighter on hover */
-  --color-border:      #333330;  /* subtle dark border */
+  --color-border:      #4d4d47;  /* border — increased contrast against dark bg */
   --color-surface:     #252520;  /* card/panel backgrounds */
 }
 

@@ -37,7 +37,7 @@ const thumbnailAlt = `Screenshot of ${title}`;
     )}
 
     <!-- Accent banner behind title -->
-    <div class="absolute inset-x-0 bottom-0 bg-[var(--color-accent)]/60 px-4 py-3 z-10">
+    <div class="absolute inset-x-0 bottom-0 bg-[var(--color-accent)]/90 px-4 py-3 z-10">
       <h3 class="text-sm font-semibold text-white leading-snug group-hover:text-white/80 group-focus-visible:text-white/80 transition-colors">
         {title}
       </h3>
@@ -55,7 +55,7 @@ const thumbnailAlt = `Screenshot of ${title}`;
     <!-- Tags -->
     <div class="flex flex-wrap gap-2">
       {tags.map((tag) => (
-        <span class="text-[10px] font-semibold tracking-widest uppercase px-2 py-1 rounded bg-[var(--color-bg-subtle)] text-[var(--color-text-muted)]">
+        <span class="text-[10px] font-semibold tracking-widest uppercase px-2 py-1 rounded bg-[var(--color-bg-subtle)] border border-[var(--color-border)] text-[var(--color-text-muted)]">
           {tag}
         </span>
       ))}
