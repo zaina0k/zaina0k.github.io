@@ -80,10 +80,29 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
       {/* Filter panel */}
       <div className="border border-[var(--color-border)] rounded-lg p-5 flex flex-col gap-5">
 
+        {/* Panel header + clear all */}
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">
+            Filter
+          </p>
+          {selectedGroups.size > 0 && (
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedGroups(new Set());
+                setCurrentPage(0);
+              }}
+              className="text-xs text-[var(--color-accent)] hover:underline cursor-pointer"
+            >
+              Clear all
+            </button>
+          )}
+        </div>
+
         {/* Favourites */}
         <div>
           <p className="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3">
-            Filter
+            Favourites
           </p>
           <div className="flex flex-col gap-2">
             {FAVOURITES.filter((f) => allGroups.includes(f)).map((group) => (
