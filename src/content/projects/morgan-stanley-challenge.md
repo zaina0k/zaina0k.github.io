@@ -1,17 +1,15 @@
 ---
-title: "Morgan Stanley Coding Challenge — Algorithmic Trading Bot"
-summary: "EMA-based currency exchange trading strategy. Placed 7th out of 27 teams."
-detail: "Built an EMA-based algorithmic trading strategy. Placed 7th out of 27 teams in a Morgan Stanley-hosted competition."
-thumbnail: "../../assets/thumbnails/morgan-stanley-challenge.png"
-startDate: 2024-03-01
-endDate: 2024-03-01
+title: "Morgan Stanley Coding Challenge 2024"
+summary: "EMA-based algorithmic currency trading bot. Placed 7th out of 27 teams in a Morgan Stanley-hosted competition."
+detail: "Built an EMA-based algorithmic trading strategy as part of a team of 5 in a Morgan Stanley-hosted coding challenge, placing 7th out of 27 teams."
+thumbnail: "../../assets/projects/morgan-stanley-challenge/ms-image-4.jpeg"
+startDate: 2024-10-01
+endDate: 2024-10-01
 status: shipped
 sortOrder: 2
 featured: true
 techStack:
   - "Python"
-  - "Pandas"
-  - "NumPy"
   - "REST APIs"
   - "Git"
 tags:
@@ -19,71 +17,53 @@ tags:
   - "Python"
   - "Competition"
 category: "competition"
-teamSize: 2
+teamSize: 5
 role: "Algorithm Developer"
-github: "https://github.com/zainaltaf/morgan-stanley-challenge"
-liveDemo: ""
+github: "https://github.com/zaina0k/morgan-stanley-challenge"
 ogImage: "/og/morgan-stanley-challenge.png"
 skills:
   - "Algorithm design"
   - "Financial data analysis"
   - "Technical indicators"
   - "Competitive programming"
+results:
+  - "Placed 7th out of 27 competing teams."
+  - "The EMA parameters (5 and 20 periods) may have been too short, causing high-frequency trades and excessive losses during volatile periods."
+  - "The simulation included hindsight on certain major market fluctuations which we did not optimise for, limiting potential gains."
+  - "Additional filters used alongside EMA in professional settings were not implemented, which limited the strategy's full effectiveness."
+  - "As a team we achieved a fair amount in a short time — with more testing and refinement the bot could have performed significantly better."
+reflection: |
+  The project stands as a foundational introduction to algorithmic market trading. The core EMA strategy worked and the bot ran reliably throughout the simulation, but there are clear areas where more refinement would have improved the result.
+
+  The most significant lesson was around parameter tuning: a data point captured each second meant 5 and 20 periods represented a very short time window, likely causing excessive trades. Longer periods or adaptive tuning based on live volatility would have been more robust.
+
+  <add content here — any personal reflections on what you learned beyond the technical points>
 ---
 
-## The Problem
+## Overview
 
-Morgan Stanley hosted a coding challenge open to university students across the UK. Teams were given access to a simulated currency exchange API and tasked with writing an automated trading bot that would maximise returns over a fixed trading window. The simulation ran in real time — your bot made live API calls, received price data, and had its trades recorded. Final ranking was by portfolio value at the close.
+Participating in the Morgan Stanley Coding Challenge, our task revolved around financial markets — specifically currency exchange between GBP and EUR. The EUR/GBP trading pair is a quotation on the current value of the Euro against the Pound.
 
-Twenty-seven teams competed. The constraint wasn't just algorithmic — it was operational. The API had rate limits, the simulation ran for a bounded period, and any bot that crashed or made invalid requests forfeited those trades.
+We were grouped into teams of 5 and given £1,000,000 in startup capital. Based on market predictions, we were to move our assets for the highest return while minimising losses, with final ranking determined by portfolio value at the close of the simulation.
 
-## The Approach
+> **📷 Carousel — 4 images ready:** `ms-image-1.jpg`, `ms-image-2.jpg`, `ms-image-3.jpg`, `ms-image-4.jpeg`
+> *(Carousel component not yet implemented — CP9)*
 
-We started by reading the API documentation carefully and sketching the decision loop before writing any code. The core loop was simple:
+## Approach & Architecture
 
-1. Fetch the current exchange rates
-2. Evaluate whether to buy, sell, or hold based on the current signal
-3. Submit the trade if the signal was strong enough
-4. Wait, then repeat
+As this was an introductory project into financial trading bots, our team decided on the EMA (Exponential Moving Average) trading strategy. EMA assigns greater weight to the most recent price data, making it more responsive to recent market moves than a simple moving average.
 
-The strategic question was which signal to use. We evaluated three approaches: simple moving average crossover, momentum-based, and exponential moving average (EMA). EMA weights recent prices more heavily than older ones, which suited the short simulation window — we didn't have weeks of history to smooth over.
+By using a short-term EMA (5 periods) and a long-term EMA (20 periods), the crossing of these two graphs triggered a trade signal within the program to buy or sell.
 
-We implemented a dual-EMA crossover: a short-window EMA (5 periods) crossing above a long-window EMA (20 periods) triggered a buy; the inverse triggered a sell. The window lengths were tuned by running the strategy against historical data provided in the documentation.
+**Risk and Reward Management**
 
-## Architecture
+The bot incorporated a risk management system by adjusting trade size based on a fixed risk percentage and a reward ratio of 2:1. This meant that our take profit was set at twice the distance of the stop-loss.
 
-```
-┌─────────────────────────────────────────────────────────┐
-│  Trading Bot (Python)                                   │
-│                                                         │
-│  main loop                                              │
-│  ├── fetch_rates()     ──►  Morgan Stanley API          │
-│  ├── compute_ema()     ──►  Pandas rolling calc         │
-│  ├── generate_signal() ──►  crossover logic             │
-│  └── submit_trade()    ──►  Morgan Stanley API          │
-│                                                         │
-│  price_history: deque(maxlen=20)  ← rolling buffer      │
-└─────────────────────────────────────────────────────────┘
-```
+## Development & Learning
 
-A `collections.deque` with `maxlen=20` maintained the rolling price window without unbounded memory growth. The EMA was computed with Pandas on each tick. Error handling wrapped every API call — a failed request was logged and skipped rather than allowed to crash the loop.
+Given that teams were randomly assigned, it was important to first assess each member's strengths to better distribute the workload. We ended up with a 3-2 split:
 
-## My Contribution
+- 3 members working on developing the trading strategy
+- 2 members working on API calls — GETting current market data from the simulation, and POSTing buy/sell orders based on the strategy output
 
-- Researched and selected the dual-EMA crossover strategy after comparing alternatives
-- Implemented the signal generation and trade submission logic
-- Wrote the error handling layer that kept the bot running through rate-limit responses
-- Tuned the EMA window parameters against the sample historical data
-- Tested the bot end-to-end against the simulation environment before the competition window opened
-
-## Key Outcomes
-
-- Placed 7th out of 27 competing teams
-- Bot ran without crashes for the full duration of the simulation window
-- Portfolio finished in positive territory across all three currency pairs traded
-
-## What I Learned
-
-The most valuable lesson was about the gap between a strategy that looks good in backtesting and one that holds up under operational constraints. Our EMA parameters were tuned on historical data — but the live simulation had different volatility characteristics. A more robust approach would have included parameter ranges and adaptive tuning rather than fixed windows.
-
-The other lesson was defensive programming under uncertainty. Every external API call is a potential failure point. Writing the error handling before the strategy logic — rather than bolting it on at the end — made the bot substantially more stable under the live conditions.
+My role was programming the trading strategy based on research into the EMA approach conducted by one of my sub-team members. This required accurately interpreting the workings of the strategy into code and creating signals for when the API should buy or sell based on previous price data.
