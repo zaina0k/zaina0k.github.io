@@ -121,7 +121,7 @@ const ogImage = data.ogImage ?? data.heroImage?.src ?? data.thumbnail?.src;
 
   <!-- Case study body -->
   <div class="mx-auto max-w-4xl px-6 pb-10">
-    <article class="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-[var(--color-text)] prose-p:text-[var(--color-text-muted)] prose-p:leading-relaxed prose-li:text-[var(--color-text-muted)] prose-code:font-mono prose-code:text-sm prose-pre:bg-[var(--color-bg-subtle)] prose-pre:rounded-xl prose-pre:p-5 prose-pre:overflow-x-auto">
+    <article class="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-[var(--color-text)] prose-p:text-[var(--color-text-muted)] prose-p:leading-relaxed prose-li:text-[var(--color-text-muted)] prose-code:font-mono prose-code:text-sm prose-pre:bg-[var(--color-bg-subtle)] prose-pre:rounded-xl prose-pre:p-5 prose-pre:overflow-x-auto prose-blockquote:not-italic prose-blockquote:border-l-4 prose-blockquote:border-[var(--color-accent)] prose-blockquote:bg-[var(--color-bg-subtle)] prose-blockquote:rounded-r-xl prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:text-[var(--color-text-muted)] prose-blockquote:text-sm">
       <Content />
     </article>
   </div>
@@ -144,7 +144,7 @@ const ogImage = data.ogImage ?? data.heroImage?.src ?? data.thumbnail?.src;
         <h2 class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-4">Results</h2>
         <ul class="space-y-2">
           {data.results.map((item) => (
-            <li class="flex items-start gap-2 text-sm font-medium text-[var(--color-text)]">
+            <li class="flex items-start gap-2 text-sm font-semibold text-[var(--color-text)]">
               <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)]" />
               {item}
             </li>
@@ -157,10 +157,10 @@ const ogImage = data.ogImage ?? data.heroImage?.src ?? data.thumbnail?.src;
   <!-- Reflection — shown for shipped and archived projects -->
   {(data.status === 'shipped' || data.status === 'archived') && data.reflection && (
     <div class="mx-auto max-w-4xl px-6 pb-10">
-      <div class="border-l-2 border-[var(--color-accent)] pl-6">
+      <div class="border-l-2 border-[var(--color-accent)] pl-6 py-1">
         <h2 class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-4">Reflection</h2>
         {data.reflection.split('\n\n').map((para) => (
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3 last:mb-0">{para}</p>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4 last:mb-0">{para}</p>
         ))}
       </div>
     </div>
