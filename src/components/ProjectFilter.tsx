@@ -64,22 +64,45 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
     return (
       <label
         htmlFor={id}
-        className="flex items-center gap-2 cursor-pointer group/cb select-none"
+        className="flex items-center gap-2.5 cursor-pointer group/cb select-none"
       >
+        {/* Hidden native checkbox — keeps keyboard/screen-reader semantics */}
         <input
           id={id}
           type="checkbox"
           checked={checked}
           onChange={() => toggle(group)}
           aria-label={`Filter by ${labelFor(group)} (${count} project${count !== 1 ? 's' : ''})`}
-          className="w-4 h-4 rounded border-[var(--color-border)] accent-[var(--color-accent)] cursor-pointer"
+          className="sr-only"
         />
+        {/* Custom visual checkbox */}
+        <span
+          aria-hidden="true"
+          className={[
+            'w-4 h-4 rounded shrink-0 border transition-all duration-150 flex items-center justify-center',
+            checked
+              ? 'bg-[var(--color-accent)] border-[var(--color-accent)]'
+              : 'bg-transparent border-[var(--color-border)] group-hover/cb:border-[var(--color-accent)]',
+          ].join(' ')}
+        >
+          {checked && (
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+              <path
+                d="M1 4l2.5 2.5L9 1"
+                stroke="white"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        </span>
         <span className="text-sm text-[var(--color-text)] group-hover/cb:text-[var(--color-accent)] transition-colors">
           {labelFor(group)}
         </span>
         <span
           aria-hidden="true"
-          className="ml-auto text-xs text-[var(--color-text-muted)] tabular-nums"
+          className="ml-auto text-xs text-[var(--color-text-muted)] tabular-nums w-5 text-right"
         >
           {count}
         </span>
