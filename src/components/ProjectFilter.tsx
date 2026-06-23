@@ -177,8 +177,38 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
         )}
       </div>
 
-      {/* Right column — grid + pagination */}
+      {/* Right column — chips + grid + pagination */}
       <div className="flex flex-col gap-6">
+
+        {/* Active filter chips — only when panel is closed and filters are active */}
+        {!isFilterOpen && selectedGroups.size > 0 && (
+          <div className="flex flex-wrap items-center gap-2">
+            {Array.from(selectedGroups).map((group) => (
+              <button
+                key={group}
+                type="button"
+                onClick={() => toggle(group)}
+                aria-label={`Remove filter: ${labelFor(group)}`}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-[var(--color-accent)] text-[var(--color-accent)] bg-[var(--color-accent)]/10 hover:bg-[var(--color-accent)]/20 transition-colors cursor-pointer"
+              >
+                {labelFor(group)}
+                <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </button>
+            ))}
+            {selectedGroups.size > 1 && (
+              <button
+                type="button"
+                aria-label="Clear all filters"
+                onClick={() => { setSelectedGroups(new Set()); setCurrentPage(0); }}
+                className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors cursor-pointer underline underline-offset-2"
+              >
+                Clear all
+              </button>
+            )}
+          </div>
+        )}
 
       {/* Project grid */}
       {filtered.length === 0 ? (
