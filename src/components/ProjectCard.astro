@@ -15,6 +15,7 @@ interface Props {
 }
 
 const { number, title, year, summary, tags, href, thumbnail, duration } = Astro.props;
+const thumbnailAlt = `Screenshot of ${title}`;
 ---
 
 <a
@@ -26,7 +27,7 @@ const { number, title, year, summary, tags, href, thumbnail, duration } = Astro.
     {thumbnail ? (
       <Image
         src={thumbnail}
-        alt={title}
+        alt={thumbnailAlt}
         width={800}
         height={450}
         loading="lazy"
