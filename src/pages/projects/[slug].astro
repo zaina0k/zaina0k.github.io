@@ -107,11 +107,28 @@ const ogImage = data.ogImage ?? data.heroImage?.src ?? data.thumbnail?.src;
   </div>
 
   <!-- Case study body -->
-  <div class="mx-auto max-w-4xl px-6 pb-20">
+  <div class="mx-auto max-w-4xl px-6 pb-10">
     <article class="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-[var(--color-text)] prose-p:text-[var(--color-text-muted)] prose-p:leading-relaxed prose-li:text-[var(--color-text-muted)] prose-code:font-mono prose-code:text-sm prose-pre:bg-[var(--color-bg-subtle)] prose-pre:rounded-xl prose-pre:p-5 prose-pre:overflow-x-auto">
       <Content />
     </article>
   </div>
+
+  <!-- Results — shown for shipped projects only -->
+  {data.status === 'shipped' && data.results && data.results.length > 0 && (
+    <div class="mx-auto max-w-4xl px-6 pb-10">
+      <div class="rounded-xl bg-[var(--color-bg-subtle)] border border-[var(--color-border)] p-6">
+        <h2 class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-4">Results</h2>
+        <ul class="space-y-2">
+          {data.results.map((item) => (
+            <li class="flex items-start gap-2 text-sm font-medium text-[var(--color-text)]">
+              <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)]" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )}
 
   <!-- Back nav -->
   <div class="mx-auto max-w-4xl px-6 pb-10 border-t border-[var(--color-border)] pt-8">
