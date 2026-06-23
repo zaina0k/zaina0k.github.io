@@ -1,103 +1,84 @@
 ---
-title: "Elo Ranking System — Competitive Rating Engine"
-summary: "Full-stack application implementing the Elo rating algorithm with match history and an interactive desktop interface."
-detail: "Full-stack application implementing the Elo rating algorithm with a REST API backend and interactive frontend."
-thumbnail: "../../assets/thumbnails/elo-ranking.png"
-startDate: 2023-10-01
-endDate: 2023-11-01
+title: "Elo Ranking"
+summary: "A Python photo comparison tool that applies the chess Elo rating system to rank images through head-to-head comparisons."
+detail: "Built a desktop photo ranking app using the Elo algorithm — users choose between two images repeatedly, and ratings converge to a true ranking over time."
+thumbnail: "../../assets/projects/elo-ranking/elo-ranking-1.jpeg"
+startDate: 2023-01-01
+endDate: 2023-01-01
 status: shipped
 sortOrder: 4
 featured: true
 techStack:
   - "Python"
-  - "Flask"
-  - "SQLite"
-  - "tkinter"
-  - "REST APIs"
+  - "GUIZERO"
+  - "Matplotlib"
+  - "JSON"
 tags:
-  - "Full-stack"
   - "Algorithms"
-  - "REST API"
+  - "Python"
+  - "GUI"
+  - "Personal"
 category: "personal"
 role: "Sole Developer"
-github: "https://github.com/zainaltaf/elo-ranking"
-liveDemo: ""
+github: "https://github.com/zaina0k/elo-ranking"
 ogImage: "/og/elo-ranking.png"
 skills:
   - "Algorithm implementation"
-  - "API design"
-  - "Database design"
-  - "Desktop GUI development"
+  - "GUI development"
+  - "Data visualisation"
+  - "Local data persistence"
+results:
+  - "Working photo comparison GUI — two images displayed side by side, user clicks a winner, ratings update immediately."
+  - "Rank-based matchmaking ensures similarly ranked photos are compared more often, making the ranking converge faster and more fairly."
+  - "Settings page with top-5 display and individual photo rating history graph via Matplotlib."
+  - "Dev page with simulation mode (up to 100 random comparisons), full ranking overlay graph, full reset, and most-compared-item history."
+  - "JSON-backed local persistence — all photo objects and rating histories saved and restored between sessions."
+reflection: |
+  <add content here — personal reflections on what you learned building this project>
 ---
 
-## The Problem
+## Overview
 
-Elo is the rating algorithm used in chess, competitive gaming, and sports rankings worldwide. The core idea is elegant: after each match, points transfer from the loser to the winner, with the amount determined by the expected outcome — an upset against a higher-rated opponent earns more points than beating a lower-rated one.
+Elo Ranking is a Python project that showcases the Elo rating system — commonly used in chess — applied to the context of comparing photos. Rather than ranking players in a game, this tool ranks images by presenting them head-to-head and having the user choose a winner.
 
-I wanted to implement Elo from scratch to understand it properly, and to build something genuinely useful: a general-purpose ranking tool for any head-to-head competition — board games, table tennis, coding challenge leaderboards — where you want fair, adaptive rankings that update in real time.
+The Elo system is designed to compare two items and adjust their ratings based on how likely each was to win. All items start with the same rating (1500). An item with 400 Elo more than its opponent is approximately 10× more likely to win — so upsets yield larger rating swings than expected victories.
 
-## The Approach
+> **📷 Carousel — 4 images ready:** `elo-ranking-1.jpeg` (comparison GUI), `elo-ranking-2.jpeg` (individual rank history), `elo-ranking-3.jpeg` (group rank overlay), `elo-ranking-4.jpeg` (data flow diagram)
+> *(Carousel component not yet implemented — CP9)*
 
-The implementation has two layers: the algorithm and the application.
+## Approach & Architecture
 
-**The algorithm** was implemented from first principles, translating the mathematical formula directly into Python before wiring it into any framework:
+The application is split across three pages, each with a distinct purpose:
 
-```
-Expected score:  E_A = 1 / (1 + 10^((R_B - R_A) / 400))
-Rating update:   R_A' = R_A + K × (S_A - E_A)
-```
+**Start Page — Photo Comparison**
+Two photo items are displayed in the GUI with labels (derived from their filenames) and a button on each side. The user clicks the winner; the ratings are updated and a new pair is displayed. The `chooseCompetitors` function drives semi-random rank-based matchmaking:
 
-Where `K` is a constant controlling rating volatility (higher K = faster adaptation; lower K = more stable ratings). I implemented a variable K-factor: new players start with K=40 for faster calibration, stabilising to K=20 after 30 matches.
+1. It checks that `item1` (the left photo) is different from last time, so the same pair is never repeated consecutively.
+2. To select `item2`, it randomly picks 3 candidates (all different from `item1`) and chooses whichever has the closest Elo rating. The number of candidates checked (configurable via `options`) controls how strict the matchmaking is — it must always be less than the total population.
 
-**The application** separates concerns cleanly: a Flask REST API handles all data and business logic; a tkinter GUI consumes it. This separation meant I could swap the GUI for a web frontend without touching the rating engine.
+This produces a fair-play structure where similarly ranked photos compete, while still allowing enough randomness to generate varied comparisons across the whole collection.
 
-## Architecture
+**Settings Page**
+- Save button — serialises all photo item objects to `db.json` in the current directory
+- Display top 5 rated — sorts the population by current rating and shows the five highest-ranked photos
+- Individual item rank history — user selects a photo by name; the photo is displayed alongside its current rating and a Matplotlib line chart of its rating history
 
-```
-┌─────────────────────────────────────────────────────────┐
-│  tkinter Desktop GUI                                    │
-│  ├── Player registration screen                         │
-│  ├── Match entry screen (select two players → submit)   │
-│  ├── Leaderboard view (sorted by current rating)        │
-│  └── Match history view (per-player)                    │
-└──────────────────┬──────────────────────────────────────┘
-                   │ HTTP (REST)
-                   ▼
-┌─────────────────────────────────────────────────────────┐
-│  Flask REST API                                         │
-│  POST /players          ← register player               │
-│  GET  /players          ← list with current ratings     │
-│  POST /matches          ← record result, update ratings │
-│  GET  /players/{id}/history  ← match history            │
-└──────────────────┬──────────────────────────────────────┘
-                   │ SQLAlchemy ORM
-                   ▼
-┌─────────────────────────────────────────────────────────┐
-│  SQLite Database                                        │
-│  players(id, name, rating, matches_played)              │
-│  matches(id, player_a, player_b, winner, timestamp,     │
-│           delta_a, delta_b)                             │
-└─────────────────────────────────────────────────────────┘
-```
+**Dev Page**
+- Simulate — a textbox and button that runs up to 100 random comparisons automatically, updating ratings as normal
+- Full graph — a slider that plots rating history charts for the top N photos on one overlaid graph
+- Full reset — clears `db.json` and all in-memory state
+- History — outputs to terminal the most frequently compared photo item
 
-Storing `delta_a` and `delta_b` (the rating change per match) made the match history view meaningful — you can see not just who won each match but how significant each result was.
+## Development & Learning
 
-## My Contribution
+The three modules that power the core functionality:
 
-- Implemented the Elo algorithm with variable K-factor from the mathematical formula, not from a library
-- Designed the database schema to make match history queryable without recomputing ratings
-- Built the Flask REST API with four endpoints and input validation
-- Built the tkinter GUI, including the real-time leaderboard that refreshes after every match entry
-- Tested the rating update logic against known Elo calculations to verify correctness
+**GUIZERO** — a tkinter-based library used for all GUI elements. It handles photo display, the menu system between pages, dropdown selectors, sliders, and buttons. GUIZERO's simplified API made it practical to build multiple pages without deep tkinter boilerplate.
 
-## Key Outcomes
+**Matplotlib** — used for the rating history line charts on both the Settings page (individual photo history) and the Dev page (overlaid group chart). Each comparison appends the new rating to a history list stored on the photo item object.
 
-- The rating engine correctly handles all edge cases: draws, new players with no history, and large upsets
-- The variable K-factor calibration meaningfully reduced rating volatility for established players
-- The REST API / GUI separation proved its value when I added the match history view — zero changes to the API, new screen in the GUI only
+**JSON** — photo item objects are serialised and written to `db.json` on save. On load, the file is read back and deserialised into the same object structure, restoring all ratings and histories exactly as they were left.
 
-## What I Learned
+*Credit: Matt Tansey — help with a rating history list bug fix.*
 
-Implementing a well-known algorithm from scratch, rather than using a library, forces you to understand it rather than just use it. I found two subtleties in the standard Elo formula that aren't obvious until you implement them: the 400-point divisor is a convention (not a mathematical necessity) that determines how quickly expected score changes with rating difference, and the K-factor trade-off between responsiveness and stability is a design choice, not a right answer.
-
-The architectural lesson: separating the Flask API from the GUI meant every feature addition was a clean decision — does this logic belong in the API or the display layer? Having that boundary made the codebase easier to reason about and extend.
+*Note: all photos used in the project were taken by the developer.*
