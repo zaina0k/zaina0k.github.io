@@ -117,7 +117,7 @@ export default function ContactForm() {
             value={name}
             onChange={(e) => { setName(e.target.value); if (errors.name) setErrors((p) => ({ ...p, name: undefined })); }}
             disabled={status === 'loading'}
-            className="w-full bg-transparent border-b border-[var(--color-border)] focus:border-[var(--color-accent)] outline-none text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] py-1 transition-colors disabled:opacity-50"
+            className="w-full bg-bg-subtle border border-text-muted rounded px-3 py-2 focus:border-accent outline-none text-sm text-text placeholder:text-text-muted transition-colors disabled:opacity-50"
           />
           {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
         </div>
@@ -135,7 +135,7 @@ export default function ContactForm() {
             value={email}
             onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors((p) => ({ ...p, email: undefined })); }}
             disabled={status === 'loading'}
-            className="w-full bg-transparent border-b border-[var(--color-border)] focus:border-[var(--color-accent)] outline-none text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] py-1 transition-colors disabled:opacity-50"
+            className="w-full bg-bg-subtle border border-text-muted rounded px-3 py-2 focus:border-accent outline-none text-sm text-text placeholder:text-text-muted transition-colors disabled:opacity-50"
           />
           {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
         </div>
@@ -153,7 +153,7 @@ export default function ContactForm() {
             value={message}
             onChange={(e) => { setMessage(e.target.value); if (errors.message) setErrors((p) => ({ ...p, message: undefined })); }}
             disabled={status === 'loading'}
-            className="w-full bg-transparent border-b border-[var(--color-border)] focus:border-[var(--color-accent)] outline-none text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] py-1 resize-none transition-colors disabled:opacity-50"
+            className="w-full bg-bg-subtle border border-text-muted rounded px-3 py-2 focus:border-accent outline-none text-sm text-text placeholder:text-text-muted resize-none transition-colors disabled:opacity-50"
           />
           {errors.message && <p className="text-xs text-red-500 mt-1">{errors.message}</p>}
         </div>
