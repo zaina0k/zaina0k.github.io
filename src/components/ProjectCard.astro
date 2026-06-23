@@ -14,16 +14,16 @@ interface Props {
   duration: string;
 }
 
-const { number, title, year, summary, detail, tags, href, thumbnail, duration } = Astro.props;
+const { number, title, year, summary, tags, href, thumbnail, duration } = Astro.props;
 ---
 
 <a
   href={href}
   class="group block rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors overflow-hidden"
 >
-  <!-- Thumbnail -->
+  <!-- Image area with overlaid number + title -->
   {thumbnail && (
-    <div class="aspect-video w-full">
+    <div class="relative aspect-video w-full overflow-hidden">
       <Image
         src={thumbnail}
         alt={title}
@@ -32,34 +32,33 @@ const { number, title, year, summary, detail, tags, href, thumbnail, duration } 
         loading="lazy"
         class="w-full h-full object-cover"
       />
+      <!-- Gradient scrim + overlay text -->
+      <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent pt-8 pb-3 px-4">
+        <div class="flex items-baseline gap-2">
+          <span class="text-xs font-bold tracking-widest text-[var(--color-accent)]">{number}</span>
+          <h3 class="text-sm font-semibold text-white leading-snug group-hover:text-[var(--color-accent)] transition-colors">
+            {title}
+          </h3>
+        </div>
+      </div>
     </div>
   )}
 
-  <div class="p-6">
-  <!-- Number + title row -->
-  <div class="flex items-baseline gap-3 mb-1">
-    <span class="text-xs font-bold tracking-widest text-[var(--color-accent)]">{number}</span>
-    <h3 class="text-base font-semibold text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
-      {title}
-    </h3>
-  </div>
+  <!-- Below-image strip -->
+  <div class="p-4">
+    <!-- Year -->
+    <p class="text-xs text-[var(--color-text-muted)] tracking-wide mb-2">{year}</p>
 
-  <!-- Year -->
-  <p class="text-xs text-[var(--color-text-muted)] tracking-wide mb-3">{year}</p>
+    <!-- Summary -->
+    <p class="text-sm text-[var(--color-text)] leading-relaxed mb-4">{summary}</p>
 
-  <!-- One-line summary -->
-  <p class="text-sm font-medium text-[var(--color-text)] mb-2">{summary}</p>
-
-  <!-- 2-line detail -->
-  <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-5">{detail}</p>
-
-  <!-- Tags -->
-  <div class="flex flex-wrap gap-2">
-    {tags.map((tag) => (
-      <span class="text-[10px] font-semibold tracking-widest uppercase px-2 py-1 rounded bg-[var(--color-bg-subtle)] text-[var(--color-text-muted)]">
-        {tag}
-      </span>
-    ))}
-  </div>
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <span class="text-[10px] font-semibold tracking-widest uppercase px-2 py-1 rounded bg-[var(--color-bg-subtle)] text-[var(--color-text-muted)]">
+          {tag}
+        </span>
+      ))}
+    </div>
   </div>
 </a>
