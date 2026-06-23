@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FooterCTA from '../../components/FooterCTA.astro';
 import { formatDateRange } from '../../lib/duration';
+import MediaCarousel from '../../components/MediaCarousel';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -106,6 +107,14 @@ const ogImage = data.ogImage ?? data.heroImage?.src ?? data.thumbnail?.src;
     </div>
 
   </div>
+
+  <!-- Gallery (carousel) — shown when project has media entries -->
+  {data.media && data.media.length > 0 && (
+    <div class="mx-auto max-w-4xl px-6 pb-10">
+      <p class="text-[10px] font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3">Gallery</p>
+      <MediaCarousel media={data.media} client:visible />
+    </div>
+  )}
 
   <!-- Tech stack badges -->
   <div class="mx-auto max-w-4xl px-6 pb-10">
