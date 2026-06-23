@@ -47,16 +47,21 @@ groups:
   - "personal"
   - "game-dev"
   - "unity"
+media:
+  - type: youtube
+    src: UhEKREfcWCc
+    caption: "Gameplay video"
+  - type: image
+    src: /projects/unity-flappy-bird/flappy-bird-gameplay.png
+    alt: "Gameplay screenshot"
+  - type: image
+    src: /projects/unity-flappy-bird/flappy-bird-title-screen.png
+    alt: "Title screen"
 ---
 
 ## Overview
 
 This project acted as an exercise to test my experience and knowledge of Unity by building a game from scratch. I chose to remake Flappy Bird — an old popular iPhone arcade game. The premise is simple: flap the bird's wings to get through as many pipes as possible.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/UhEKREfcWCc?si=AF3b26nmgyJYXhLl" title="Flappy Bird gameplay video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-> **📷 Carousel — 2 images ready:** `flappy-bird-gameplay.png`, `flappy-bird-title-screen.png`
-> *(Carousel component not yet implemented — CP9)*
 
 ## Approach & Architecture
 

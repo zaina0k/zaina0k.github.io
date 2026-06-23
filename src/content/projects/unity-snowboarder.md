@@ -49,14 +49,21 @@ groups:
   - "personal"
   - "game-dev"
   - "unity"
+media:
+  - type: youtube
+    src: UhEKREfcWCc
+    caption: "Gameplay video"
+  - type: image
+    src: /projects/unity-snowboarder/snowboarder-1.png
+    alt: "Snowboarder gameplay"
+  - type: image
+    src: /projects/unity-snowboarder/snowboarder-2.png
+    alt: "Snowboarder screenshot"
 ---
 
 ## Overview
 
 This project continues my game development journey and showcases a moving physics-based sprite on a sidescrolling platform. The aim is to complete the level without dying — the death condition is the player sprite's head making contact with any surface. Rotation and speed boost controls allow the player to perform flips off the slopes.
-
-> **📷 Carousel — 2 images ready:** `snowboarder-1.png`, `snowboarder-2.png`
-> *(Carousel component not yet implemented — CP9)*
 
 ## Approach & Architecture
 

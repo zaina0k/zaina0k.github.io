@@ -45,14 +45,21 @@ groups:
   - "personal"
   - "game-dev"
   - "unity"
+media:
+  - type: youtube
+    src: UhEKREfcWCc
+    caption: "Gameplay video"
+  - type: image
+    src: /projects/unity-pizza-delivery/pizza-delivery-1.png
+    alt: "Pizza delivery gameplay"
+  - type: image
+    src: /projects/unity-pizza-delivery/pizza-delivery-2.png
+    alt: "Pizza delivery screenshot"
 ---
 
 ## Overview
 
 This project represents the first project I would consider a complete game in my game development journey. It was made following a tutorial on Udemy using assets provided by the online course. The game is a small top-down car game — drive around the map collecting pizzas and delivering them to a customer.
-
-> **📷 Carousel — 2 images ready:** `pizza-delivery-1.png`, `pizza-delivery-2.png`
-> *(Carousel component not yet implemented — CP9)*
 
 ## Approach & Architecture
 
