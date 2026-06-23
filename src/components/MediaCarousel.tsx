@@ -72,7 +72,7 @@ export default function MediaCarousel({ media }: Props) {
             key={i}
             ref={el => { thumbRefs.current[i] = el; }}
             onClick={() => setSelectedIndex(i)}
-            className={`shrink-0 w-24 h-14 rounded overflow-hidden cursor-pointer focus:outline-none ring-offset-1 ${i === selectedIndex ? 'ring-2 ring-accent' : ''}`}
+            className={`relative shrink-0 w-24 h-14 rounded overflow-hidden cursor-pointer focus:outline-none ring-offset-1 ${i === selectedIndex ? 'ring-2 ring-accent' : ''}`}
             aria-label={item.alt ?? `Media ${i + 1}`}
           >
             <img
@@ -84,6 +84,11 @@ export default function MediaCarousel({ media }: Props) {
               alt={item.alt ?? ''}
               className="w-full h-full object-cover"
             />
+            {item.type === 'youtube' && (
+              <span className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white" className="drop-shadow"><polygon points="5,3 19,12 5,21"/></svg>
+              </span>
+            )}
           </button>
         ))}
       </div>
