@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   number: string;
   title: string;
@@ -7,9 +9,11 @@ interface Props {
   detail: string;
   tags: string[];
   href: string;
+  thumbnail?: ImageMetadata;
+  duration: string;
 }
 
-const { number, title, year, summary, detail, tags, href } = Astro.props;
+const { number, title, year, summary, detail, tags, href, thumbnail, duration } = Astro.props;
 ---
 
 <a
