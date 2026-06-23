@@ -43,6 +43,10 @@ reflection: |
   Unity canvas UI — building overlay screens, buttons, and dynamic score display.
 
   Infinite spawners with randomised parameters — creating a procedural gameplay loop that never repeats.
+groups:
+  - "personal"
+  - "game-dev"
+  - "unity"
 ---
 
 ## Overview

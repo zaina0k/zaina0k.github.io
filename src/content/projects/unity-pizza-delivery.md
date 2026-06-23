@@ -41,6 +41,10 @@ reflection: |
   Referencing — accessing other GameObjects and their components from scripts.
 
   Serialized fields — exposing script variables to the Unity Inspector for easy tuning without changing code.
+groups:
+  - "personal"
+  - "game-dev"
+  - "unity"
 ---
 
 ## Overview

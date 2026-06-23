@@ -45,6 +45,10 @@ reflection: |
   Particle effects — creating contextual visual feedback for different game events (win, death, snow contact).
 
   Introduction to sound effects — hooking audio into game events for basic feedback.
+groups:
+  - "personal"
+  - "game-dev"
+  - "unity"
 ---
 
 ## Overview
