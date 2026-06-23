@@ -1,5 +1,6 @@
 ---
 import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 
 interface Props {
   number: string;
@@ -18,8 +19,23 @@ const { number, title, year, summary, detail, tags, href, thumbnail, duration } 
 
 <a
   href={href}
-  class="group block rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 hover:border-[var(--color-accent)] transition-colors"
+  class="group block rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors overflow-hidden"
 >
+  <!-- Thumbnail -->
+  {thumbnail && (
+    <div class="aspect-video w-full">
+      <Image
+        src={thumbnail}
+        alt={title}
+        width={800}
+        height={450}
+        loading="lazy"
+        class="w-full h-full object-cover"
+      />
+    </div>
+  )}
+
+  <div class="p-6">
   <!-- Number + title row -->
   <div class="flex items-baseline gap-3 mb-1">
     <span class="text-xs font-bold tracking-widest text-[var(--color-accent)]">{number}</span>
@@ -44,5 +60,6 @@ const { number, title, year, summary, detail, tags, href, thumbnail, duration } 
         {tag}
       </span>
     ))}
+  </div>
   </div>
 </a>
