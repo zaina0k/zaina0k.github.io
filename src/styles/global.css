@@ -65,3 +65,8 @@ code, pre, kbd, samp {
   outline-offset: 3px;
   border-radius: 3px;
 }
+
+@keyframes mc-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
