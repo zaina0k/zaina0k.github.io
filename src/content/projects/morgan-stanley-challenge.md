@@ -19,7 +19,7 @@ tags:
 category: "competition"
 teamSize: 5
 role: "Algorithm Developer"
-github: "https://github.com/zaina0k/morgan-stanley-challenge"
+github: "https://github.com/zaina0k/Morgan-Stanley-Coding-Challenge"
 ogImage: "/og/morgan-stanley-challenge.png"
 skills:
   - "Algorithm design"
