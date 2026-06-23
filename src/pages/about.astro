@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FooterCTA from '../components/FooterCTA.astro';
+import ProjectsTimeline from '../components/ProjectsTimeline.astro';
 import profileReal   from '../assets/profile real.png';
 import profileSketch from '../assets/profile sketch.png';
 
@@ -112,6 +113,17 @@ const skillRows = [
             </div>
           </div>
         ))}
+      </div>
+    </div>
+
+    <!-- Project timeline -->
+    <div class="mt-16">
+      <div class="flex items-baseline gap-4 mb-8">
+        <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">Projects</span>
+        <h2 class="text-xl font-semibold tracking-tight text-[var(--color-text)]">Project Timeline</h2>
+      </div>
+      <div class="pl-16">
+        <ProjectsTimeline />
       </div>
     </div>
 
