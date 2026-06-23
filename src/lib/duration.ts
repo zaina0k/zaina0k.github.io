@@ -1,6 +1,6 @@
 const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-function monthLabel(date: Date): string {
+export function monthLabel(date: Date): string {
   return `${MONTH_NAMES[date.getMonth()]} ${date.getFullYear()}`;
 }
 
