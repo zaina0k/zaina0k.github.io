@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import { UI_IMAGES } from '../lib/images';
 
 interface Props {
   title: string;
@@ -9,7 +10,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description, ogImage = '/og-default.png' } = Astro.props;
+const { title, description, ogImage = UI_IMAGES.socialShareCard } = Astro.props;
 const canonicalURL = Astro.url;
 const pageTitle = `${title} | Zain Altaf`;
 const ogImageAbsolute = new URL(ogImage, Astro.site).href;
