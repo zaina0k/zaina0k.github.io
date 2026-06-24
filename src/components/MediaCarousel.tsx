@@ -115,6 +115,26 @@ export default function MediaCarousel({ media }: Props) {
     dx > 0 ? next() : prev();
   };
 
+  const handleLightboxTouchStart = (e: React.TouchEvent) => {
+    lbTouchStartX.current = e.touches[0].clientX;
+    lbTouchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleLightboxTouchEnd = (e: React.TouchEvent) => {
+    if (zoomedRef.current) return;
+    const dx = e.changedTouches[0].clientX - lbTouchStartX.current;
+    const dy = e.changedTouches[0].clientY - lbTouchStartY.current;
+    const absDx = Math.abs(dx);
+    const absDy = Math.abs(dy);
+    if (absDx > 60 && absDx > absDy) {
+      e.stopPropagation();
+      dx > 0 ? next() : prev();
+    } else if (dy > 80 && absDy > absDx) {
+      e.stopPropagation();
+      closeLightbox();
+    }
+  };
+
   return (
     <>
       <div className="group">
@@ -191,7 +211,11 @@ export default function MediaCarousel({ media }: Props) {
 
       {/* Lightbox overlay */}
       {lightboxOpen && (
-        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center">
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
+          onTouchStart={handleLightboxTouchStart}
+          onTouchEnd={handleLightboxTouchEnd}
+        >
           {/* Backdrop — click outside image closes */}
           <div
             className="absolute inset-0"
