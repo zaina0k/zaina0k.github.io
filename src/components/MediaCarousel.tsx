@@ -11,9 +11,10 @@ export type MediaItem = {
 
 type Props = {
   media: MediaItem[];
+  fallback?: string;
 };
 
-export default function MediaCarousel({ media }: Props) {
+export default function MediaCarousel({ media, fallback }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [zoomed, setZoomed] = useState(false);
@@ -75,6 +76,13 @@ export default function MediaCarousel({ media }: Props) {
   const active = media[selectedIndex];
   const prev = () => setSelectedIndex(n(selectedIndex - 1, len));
   const next = () => setSelectedIndex(n(selectedIndex + 1, len));
+
+  const onImgError = fallback
+    ? (e: React.SyntheticEvent<HTMLImageElement>) => {
+        const img = e.currentTarget;
+        if (img.src !== fallback) img.src = fallback;
+      }
+    : undefined;
 
   const handleWrapperClick = () => {
     if (!window.matchMedia('(hover: hover)').matches) return;
@@ -190,6 +198,7 @@ export default function MediaCarousel({ media }: Props) {
                 alt={active.alt ?? ''}
                 className="w-full h-full object-cover cursor-pointer"
                 onClick={openLightbox}
+                onError={onImgError}
               />
             )}
           </div>
@@ -229,6 +238,7 @@ export default function MediaCarousel({ media }: Props) {
                 }
                 alt={item.alt ?? ''}
                 className="w-full h-full object-cover"
+                onError={item.type === 'image' ? onImgError : undefined}
               />
               {item.type === 'youtube' && (
                 <span className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -294,6 +304,7 @@ export default function MediaCarousel({ media }: Props) {
                 src={active.src}
                 alt={active.alt ?? ''}
                 className="max-w-full max-h-[90vh] object-contain select-none block"
+                onError={onImgError}
               />
             </div>
             {active.caption && (

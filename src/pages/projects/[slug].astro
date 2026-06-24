@@ -17,6 +17,11 @@ const { project } = Astro.props;
 const { data } = project;
 const { Content } = await render(project);
 const ogImage = data.ogImage ?? data.heroImage?.src ?? data.thumbnail?.src;
+const carouselMedia = data.media?.length
+  ? data.media
+  : data.thumbnail
+    ? [{ type: 'image' as const, src: data.thumbnail.src, alt: data.title }]
+    : undefined;
 ---
 
 <BaseLayout title={data.title} description={data.summary} ogImage={ogImage}>
@@ -113,10 +118,10 @@ const ogImage = data.ogImage ?? data.heroImage?.src ?? data.thumbnail?.src;
   </div>
 
   <!-- Gallery (carousel) — shown when project has media entries -->
-  {data.media && data.media.length > 0 && (
+  {carouselMedia && (
     <div class="mx-auto max-w-4xl px-6 pb-10">
       <p class="text-[10px] font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-3">Gallery</p>
-      <MediaCarousel media={data.media} client:visible />
+      <MediaCarousel media={carouselMedia} fallback={data.thumbnail?.src} client:visible />
     </div>
   )}
 
