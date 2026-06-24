@@ -8,6 +8,7 @@ import {
   pageCount,
 } from '../lib/filter';
 import ProjectCardItem from './ProjectCardItem';
+import { UI_IMAGES } from '../lib/images';
 
 export const PAGE_SIZE = 12;
 
@@ -188,6 +189,7 @@ export default function ProjectFilter({ projects, pageSize = PAGE_SIZE }: Props)
           aria-live="polite"
           className="flex flex-col items-center justify-center py-16 text-center"
         >
+          <img src={UI_IMAGES.emptyState} alt="" aria-hidden="true" width={128} height={128} className="w-32 h-auto mx-auto mb-4 opacity-60" />
           <p className="text-[var(--color-text-muted)] text-sm mb-2">
             No projects match the selected filters.
           </p>
