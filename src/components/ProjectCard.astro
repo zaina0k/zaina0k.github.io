@@ -1,6 +1,7 @@
 ---
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
+import { UI_IMAGES } from '../lib/images';
 
 interface Props {
   title: string;
@@ -31,7 +32,7 @@ const thumbnailAlt = `Screenshot of ${title}`;
         class="w-full h-full object-cover"
       />
     ) : (
-      <div class="w-full h-full bg-[var(--color-accent)] opacity-20" />
+      <img src={UI_IMAGES.inProgressThumbnail} alt="Project in progress" width={800} height={450} loading="lazy" class="w-full h-full object-cover" />
     )}
 
     <!-- Accent banner behind title -->
