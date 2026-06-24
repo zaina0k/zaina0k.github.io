@@ -4,7 +4,7 @@ summary: "A physics-based sidescrolling Unity game where the player controls a s
 detail: "Built a physics-based sidescrolling snowboarder game in Unity — featuring sprite shape terrain, edge colliders, a Cinemachine follow camera, and particle effects."
 thumbnail: "../../assets/projects/unity-snowboarder/snowboarder-1.png"
 startDate: 2024-07-01
-endDate: 2024-07-01
+endDate: 2024-07-15
 status: shipped
 sortOrder: 6
 featured: false

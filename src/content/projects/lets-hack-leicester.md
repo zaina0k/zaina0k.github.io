@@ -4,7 +4,7 @@ summary: "A portfolio project collaboration platform for CS students, built as a
 detail: "Led backend development and team coordination at Let's Hack Leicester 2024, building a Next.js + Flask + SQLite web app for students to find and join portfolio projects."
 thumbnail: "../../assets/projects/lets-hack-leicester/lhl-image-1.png"
 startDate: 2024-11-01
-endDate: 2024-11-01
+endDate: 2024-11-15
 status: shipped
 sortOrder: 1
 featured: true

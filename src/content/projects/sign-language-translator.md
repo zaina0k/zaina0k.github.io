@@ -4,7 +4,7 @@ summary: "A Python BSL learning app with GIF-based sign demonstrations, adaptive
 detail: "Built a British Sign Language learning tool with GIF demonstrations, speech input, an adaptive learning algorithm, and Google Sheets-backed user profiles."
 thumbnail: "../../assets/projects/sign-language-translator/slt-4.jpeg"
 startDate: 2021-01-01
-endDate: 2021-01-01
+endDate: 2021-01-15
 status: shipped
 sortOrder: 3
 featured: true

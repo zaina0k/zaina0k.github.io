@@ -4,7 +4,7 @@ summary: "A top-down car game built in Unity as a Udemy tutorial project — my 
 detail: "Built a top-down pizza delivery car game in Unity following a Udemy course, learning core engine concepts including colliders, triggers, components, and C# scripting."
 thumbnail: "../../assets/projects/unity-pizza-delivery/pizza-delivery-1.png"
 startDate: 2024-07-01
-endDate: 2024-07-01
+endDate: 2024-07-15
 status: shipped
 sortOrder: 7
 featured: false

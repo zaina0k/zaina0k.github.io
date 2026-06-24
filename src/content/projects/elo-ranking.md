@@ -4,7 +4,7 @@ summary: "A Python photo comparison tool that applies the chess Elo rating syste
 detail: "Built a desktop photo ranking app using the Elo algorithm — users choose between two images repeatedly, and ratings converge to a true ranking over time."
 thumbnail: "../../assets/projects/elo-ranking/elo-ranking-1.jpeg"
 startDate: 2023-01-01
-endDate: 2023-01-01
+endDate: 2023-01-15
 status: shipped
 sortOrder: 4
 featured: true

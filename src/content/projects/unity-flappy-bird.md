@@ -4,7 +4,7 @@ summary: "A Unity remake of the classic Flappy Bird arcade game, built from scra
 detail: "Rebuilt Flappy Bird from scratch in Unity — including custom Aseprite sprites, infinite pipe spawner, particle-based cloud system, and multi-screen UI."
 thumbnail: "../../assets/projects/unity-flappy-bird/flappy-bird-gameplay.png"
 startDate: 2024-07-01
-endDate: 2024-07-01
+endDate: 2024-07-15
 status: shipped
 sortOrder: 5
 featured: false

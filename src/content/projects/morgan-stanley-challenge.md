@@ -4,7 +4,7 @@ summary: "EMA-based algorithmic currency trading bot. Placed 7th out of 27 teams
 detail: "Built an EMA-based algorithmic trading strategy as part of a team of 5 in a Morgan Stanley-hosted coding challenge, placing 7th out of 27 teams."
 thumbnail: "../../assets/projects/morgan-stanley-challenge/ms-image-4.jpeg"
 startDate: 2024-10-01
-endDate: 2024-10-01
+endDate: 2024-10-15
 status: shipped
 sortOrder: 2
 featured: true
