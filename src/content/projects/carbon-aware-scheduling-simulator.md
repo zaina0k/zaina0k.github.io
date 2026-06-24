@@ -12,6 +12,11 @@ endDate: 2026-04-27
 status: shipped
 sortOrder: 1
 featured: true
+media:
+  - type: image
+    src: /images/ui/project-page-in-progress-thumbnail.png
+    alt: Project page in progress — screenshots coming soon
+    caption: Media coming soon
 techStack:
   - "Python"
   - "NumPy"
