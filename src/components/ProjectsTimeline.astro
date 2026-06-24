@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { monthLabel, isOngoing } from '../lib/duration';
+import { shortDateLabel, isOngoing } from '../lib/duration';
 
 const allProjects = await getCollection('projects');
 const projects = allProjects.sort(
@@ -22,13 +22,13 @@ const projects = allProjects.sort(
         ></div>
         <div>
           <p class="text-xs font-semibold tracking-widest uppercase text-text-muted mb-1">
-            {monthLabel(p.data.startDate)}{ongoing && ' — Ongoing'}
+            {shortDateLabel(p.data.startDate)}{ongoing && ' — Ongoing'}
           </p>
           <div class="flex items-center gap-3 flex-wrap">
             <a
               href={`/projects/${p.id}/`}
               class="text-base font-semibold text-text hover:text-accent transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent rounded-sm"
-              aria-label={`${p.data.title} · ${monthLabel(p.data.startDate)}${ongoing ? ' — Ongoing' : ''} · ${p.data.status}`}
+              aria-label={`${p.data.title} · ${shortDateLabel(p.data.startDate)}${ongoing ? ' — Ongoing' : ''} · ${p.data.status}`}
             >
               {p.data.title}
             </a>
