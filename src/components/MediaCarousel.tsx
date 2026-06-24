@@ -115,6 +115,37 @@ export default function MediaCarousel({ media }: Props) {
     dx > 0 ? next() : prev();
   };
 
+  const handleWrapperTouchEnd = (e: React.TouchEvent) => {
+    if (window.matchMedia('(hover: hover)').matches) return;
+    const now = Date.now();
+    if (now - lastTapTimeRef.current < 300) {
+      e.preventDefault();
+      lastTapTimeRef.current = 0;
+      const touch = e.changedTouches[0];
+      const img = imgRef.current;
+      const wrapper = wrapperRef.current;
+      if (!img || !wrapper) return;
+      if (!zoomedRef.current) {
+        const rect = wrapper.getBoundingClientRect();
+        const x = ((touch.clientX - rect.left) / rect.width) * 100;
+        const y = ((touch.clientY - rect.top) / rect.height) * 100;
+        img.style.transformOrigin = `${x}% ${y}%`;
+        img.style.transition = 'transform 0.2s ease';
+        img.style.transform = 'scale(2)';
+        zoomedRef.current = true;
+        setZoomed(true);
+      } else {
+        img.style.transition = 'transform 0.2s ease';
+        img.style.transform = 'scale(1)';
+        img.style.transformOrigin = '50% 50%';
+        zoomedRef.current = false;
+        setZoomed(false);
+      }
+    } else {
+      lastTapTimeRef.current = now;
+    }
+  };
+
   const handleLightboxTouchStart = (e: React.TouchEvent) => {
     lbTouchStartX.current = e.touches[0].clientX;
     lbTouchStartY.current = e.touches[0].clientY;
@@ -255,6 +286,7 @@ export default function MediaCarousel({ media }: Props) {
               ref={wrapperRef}
               onClick={handleWrapperClick}
               onMouseMove={handleWrapperMouseMove}
+              onTouchEnd={handleWrapperTouchEnd}
               className={`overflow-hidden ${zoomed ? 'cursor-crosshair' : '[@media(hover:hover)]:cursor-zoom-in'}`}
             >
               <img
