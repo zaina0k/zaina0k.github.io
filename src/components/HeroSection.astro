@@ -14,20 +14,20 @@ import profileSketch from '../assets/profile sketch.png';
       <!-- Status line -->
       <div class="flex items-center gap-2 mb-8">
         <span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-        <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">
+        <span class="text-xs font-semibold tracking-widest uppercase text-text-muted">
           CS Graduate · Open to opportunities
         </span>
       </div>
 
       <!-- Stacked headline -->
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight tracking-tight text-[var(--color-text)] mb-6">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight tracking-tight text-text mb-6">
         Engineer.<br />
         Problem solver.<br />
-        <span class="text-[var(--color-accent)]">Builder.</span>
+        <span class="text-accent">Builder.</span>
       </h1>
 
       <!-- Subtitle -->
-      <p class="text-lg text-[var(--color-text-muted)] leading-relaxed max-w-md mb-10">
+      <p class="text-lg text-text-muted leading-relaxed max-w-md mb-10">
         Computer Science graduate from The University of Leicester with experience in popular industry standard technologies,
         such as Java, Python, JavaScript and more. Tailoring skills towards data science,
         and agentic AI integrations.
@@ -37,13 +37,13 @@ import profileSketch from '../assets/profile sketch.png';
       <div class="flex flex-wrap gap-3 mb-12">
         <a
           href="/projects/"
-          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold bg-[var(--color-accent)] text-[var(--color-bg)] hover:bg-[var(--color-accent-hover)] transition-colors"
+          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold bg-accent text-bg hover:bg-accent-hover transition-colors"
         >
           View Projects
         </a>
         <a
           href="/cv/"
-          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold border border-[var(--color-border)] text-[var(--color-text)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold border border-border text-text hover:border-accent hover:text-accent transition-colors"
         >
           Download CV
         </a>
@@ -51,14 +51,14 @@ import profileSketch from '../assets/profile sketch.png';
           href="https://github.com/zaina0k"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold border border-[var(--color-border)] text-[var(--color-text)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold border border-border text-text hover:border-accent hover:text-accent transition-colors"
         >
           GitHub ↗
         </a>
       </div>
 
       <!-- Stats strip -->
-      <div class="flex flex-wrap gap-8 pt-8 border-t border-[var(--color-border)]">
+      <div class="flex flex-wrap gap-8 pt-8 border-t border-border">
         <StatCard value="1st Class Honours" label="BSc Computer Science" />
         <StatCard value="96.1%" label="Highest Module Grade" />
         <StatCard value="Internet & Cloud" label="Favourite Module" />
@@ -73,7 +73,7 @@ import profileSketch from '../assets/profile sketch.png';
         width={512}
         height={512}
         densities={[1, 2, 3]}
-        class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-[var(--color-border)] dark:hidden"
+        class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-border dark:hidden"
       />
       <Image
         src={profileSketch}
@@ -81,7 +81,7 @@ import profileSketch from '../assets/profile sketch.png';
         width={512}
         height={512}
         densities={[1, 2, 3]}
-        class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-[var(--color-border)] hidden dark:block"
+        class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-border hidden dark:block"
       />
     </div>
 
