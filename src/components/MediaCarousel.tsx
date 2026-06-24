@@ -202,10 +202,29 @@ export default function MediaCarousel({ media }: Props) {
           <button
             onClick={closeLightbox}
             aria-label="Close lightbox"
-            className="fixed top-4 right-4 z-10 flex items-center justify-center w-10 h-10 rounded-full bg-black/60 text-white hover:bg-black/80 transition-colors"
+            className="fixed top-4 right-4 z-20 flex items-center justify-center w-10 h-10 rounded-full bg-black/60 text-white hover:bg-black/80 transition-colors"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
+          {/* Lightbox prev/next arrows */}
+          {len > 1 && (
+            <>
+              <button
+                onClick={e => { e.stopPropagation(); prev(); }}
+                aria-label="Previous image"
+                className="fixed left-3 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 rounded-full bg-black/60 text-white hover:bg-black/80 transition-colors"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button
+                onClick={e => { e.stopPropagation(); next(); }}
+                aria-label="Next image"
+                className="fixed right-3 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 rounded-full bg-black/60 text-white hover:bg-black/80 transition-colors"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </>
+          )}
           {/* Image at native aspect ratio */}
           <div className="relative z-10 p-4 flex flex-col items-center max-w-full overflow-auto" style={{ touchAction: 'manipulation' }}>
             <div
