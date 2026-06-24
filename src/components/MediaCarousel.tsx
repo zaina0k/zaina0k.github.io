@@ -16,14 +16,14 @@ type Props = {
 export default function MediaCarousel({ media }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [magnifierActive, setMagnifierActive] = useState(false);
-  const [lensPos, setLensPos] = useState<{ x: number; y: number } | null>(null);
-  const [zoomScale, setZoomScale] = useState(1);
+  const [zoomed, setZoomed] = useState(false);
 
   // All refs declared before any early return (rules-of-hooks)
   const savedScrollY = useRef(0);
   const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const imgRef = useRef<HTMLImageElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const zoomedRef = useRef(false);
 
   const len = media?.length ?? 0;
 
@@ -41,8 +41,13 @@ export default function MediaCarousel({ media }: Props) {
     const top = Math.abs(parseInt(document.body.style.top || '0'));
     document.body.style.cssText = '';
     window.scrollTo(0, top);
-    setMagnifierActive(false);
-    setLensPos(null);
+    if (imgRef.current) {
+      imgRef.current.style.transition = 'transform 0.2s ease';
+      imgRef.current.style.transform = 'scale(1)';
+      imgRef.current.style.transformOrigin = '50% 50%';
+    }
+    zoomedRef.current = false;
+    setZoomed(false);
     setLightboxOpen(false);
   };
 
@@ -66,21 +71,31 @@ export default function MediaCarousel({ media }: Props) {
   const prev = () => setSelectedIndex(n(selectedIndex - 1, len));
   const next = () => setSelectedIndex(n(selectedIndex + 1, len));
 
-  const handleLightboxImageClick = () => {
+  const handleWrapperClick = () => {
     if (!window.matchMedia('(hover: hover)').matches) return;
-
-    if (magnifierActive) {
-      setMagnifierActive(false);
-      setLensPos(null);
-      return;
-    }
-
     const img = imgRef.current;
     if (!img) return;
-    const rect = img.getBoundingClientRect();
-    const scale = Math.min(Math.max(img.naturalWidth / rect.width, 1.5), 4);
-    setZoomScale(scale);
-    setMagnifierActive(true);
+    if (!zoomedRef.current) {
+      img.style.transition = 'transform 0.2s ease';
+      img.style.transform = 'scale(2)';
+      zoomedRef.current = true;
+      setZoomed(true);
+    } else {
+      img.style.transition = 'transform 0.2s ease';
+      img.style.transform = 'scale(1)';
+      img.style.transformOrigin = '50% 50%';
+      zoomedRef.current = false;
+      setZoomed(false);
+    }
+  };
+
+  const handleWrapperMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!zoomedRef.current || !wrapperRef.current || !imgRef.current) return;
+    const rect = wrapperRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    imgRef.current.style.transition = 'none';
+    imgRef.current.style.transformOrigin = `${x}% ${y}%`;
   };
 
   return (
@@ -172,13 +187,17 @@ export default function MediaCarousel({ media }: Props) {
           </button>
           {/* Image at native aspect ratio */}
           <div className="relative z-10 p-4 flex flex-col items-center max-w-full overflow-auto" style={{ touchAction: 'manipulation' }}>
-            <div className="relative">
+            <div
+              ref={wrapperRef}
+              onClick={handleWrapperClick}
+              onMouseMove={handleWrapperMouseMove}
+              className={`overflow-hidden ${zoomed ? 'cursor-crosshair' : '[@media(hover:hover)]:cursor-zoom-in'}`}
+            >
               <img
                 ref={imgRef}
                 src={active.src}
                 alt={active.alt ?? ''}
-                onClick={handleLightboxImageClick}
-                className={`max-w-full max-h-[90vh] object-contain select-none ${magnifierActive ? 'cursor-crosshair' : '[@media(hover:hover)]:cursor-zoom-in'}`}
+                className="max-w-full max-h-[90vh] object-contain select-none block"
               />
             </div>
             {active.caption && (
