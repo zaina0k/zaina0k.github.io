@@ -1,4 +1,5 @@
 import type { ProjectFilterItem } from '../lib/filter';
+import { UI_IMAGES } from '../lib/images';
 
 type Props = Pick<
   ProjectFilterItem,
@@ -40,7 +41,7 @@ export default function ProjectCardItem({
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-full bg-[var(--color-accent)] opacity-20" />
+          <img src={UI_IMAGES.inProgressThumbnail} alt="Project in progress" width={800} height={450} loading="lazy" className="w-full h-full object-cover" />
         )}
 
         {/* Accent banner behind title */}
