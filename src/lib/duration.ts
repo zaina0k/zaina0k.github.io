@@ -10,7 +10,7 @@ export function isOngoing(endDate: Date | null | undefined): boolean {
 }
 
 /** Whole calendar days between two dates. */
-function daysBetween(start: Date, end: Date): number {
+export function daysBetween(start: Date, end: Date): number {
   return Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 }
 

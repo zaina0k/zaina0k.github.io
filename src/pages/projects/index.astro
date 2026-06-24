@@ -5,6 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import FooterCTA from '../../components/FooterCTA.astro';
 import ProjectFilter from '../../components/ProjectFilter';
 import type { ProjectFilterItem } from '../../lib/filter';
+import { daysBetween } from '../../lib/duration';
 
 const allProjects = await getCollection('projects');
 const sorted = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
@@ -29,6 +30,9 @@ const projects: ProjectFilterItem[] = await Promise.all(
       groups: project.data.groups ?? [],
       sortOrder: project.data.sortOrder,
       startYear: project.data.startDate.getFullYear(),
+      durationDays: project.data.endDate
+        ? daysBetween(project.data.startDate, project.data.endDate)
+        : null,
       status: project.data.status,
       href: `/projects/${project.id}/`,
       thumbnail,

@@ -13,6 +13,7 @@ export interface ProjectFilterItem {
   groups: string[];
   sortOrder: number;
   startYear: number;
+  durationDays: number | null;
   status: 'planned' | 'in-progress' | 'shipped' | 'archived';
   href: string;
   thumbnail: ProcessedImage | null;

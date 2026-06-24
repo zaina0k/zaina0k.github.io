@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FooterCTA from '../../components/FooterCTA.astro';
-import { formatDateRange } from '../../lib/duration';
+import { formatDateRange, formatDuration } from '../../lib/duration';
 import MediaCarousel from '../../components/MediaCarousel';
 
 export async function getStaticPaths() {
@@ -58,6 +58,10 @@ const ogImage = data.ogImage ?? data.heroImage?.src ?? data.thumbnail?.src;
       <div>
         <dt class="text-[10px] font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-0.5">Period</dt>
         <dd class="text-sm font-medium text-[var(--color-text)]">{formatDateRange(data.startDate!, data.endDate)}</dd>
+      </div>
+      <div>
+        <dt class="text-[10px] font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-0.5">Duration</dt>
+        <dd class="text-sm font-medium text-[var(--color-text)]">{formatDuration(data.startDate!, data.endDate)}</dd>
       </div>
       <div>
         <dt class="text-[10px] font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-0.5">Status</dt>
