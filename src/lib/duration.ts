@@ -20,7 +20,7 @@ export function daysBetween(start: Date, end: Date): number {
 export function formatDuration(startDate: Date, endDate: Date | null | undefined): string {
   if (isOngoing(endDate)) return 'Ongoing';
   const days = daysBetween(startDate, endDate!);
-  if (days <= 0) return '< 1 day';
+  if (days < 1) return '1 day';
   if (days === 1) return '1 day';
   return `${days} days`;
 }

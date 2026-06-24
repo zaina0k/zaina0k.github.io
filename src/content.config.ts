@@ -34,6 +34,19 @@ const projects = defineCollection({
         alt: z.string().optional(),
         caption: z.string().optional(),
       })).optional(),
+    }).superRefine((data, ctx) => {
+      if (data.endDate !== null) {
+        const days = Math.round(
+          (data.endDate.getTime() - data.startDate.getTime()) / (1000 * 60 * 60 * 24),
+        );
+        if (days < 1) {
+          ctx.addIssue({
+            code: 'custom',
+            message: `endDate must be at least 1 day after startDate (got ${days} day(s))`,
+            path: ['endDate'],
+          });
+        }
+      }
     }),
 });
 
