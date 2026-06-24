@@ -24,6 +24,11 @@ export default function MediaCarousel({ media }: Props) {
   const imgRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const zoomedRef = useRef(false);
+  const carouselTouchStartX = useRef(0);
+  const carouselTouchStartY = useRef(0);
+  const lbTouchStartX = useRef(0);
+  const lbTouchStartY = useRef(0);
+  const lastTapTimeRef = useRef(0);
 
   const len = media?.length ?? 0;
 
@@ -98,11 +103,27 @@ export default function MediaCarousel({ media }: Props) {
     imgRef.current.style.transformOrigin = `${x}% ${y}%`;
   };
 
+  const handleCarouselTouchStart = (e: React.TouchEvent) => {
+    carouselTouchStartX.current = e.touches[0].clientX;
+    carouselTouchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleCarouselTouchEnd = (e: React.TouchEvent) => {
+    const dx = e.changedTouches[0].clientX - carouselTouchStartX.current;
+    const dy = e.changedTouches[0].clientY - carouselTouchStartY.current;
+    if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy)) return;
+    dx > 0 ? next() : prev();
+  };
+
   return (
     <>
       <div className="group">
         {/* Main viewer */}
-        <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden">
+        <div
+          className="relative w-full aspect-video bg-black rounded-lg overflow-hidden"
+          onTouchStart={handleCarouselTouchStart}
+          onTouchEnd={handleCarouselTouchEnd}
+        >
           <div key={selectedIndex} style={{ animation: 'mc-fade-in 0.2s ease', width: '100%', height: '100%' }}>
             {active.type === 'youtube' ? (
               <iframe
