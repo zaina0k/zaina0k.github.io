@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { UI_IMAGES } from '../lib/images';
 ---
 
 <BaseLayout title="Page Not Found" description="The page you're looking for doesn't exist.">
   <div class="mx-auto max-w-5xl px-6 py-32 text-center">
+    <img src={UI_IMAGES.errorPage} alt="" aria-hidden="true" width={320} height={320} class="w-48 h-auto mx-auto mb-8 opacity-80" />
     <p class="text-sm font-mono text-[var(--color-accent)] mb-4 tracking-widest uppercase">404</p>
     <h1 class="text-4xl sm:text-5xl font-semibold leading-tight tracking-tight text-[var(--color-text)] mb-6">
       Page not found.
