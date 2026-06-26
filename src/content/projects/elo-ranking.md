@@ -40,9 +40,6 @@ groups:
   - "python"
   - "algorithms"
 media:
-  - type: youtube
-    src: UhEKREfcWCc
-    caption: "Project demo"
   - type: image
     src: /projects/elo-ranking/elo-ranking-1.jpeg
     alt: "Comparison GUI"

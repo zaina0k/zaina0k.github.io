@@ -45,9 +45,6 @@ groups:
   - "python"
   - "accessibility"
 media:
-  - type: youtube
-    src: UhEKREfcWCc
-    caption: "Project demo"
   - type: image
     src: /projects/sign-language-translator/slt-1.jpeg
     alt: "Search page"

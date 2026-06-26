@@ -50,9 +50,6 @@ groups:
   - "game-dev"
   - "unity"
 media:
-  - type: youtube
-    src: UhEKREfcWCc
-    caption: "Gameplay video"
   - type: image
     src: /projects/unity-snowboarder/snowboarder-1.png
     alt: "Snowboarder gameplay"

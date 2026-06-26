@@ -44,9 +44,6 @@ groups:
   - "python"
   - "algorithms"
 media:
-  - type: youtube
-    src: UhEKREfcWCc
-    caption: "Project demo"
   - type: image
     src: /projects/morgan-stanley-challenge/ms-image-1.jpg
     alt: "Screenshot 1"

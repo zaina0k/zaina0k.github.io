@@ -51,9 +51,6 @@ groups:
   - "hackathon"
   - "python"
 media:
-  - type: youtube
-    src: UhEKREfcWCc
-    caption: "Project demo"
   - type: image
     src: /projects/lets-hack-leicester/lhl-home-page.png
     alt: "Home page"

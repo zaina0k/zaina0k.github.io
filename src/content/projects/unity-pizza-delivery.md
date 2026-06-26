@@ -46,9 +46,6 @@ groups:
   - "game-dev"
   - "unity"
 media:
-  - type: youtube
-    src: UhEKREfcWCc
-    caption: "Gameplay video"
   - type: image
     src: /projects/unity-pizza-delivery/pizza-delivery-1.png
     alt: "Pizza delivery gameplay"
