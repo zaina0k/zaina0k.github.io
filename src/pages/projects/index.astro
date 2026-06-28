@@ -6,6 +6,8 @@ import FooterCTA from '../../components/FooterCTA.astro';
 import ProjectFilter from '../../components/ProjectFilter';
 import type { ProjectFilterItem } from '../../lib/filter';
 import { daysBetween } from '../../lib/duration';
+// REMOVABLE BANNER — remove this import and the <MigrationBanner /> tag below when migration is complete (target: 13 July 2026)
+import MigrationBanner from '../../components/MigrationBanner.astro';
 
 const allProjects = await getCollection('projects');
 const sorted = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
@@ -45,6 +47,8 @@ const projects: ProjectFilterItem[] = await Promise.all(
   title="Projects"
   description="Software engineering projects by Zain Altaf: hackathon builds, trading bots, accessible-tech applications, and more."
 >
+  {/* REMOVABLE BANNER — remove this tag and the import above when migration is complete (target: 13 July 2026) */}
+  <MigrationBanner />
 
   <div class="mx-auto max-w-5xl px-6 pt-16 pb-10">
 
