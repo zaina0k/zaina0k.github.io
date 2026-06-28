@@ -7,7 +7,7 @@ startDate: 2021-01-01
 endDate: 2021-01-15
 status: shipped
 sortOrder: 3
-featured: true
+featured: false
 techStack:
   - "Python"
   - "GUIZERO"
