@@ -14,9 +14,73 @@ sortOrder: 1
 featured: true
 media:
   - type: image
-    src: /images/ui/project-page-in-progress-thumbnail.png
-    alt: Project page in progress — screenshots coming soon
-    caption: Media coming soon
+    src: /projects/carbon-aware-scheduling-simulator/architecture.png
+    alt: System architecture diagram showing the seven principal components of the simulator
+    caption: Architecture — seven-component modular pipeline
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/data_flow.png
+    alt: Data flow diagram showing how carbon traces and workload logs move through the simulator
+    caption: Data flow through the simulation pipeline
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/policy_flow.png
+    alt: Policy flow diagram illustrating how scheduling decisions are made for each task
+    caption: Policy decision flow for task scheduling
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/simulation_execution_flow.png
+    alt: Simulation execution flow showing the tick-based discrete-event model
+    caption: Simulation execution flow (tick-based discrete-event model)
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/code_expand_to_ticks.png
+    alt: Code snippet showing the expand-to-ticks conversion from carbon intensity intervals
+    caption: Implementation — expand carbon trace to tick resolution
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/code_lowest_intensity_policy.png
+    alt: Code snippet for the LowestSlot scheduling policy implementation
+    caption: Implementation — LowestSlot policy
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/code_window_optimal_policy.png
+    alt: Code snippet for the WindowOptimal scheduling policy implementation
+    caption: Implementation — WindowOptimal policy
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/code_threshold_deferral_policy.png
+    alt: Code snippet for the ThresholdDeferral scheduling policy implementation
+    caption: Implementation — ThresholdDeferral policy
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/code_spot_preemption_engine.png
+    alt: Code snippet showing the spot preemption engine with stochastic interruption logic
+    caption: Implementation — spot preemption engine
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/code_simulator_spot_branch.png
+    alt: Code snippet showing the simulator's spot instance dispatch branch
+    caption: Implementation — simulator spot instance branch
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/capacity_pool_state_machine.png
+    alt: State machine diagram for the three-tier capacity pool (reserved, spot, on-demand)
+    caption: Capacity pool state machine — reserved / spot / on-demand tiers
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/code_capacity_try_allocate.png
+    alt: Code snippet for the capacity pool try-allocate logic
+    caption: Implementation — capacity pool allocation
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/experiment_pipline.png
+    alt: Experiment pipeline diagram showing the 60-run YAML-driven matrix sweep
+    caption: Experiment pipeline — 60-run YAML-driven matrix sweep
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/cp12-policy-ranking-bars.png
+    alt: Bar chart ranking the four scheduling policies by carbon savings across all matrix cells
+    caption: Results — policy ranking by carbon savings
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/cp12-seasonal-variability.png
+    alt: Chart showing how carbon savings vary across the five seasonal windows
+    caption: Results — seasonal variability of carbon savings
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/cp12-recommendation-heatmap.png
+    alt: Colour-coded recommendation heatmap across workload profiles and seasonal windows
+    caption: Results — recommendation matrix heatmap (15 cells)
+  - type: image
+    src: /projects/carbon-aware-scheduling-simulator/cp12-threshold-sensitivity.png
+    alt: Threshold sensitivity sweep showing the carbon/delay trade-off at different threshold values
+    caption: Results — ThresholdDeferral sensitivity sweep
 techStack:
   - "Python"
   - "NumPy"
