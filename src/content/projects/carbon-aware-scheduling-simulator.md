@@ -12,6 +12,7 @@ endDate: 2026-04-27
 status: shipped
 sortOrder: 1
 featured: true
+thumbnail: "../../assets/projects/carbon-aware-scheduling-simulator/cp12-threshold-sensitivity.png"
 media:
   - type: image
     src: /projects/carbon-aware-scheduling-simulator/architecture.png
