@@ -1,0 +1,109 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git branch --list*)",
+      "Bash(git branch -vv*)",
+      "Bash(git branch --show-current*)",
+      "Bash(git rev-parse*)",
+      "Bash(git worktree list*)",
+      "Bash(git check-ignore*)",
+      "Bash(git ls-files*)",
+      "Bash(git add docs/*)",
+      "Bash(git add src/*)",
+      "Bash(git add public/*)",
+      "Bash(git add bin/*)",
+      "Bash(git add .claude/*)",
+      "Bash(git add .githooks/*)",
+      "Bash(git add CLAUDE.md*)",
+      "Bash(git add .gitignore*)",
+      "Bash(git add package.json*)",
+      "Bash(git commit*)",
+      "Bash(npm run build*)",
+      "Bash(npm run check*)",
+      "Bash(npm run preview*)",
+      "Bash(npm ls*)",
+      "Bash(npm view*)",
+      "Bash(npx astro check*)",
+      "Bash(ls*)",
+      "Bash(wc *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(grep *)",
+      "Bash(rg *)",
+      "Bash(bin/check_changelog.sh*)",
+      "Bash(bin/conventions_audit.sh*)",
+      "Bash(bin/test_check_changelog.sh*)",
+      "Bash(bin/test_merge_guard.sh*)"
+    ],
+    "ask": [
+      "Bash(git switch*)",
+      "Bash(git checkout*)",
+      "Bash(git merge*)",
+      "Bash(git worktree add*)",
+      "Bash(git worktree remove*)",
+      "Bash(git config*)",
+      "Bash(gh *)",
+      "Bash(rm *)",
+      "Edit(.github/workflows/**)"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean*)",
+      "Bash(git branch -d*)",
+      "Bash(git branch -D*)",
+      "Bash(git branch --delete*)",
+      "Bash(git add -A*)",
+      "Bash(git add --all*)",
+      "Bash(git add .)",
+      "Bash(git add . *)",
+      "Bash(git commit --no-verify*)",
+      "Bash(git commit * --no-verify*)",
+      "Bash(git stash*)",
+      "Bash(rm -rf*)",
+      "Bash(rm -fr*)",
+      "Bash(rm -r *)",
+      "Bash(rm -f -r*)",
+      "Bash(docker volume rm*)",
+      "Bash(docker volume prune*)",
+      "Bash(docker system prune*)",
+      "Bash(gh workflow run*)",
+      "Bash(gh run rerun*)",
+      "Bash(gh repo delete*)",
+      "Edit(**/.env)",
+      "Edit(**/.env.local)",
+      "Edit(**/.env.production)",
+      "Edit(**/.env.*.local)",
+      "Edit(**/*.pem)",
+      "Edit(**/*.key)",
+      "Edit(**/*.p12)",
+      "Edit(**/id_rsa*)",
+      "Edit(**/credentials*)",
+      "Edit(**/secrets*)",
+      "Read(**/.env)",
+      "Read(**/.env.local)",
+      "Read(**/.env.production)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/id_rsa*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "g=\"$CLAUDE_PROJECT_DIR/bin/claude_merge_guard.sh\"; if [ ! -x \"$g\" ]; then root=\"$(git rev-parse --show-toplevel 2>/dev/null)\"; g=\"$root/bin/claude_merge_guard.sh\"; [ -x \"$g\" ] && export CLAUDE_PROJECT_DIR=\"$root\"; fi; if [ -x \"$g\" ]; then \"$g\"; else payload=\"$(cat)\"; case \"$payload\" in *merge*|*commit*|*cherry-pick*|*revert*|*rebase*|*\"git am\"*|*update-ref*|*\"branch -f\"*|*\"branch --force\"*) printf '%s\\n' '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"claude_merge_guard.sh not found under CLAUDE_PROJECT_DIR or git rev-parse --show-toplevel; the branch/merge guard cannot run for this command. Start Claude from the repo root or worktree root, not a parent folder, then retry.\"}}' ;; esac; fi; exit 0",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+# Files already over the size limit when the audit was added (2026-11-05).
+# Known debt, not endorsement: new oversized files still fail. Remove a line when its file is shrunk.
+public/images/ui/404-error-page.png
+public/images/ui/empty-state-ui.png
+public/images/ui/project-page-in-progress-thumbnail.png
+public/images/ui/social-share-card.png
+public/images/ui/square-logo-monogram.png
+public/images/ui/surface-texture.png
+public/projects/morgan-stanley-challenge/ms-image-1.jpg
+public/projects/morgan-stanley-challenge/ms-image-2.jpg
+public/projects/morgan-stanley-challenge/ms-image-3.jpg
+public/projects/unity-snowboarder/snowboarder-1.png
+public/projects/unity-snowboarder/snowboarder-2.png
+src/assets/profile real.png
+src/assets/profile sketch.png
+src/assets/profile2.png
+src/assets/projects/morgan-stanley-challenge/ms-image-1.jpg
+src/assets/projects/morgan-stanley-challenge/ms-image-2.jpg
+src/assets/projects/morgan-stanley-challenge/ms-image-3.jpg
+src/assets/projects/unity-snowboarder/snowboarder-1.png
+src/assets/projects/unity-snowboarder/snowboarder-2.png
