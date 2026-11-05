@@ -10,9 +10,16 @@
 # up. It also catches a fast-forward merge, which skips the git hook entirely.
 #
 # What it refuses, and only this:
-#   a `git merge` whose TARGET is main and which either
-#     - lacks --no-ff (docs/git-workflow.md: every merge is --no-ff), or
-#     - brings no changelog entry (bin/check_changelog.sh decides, not this file).
+#   1. a `git merge` whose TARGET is main and which either
+#        - lacks --no-ff (docs/git-workflow.md: every merge is --no-ff), or
+#        - brings no changelog entry (bin/check_changelog.sh decides, not this file);
+#   2. a `git merge` into dev that lacks --no-ff;
+#   3. any command that writes a non-merge commit or moves the ref while main or dev is the
+#      current branch: git commit (incl. --amend, --no-verify), cherry-pick, revert, am,
+#      rebase, `git branch -f main|dev`, `git update-ref refs/heads/main|dev`.
+#      Finishing a conflicted merge with `git commit` is allowed (MERGE_HEAD present).
+#      Escape for 3 only: SKIP_BRANCH_GUARD=1. Same rule as .githooks/pre-commit, which
+#      cannot see most of these (--no-verify, cherry-pick, revert, rebase, fast-forward).
 #
 # How the target is decided (the part the reference project got wrong, by
 # matching strings anywhere in the command): the command is split into
@@ -28,14 +35,15 @@
 # work whenever it cannot parse something would be switched off within a day.
 # Anything unreadable is allowed, and the git hook is the backstop.
 #
-# Escape: SKIP_CHANGELOG_CHECK=1 as an env prefix on the merge segment.
+# Escapes, as env prefixes on the segment: SKIP_CHANGELOG_CHECK=1 (item 1),
+# SKIP_BRANCH_GUARD=1 (items 2 and 3; bootstrap and genuine emergencies only).
 set -uo pipefail
 
 payload="$(cat)"
 
 # Cheapest rejection first: nearly every Bash call has nothing to do with merges.
 case "$payload" in
-    *merge*) ;;
+    *merge*|*commit*|*cherry-pick*|*revert*|*rebase*|*"git am"*|*update-ref*|*"branch -f"*|*"branch --force"*) ;;
     *) exit 0 ;;
 esac
 
@@ -51,7 +59,8 @@ try:
     cmd = json.loads(os.environ.get("GUARD_PAYLOAD", "")).get("tool_input", {}).get("command", "")
 except Exception:
     allow()
-if not isinstance(cmd, str) or "merge" not in cmd:
+KEYS = ("merge", "commit", "cherry-pick", "revert", "rebase", "am", "update-ref", "branch")
+if not isinstance(cmd, str) or not any(k in cmd for k in KEYS):
     allow()
 
 # ---- 1. Drop heredoc bodies, turn unquoted newlines into ';' -----------------
@@ -197,16 +206,52 @@ for seg in segments:
             current = new
         continue
 
+    def branch_here():
+        return current if (current and not gcwd) else current_branch(gcwd)
+
+    # ---- branch guard: no non-merge commit, and no ref move, on main or dev -----
+    if "SKIP_BRANCH_GUARD=1" not in env:
+        writes = False
+        if sub == "commit" and "--dry-run" not in args:
+            writes = True
+        elif sub in ("cherry-pick", "revert", "am", "rebase") and not any(
+                a in ("--abort", "--quit") for a in args):
+            writes = True
+        if writes:
+            b = branch_here()
+            if b in ("main", "dev"):
+                # Finishing a conflicted merge is a merge commit: allowed.
+                if sub == "commit" and git_out(["rev-parse", "-q", "--verify", "MERGE_HEAD"], gcwd or work_dir):
+                    continue
+                deny("`git %s` on %s. Nothing is committed directly to main or dev (docs/git-workflow.md); "
+                     "both only receive --no-ff merges. Put the work on a branch (git switch -c cp/<n>-<slug> dev, "
+                     "or use a worktree) and commit there. For the one-time bootstrap or a genuine emergency only, "
+                     "prefix SKIP_BRANCH_GUARD=1 and tell the owner." % (sub, b))
+        branch_pos = [a for a in args if not a.startswith("-")]   # first positional = the branch moved
+        if sub == "branch" and any(a in ("-f", "--force") for a in args) and \
+                branch_pos and branch_pos[0] in ("main", "dev"):
+            deny("`git branch --force` would move main or dev without a merge. Use a --no-ff merge. "
+                 "SKIP_BRANCH_GUARD=1 only for the bootstrap or a genuine emergency.")
+        if sub == "update-ref" and any(a in ("refs/heads/main", "refs/heads/dev") for a in args):
+            deny("`git update-ref` on refs/heads/main or dev would move it without a merge. "
+                 "SKIP_BRANCH_GUARD=1 only for the bootstrap or a genuine emergency.")
+
     if sub != "merge":
         continue
     if any(a in ("--abort", "--continue", "--quit") for a in args):
         continue
+
+    target = branch_here()
+
+    # A merge into dev must be --no-ff too (a fast-forward moves dev with no merge commit).
+    if target == "dev" and "--no-ff" not in args and "SKIP_BRANCH_GUARD=1" not in env:
+        deny("This merge targets dev without --no-ff. dev only receives --no-ff merges "
+             "(docs/git-workflow.md); the merge commit is the marker. Re-run with --no-ff.")
+
     if "SKIP_CHANGELOG_CHECK=1" in env:
         continue
-
-    target = current if (current and not gcwd) else current_branch(gcwd)
     if target != "main":
-        continue                          # a merge into dev or a feature branch is not guarded
+        continue                          # a merge into a feature branch is not guarded
 
     # Judged only here: the target really is main.
     if "--no-ff" not in args:
