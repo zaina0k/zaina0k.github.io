@@ -14,7 +14,7 @@ Launch Claude from the repo root (`zainaltaf-portfolio/`) or from a worktree's o
 | [docs/roadmap.md](docs/roadmap.md) | What is built, what is current, what is blocked. |
 | [docs/git-workflow.md](docs/git-workflow.md) | Branches, commit format, merging, worktrees, the changelog gate. Binding. |
 | [docs/testing.md](docs/testing.md) | Each way of checking work, and what it cannot see. |
-| [docs/deployment.md](docs/deployment.md) | How it deploys, the one public key, a proposed workflow change (not applied). |
+| [docs/deployment.md](docs/deployment.md) | How it deploys, the one public key, and the paths-ignore / concurrency change (applied, not yet observed). |
 | [docs/CHANGELOG.md](docs/CHANGELOG.md) | Hand-written record of what changed. |
 
 Do not invent requirements. If a behaviour is not in `docs/prd.md`, it is not in scope. If something is ambiguous, stop and ask. If two documents disagree, quote both places and say so.

@@ -1,19 +1,70 @@
 ---
 # Blueprint: docs/project-blueprints/predicting-crime-severity-blueprint.md
 
-title: "CO3093: Predicting Crime Severity — Metropolitan Police Data Analysis"
+title: "Predicting Crime Severity — Metropolitan Police Data Analysis"
 summary: "ML pipeline on 1M+ Metropolitan Police records to predict monthly crime counts by area. Naive persistence baseline outperformed both trained regression models."
 detail: "Built an end-to-end data science pipeline on 1.1M Metropolitan Police records — data cleaning, MapReduce aggregation, K-Means clustering, and regression modelling — as sole developer for a Big Data coursework assessment."
 sortOrder: 3
+thumbnail: "../../assets/projects/predicting-crime-severity/clustering_cluster_map.png"
 featured: false
 startDate: 2026-01-26
 endDate: 2026-03-27
 status: shipped
 media:
   - type: image
-    src: /images/ui/project-page-in-progress-thumbnail.png
-    alt: Project page in progress — screenshots coming soon
-    caption: Media coming soon
+    src: /projects/predicting-crime-severity/eda_monthly_crime_totals.png
+    alt: "Bar chart showing total recorded crimes per month across 2023, with values staying within a narrow range"
+    caption: "Monthly crime totals — overall volume stays stable across the year, with modest seasonal variation"
+
+  - type: image
+    src: /projects/predicting-crime-severity/eda_monthly_crime_pct_diff_from_mean.png
+    alt: "Bar chart showing each month's total crime count as a percentage difference from the annual mean"
+    caption: "Monthly deviation from mean — average absolute difference of 5.92% confirms moderate rather than extreme seasonality"
+
+  - type: image
+    src: /projects/predicting-crime-severity/eda_target_distribution.png
+    alt: "Histogram and boxplot of crime_count per LSOA-month, showing strong right skew with a long upper tail, plus a 99th percentile boxplot"
+    caption: "Target distribution — most area-months have low counts; a small number of high-activity cells form a long upper tail"
+
+  - type: image
+    src: /projects/predicting-crime-severity/eda_lag_hexbin.png
+    alt: "Log-scaled hexbin plot of last month's crime count against current month's crime count, with observations concentrated near the diagonal"
+    caption: "Temporal persistence — Pearson r = 0.961 between consecutive months in the same LSOA; the key finding that shaped the whole modelling approach"
+
+  - type: image
+    src: /projects/predicting-crime-severity/eda_correlation_heatmap.png
+    alt: "Correlation heatmap for crime_count, lag_1_crime_count, rolling_mean_3, and month_num"
+    caption: "Predictor correlation structure — lag and rolling mean dominate; calendar month contributes only a weak signal"
+
+  - type: image
+    src: /projects/predicting-crime-severity/eda_representative_series.png
+    alt: "Line charts of monthly crime_count for three example LSOAs, each showing smooth month-to-month movement rather than sharp spikes"
+    caption: "Representative LSOA time series — three areas at different crime levels, all exhibiting the smooth persistence that motivates lag-based forecasting"
+
+  - type: image
+    src: /projects/predicting-crime-severity/clustering_kmeans_diagnostics.png
+    alt: "Side-by-side elbow (inertia) and silhouette score plots for k=4 to k=12, with a peak at k=7"
+    caption: "K-means diagnostics — elbow and silhouette curves both point to k=7 as the optimal cluster count"
+
+  - type: image
+    src: /projects/predicting-crime-severity/clustering_cluster_map.png
+    alt: "Scatter plot of incident coordinates across Greater London, coloured by K-means cluster assignment into seven broad geographic groups"
+    caption: "Cluster map — k=7 produces coherent geographic partitions across the Metropolitan Police area"
+
+  - type: image
+    src: /projects/predicting-crime-severity/clustering_area_month_observations_by_cluster.png
+    alt: "Bar chart showing the number of area-month rows falling into each of the seven district clusters"
+    caption: "Cluster sizes — area-month observations distributed across the seven clusters after label merge"
+
+  - type: image
+    src: /projects/predicting-crime-severity/clustering_crime_count_by_cluster_p99.png
+    alt: "Boxplot of crime_count by district cluster, display capped at the 99th percentile to show the main distribution without extreme outliers dominating the scale"
+    caption: "Crime count by cluster (p99 cap) — Cluster 1 shows a notably wider spread and heavier upper tail than the others"
+
+  - type: image
+    src: /projects/predicting-crime-severity/evaluation_model_performance.png
+    alt: "Bar chart comparing RMSE and R-squared for the naive lag-1 baseline, linear regression, and random forest on the chronological holdout set"
+    caption: "Model comparison — naive lag-1 (RMSE 10.39, R² 0.94) outperforms both trained models on the held-out test months"
 techStack:
   - "Python"
   - "pandas"

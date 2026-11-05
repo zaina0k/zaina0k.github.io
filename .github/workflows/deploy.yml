@@ -3,7 +3,17 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '.claude/**'
+      - 'bin/**'
+      - '.githooks/**'
+      - '*.md'
   workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 permissions:
   contents: read
