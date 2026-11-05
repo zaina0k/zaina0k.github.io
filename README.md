@@ -41,7 +41,7 @@ npm run dev        # starts local dev server at localhost:4321
 ## Project structure
 
 ```
-website/
+zainaltaf-portfolio/
 ├── public/
 │   ├── CNAME                    # Custom domain → zainaltaf.dev
 │   ├── cv.pdf                   # CV served at /cv.pdf
