@@ -13,6 +13,10 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ## [Unreleased]
 
+### Added
+
+- The Predicting Crime Severity project page now shows eleven captioned charts in its carousel (data exploration, clustering and the model comparison) and uses the cluster map as its card thumbnail, replacing the "media coming soon" placeholder; its title no longer carries the module code. (PF3, PF4)
+
 ### Changed
 
 - The repository root is now the `zainaltaf-portfolio/` folder itself instead of a `website/` subfolder inside it, so the project's files sit at the top level. Every tracked path, branch and the `origin` remote are unchanged; the deployed site, its build and the Pages workflow are unaffected. Local planning notes that sit in `docs/` are gitignored by name. No visitor-facing change.
