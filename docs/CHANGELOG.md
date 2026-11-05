@@ -15,4 +15,4 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ### Added
 
-- The repo now has a written working agreement for Claude Code sessions: a lean `CLAUDE.md`, a `docs/` set (overview, requirements, architecture, roadmap, testing, git workflow, deployment), three-level branching (`cp/<n>-<slug>` into `dev` into `main`), and a pair of guards that refuse a merge into `main` with no changelog entry. No visitor-facing change.
+- The repo now has a written working agreement for Claude Code sessions: a lean `CLAUDE.md`, a `docs/` set (overview, requirements, architecture, roadmap, testing, git workflow, deployment), three-level branching (`cp/<n>-<slug>` into `dev` into `main`), a pair of guards that refuse a merge into `main` with no changelog entry, and a second pair that refuse a commit made directly on `main` or `dev`. No visitor-facing change.

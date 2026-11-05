@@ -32,7 +32,7 @@ Do not invent requirements. If a behaviour is not in `docs/prd.md`, it is not in
 - Ask before anything that costs money or reaches a paid or external service, including any added later. State how many calls it will make and a rough cost, then wait. Approval covers the size named, not the task: if the volume grows, ask again. *Why: the amount can be trivial and the consent still wrong.*
 - Stage explicit paths only; never `git add -A` or `git add .`. *Why: another session may have uncommitted work in the same checkout.*
 - Before any state-changing git operation, run `ListAgents` and `git worktree list`, and never run git in a checkout another session is using. Build in a worktree under `.claude/worktrees/`. *Why: two sessions in one checkout overwrite each other's work.*
-- Nothing is committed directly to `dev` or `main`. *Why: the merge commit is what marks where work began and ended.*
+- Nothing is committed directly to `dev` or `main`; commits go on `cp/<n>-<slug>`. A pre-commit hook and the Claude guard enforce it; `SKIP_BRANCH_GUARD=1` is for the one-time bootstrap and genuine emergencies only, and the owner is told. *Why: the merge commit is what marks where work began and ended.*
 - No `Co-Authored-By` or other AI attribution in commits. *Why: commits are authored by the owner alone.*
 
 **Code**
@@ -73,7 +73,7 @@ Work happens in numbered checkpoints on a branch `cp/<n>-<slug>` cut from `dev`,
 
 - **Before writing code, list the commits, one line each.** Commit each piece as soon as it is complete and verified; do not batch. Only `git commit` is unprompted.
 - Every commit carries the trailer `Checkpoint: CP-<n> - <name>` (and `Refs: PF<n>` when it touches a requirement).
-- A merge into `main` needs a new entry in `docs/CHANGELOG.md` on the branch being merged. Two guards enforce it (`.githooks/pre-merge-commit`, enabled with `git config core.hooksPath .githooks`, and a Claude hook). Escape for a release with nothing to announce: `SKIP_CHANGELOG_CHECK=1`.
+- A merge into `main` needs a new entry in `docs/CHANGELOG.md` on the branch being merged. Two guards enforce it (`.githooks/pre-merge-commit`, and a Claude hook); `.githooks/` is enabled with `git config core.hooksPath .githooks`. `npm run check` and `npm run build` before that merge are a manual step; nothing enforces them. Escape for a release with nothing to announce: `SKIP_CHANGELOG_CHECK=1`.
 - Skills in `.claude/skills/`: `checkpoint`, `changelog-entry`, `handoff`, `conventions-audit`.
 - Run what `docs/testing.md` supports before calling anything done, and say plainly if something fails.
 

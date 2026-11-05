@@ -19,6 +19,17 @@ Done means: it is merged into `dev` with the owner's approval. Merging to `main`
 Delivers: agreed v1 success criteria and an out-of-scope list in [prd.md](prd.md).
 Blocked on: the owner reacting to the draft PF12 to PF17. TBD, ask owner.
 
+## Candidate checkpoints (not started; each needs a personal-detail check)
+
+Proposed for later; none is scheduled and none starts without the owner. Each **needs a personal-detail check** before anything is copied into this public repo: read it for phone numbers, addresses, dates of birth and anything else not meant to be published.
+
+1. **Lift two parts of the old planning blueprint:** its "Decisions still needed" list and its asset and image standards.
+2. **Copy the portable design-language document** into `docs/`.
+3. **Port two skills:** one for adding a new project page, one for keeping `README.md` in step with the code.
+4. **Deal with the 19 oversized images** (3 to 9 MB, listed in `bin/conventions_audit.baseline`) **and the 3 `astro check` hints** (below).
+5. **The `deploy.yml` change** (`paths-ignore` plus a `concurrency` group): a **proposal only**, written up in [deployment.md](deployment.md). `.github/` is not touched without the owner's separate approval.
+6. **Decide the `reference-transaction` hook** that would close the human-terminal routes around the branch guard ([git-workflow.md](git-workflow.md)).
+
 ## Observed, not scheduled
 
 Found while setting up checks; none is a requirement until the owner says so.

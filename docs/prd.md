@@ -27,7 +27,23 @@ Status values: **Built** (in the codebase, cited), **Proposed** (a draft for the
 | PF10 | Old project URLs from the previous site redirect to their new pages. | Built | `redirects` in `astro.config.mjs` |
 | PF11 | Served from `zainaltaf.dev` on GitHub Pages, deployed from `main`. | Built | `public/CNAME`, `.github/workflows/deploy.yml` |
 
-Acceptance criteria for these are not backfilled. TBD, ask owner: whether they should be written, or only for changes from here on.
+### Acceptance criteria for PF1 to PF11
+
+Written 2026-11-05, **only from what could be checked in the repository**: the build output in `dist/`, the source, and one deliberate build failure. "Verified" means that. **Nothing here was checked in a browser, on the live site, or by a person looking at it**, so what a page looks like and how it behaves for a visitor is not claimed. Anything that could not be checked is marked **TBD, ask owner**.
+
+| ID | Verified (build output / source) | TBD, ask owner |
+|---|---|---|
+| PF1 | `/` builds, with the title "Home \| Zain Altaf". The featured section is built from every project whose `featured` frontmatter is `true`. | What the page must say about the owner; how it should look. |
+| PF2 | `/projects/` builds and includes the `ProjectFilter` island (`client:load`). Selecting several groups matches a project in **any** of them; counts update live; results are paginated (`src/lib/filter.ts`). | The page size; whether the filter works as intended in a browser; which groups should exist. |
+| PF3 | Each of the 9 files in `src/content/projects/` produces `/projects/<slug>/`. A frontmatter value outside the schema fails the build: changing one project's `category` to an invalid value made `npm run build` stop with `InvalidContentEntryDataError` (tested and reverted 2026-11-05). | Whether every project's content is complete and accurate; whether the schema is the right contract. |
+| PF4 | Project pages include `MediaCarousel` (`client:visible`). It accepts items of type `image` or `youtube`, and the source handles arrow keys, Escape and touch swipes. | Whether it works in a browser and on a phone. |
+| PF5 | `/about/` builds, with the title "About \| Zain Altaf". | Whether the content is current and accurate. |
+| PF6 | `/contact/` builds with the `ContactForm` island (`client:visible`). The form requires a name, a valid-looking email and a message before it sends. It posts to `https://api.web3forms.com/submit` with `PUBLIC_WEB3FORMS_KEY`, and shows success or error states. | **That a message reaches the owner.** This needs a live key and a real submission, which was not done. Where messages go. |
+| PF7 | `/cv/` builds, embeds `/cv.pdf` and has a download link. `public/cv.pdf` exists. | Whether the CV is current; how the viewer behaves on a phone. |
+| PF8 | The toggle adds or removes the `dark` class and stores the choice under `theme` in `localStorage`. With no stored choice it follows the system's colour-scheme preference. An inline script in `BaseLayout.astro` applies it before first paint. | Whether both themes look right and meet contrast (see PF14). |
+| PF9 | `sitemap-index.xml` and `sitemap-0.xml` are generated (14 URLs). Six pages sampled (home, about, contact, cv, projects index, one project) each have a `<title>`, a description, `og:title` and a canonical link. | Whether all 15 pages have them (only six were sampled); whether the descriptions are good; how the Open Graph cards look when shared. |
+| PF10 | The 7 old slugs configured in `astro.config.mjs` each build to a redirect page. Five targets were read from the output: four map to the new slugs and `/projects/unity_flappy_bird/` to `/projects/`. The other two follow the config. | How the redirects behave for a visitor on GitHub Pages; whether any old URL is missing from the list. |
+| PF11 | `public/CNAME` contains `zainaltaf.dev` and is copied into `dist/`. The workflow in `.github/workflows/deploy.yml` runs on every push to `main`. | That the live site is currently serving the latest `main`: not checked, because nothing was requested from the live site. |
 
 ## Part 2: v1 success criteria
 
@@ -51,3 +67,4 @@ Acceptance criteria for these are not backfilled. TBD, ask owner: whether they s
 | Date | Change |
 |---|---|
 | 2026-11-05 | File created. PF1 to PF11 backfilled from the code; PF12 to PF17 proposed; out-of-scope left TBD. |
+| 2026-11-05 | Acceptance criteria written for PF1 to PF11 from what is verifiable in the repository only; the rest marked TBD, ask owner. |

@@ -4,7 +4,7 @@
 
 ## Where it runs
 
-GitHub Pages, at https://zainaltaf.dev. The custom domain is set by `public/CNAME`. The repository is public.
+GitHub Pages, at https://zainaltaf.dev. The custom domain is set by `public/CNAME`. **The repository is public**: verified by the owner with `gh repo view zaina0k/zaina0k.github.io` (visibility PUBLIC) on 2026-11-05.
 
 ## How it deploys
 
