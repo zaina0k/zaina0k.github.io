@@ -99,7 +99,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "g=\"$CLAUDE_PROJECT_DIR/bin/claude_merge_guard.sh\"; [ -x \"$g\" ] && \"$g\" || true",
+            "command": "g=\"$CLAUDE_PROJECT_DIR/bin/claude_merge_guard.sh\"; if [ ! -x \"$g\" ]; then root=\"$(git rev-parse --show-toplevel 2>/dev/null)\"; g=\"$root/bin/claude_merge_guard.sh\"; [ -x \"$g\" ] && export CLAUDE_PROJECT_DIR=\"$root\"; fi; if [ -x \"$g\" ]; then \"$g\"; else payload=\"$(cat)\"; case \"$payload\" in *merge*|*commit*|*cherry-pick*|*revert*|*rebase*|*\"git am\"*|*update-ref*|*\"branch -f\"*|*\"branch --force\"*) printf '%s\\n' '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"claude_merge_guard.sh not found under CLAUDE_PROJECT_DIR or git rev-parse --show-toplevel; the branch/merge guard cannot run for this command. Start Claude from the repo root or worktree root, not a parent folder, then retry.\"}}' ;; esac; fi; exit 0",
             "timeout": 20
           }
         ]
