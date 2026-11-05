@@ -115,7 +115,7 @@ ln -s ../../../node_modules node_modules
 
 `.claude/worktrees/` is gitignored. Do not `cd` out of a worktree into another checkout and then run a state-changing git command.
 
-A new worktree already has the git hooks enabled (`core.hooksPath` is repository-wide, not per-worktree) — don't re-run `git config core.hooksPath .githooks` there. Launch Claude from the new worktree's own root, not from the parent folder that holds all the worktrees: `bin/claude_merge_guard.sh` is located relative to the launch directory, and the wrong one weakens that guard (see CLAUDE.md).
+A new worktree already has the git hooks enabled (`core.hooksPath` is repository-wide, not per-worktree) — don't re-run `git config core.hooksPath .githooks` there. Launch Claude from the new worktree's own root (or the repo root), not from a subdirectory such as `.claude/worktrees/` that holds all the worktrees: `bin/claude_merge_guard.sh` is located relative to the launch directory, and the wrong one weakens that guard (see CLAUDE.md).
 
 ## One-time bootstrap exceptions (CP-16)
 
@@ -125,3 +125,4 @@ These are exceptions, not precedents.
 2. **Numbering started at CP-16, not CP-1.** The log contained no `Checkpoint:` trailers, but earlier work was tracked as CP-1 to CP-15 in local planning notes. The "read the log" rule would have produced CP-1 and collided with those.
 3. **Earlier commits carry no trailers.** They are not rewritten.
 4. **`SKIP_BRANCH_GUARD=1` exists for this kind of one-off.** It was not needed during CP-16: the work was done on `cp/16-claude-structure` in a worktree.
+5. **The repository root moved up one level (CP-18, 2026-11-05).** The git directory used to live in a `website/` subfolder of a local workspace folder; it now lives in the workspace folder itself, `zainaltaf-portfolio/`, which is the repo root. This was a filesystem move of `.git` and the working files, not a commit: every tracked path, branch, tag and `origin` ref is identical before and after (143 tracked files, same hashes). The workspace folder's local planning files now sit in `docs/` and are gitignored by name. The two worktrees that existed were removed first and recreated under the new root.
