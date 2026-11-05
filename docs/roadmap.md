@@ -27,7 +27,7 @@ Proposed for later; none is scheduled and none starts without the owner. Each **
 2. **Copy the portable design-language document** into `docs/`.
 3. **Port two skills:** one for adding a new project page, one for keeping `README.md` in step with the code.
 4. **Deal with the 19 oversized images** (3 to 9 MB, listed in `bin/conventions_audit.baseline`) **and the 3 `astro check` hints** (below).
-5. **The `deploy.yml` change** (`paths-ignore` plus a `concurrency` group): a **proposal only**, written up in [deployment.md](deployment.md). `.github/` is not touched without the owner's separate approval.
+5. ~~**The `deploy.yml` change** (`paths-ignore` plus a `concurrency` group)~~ **Applied (CP-20), 2026-11-05**, at the owner's approval; see [deployment.md](deployment.md). Not yet observed running. `.github/` otherwise stays protected.
 6. **Decide the `reference-transaction` hook** that would close the human-terminal routes around the branch guard ([git-workflow.md](git-workflow.md)).
 
 ## Observed, not scheduled
@@ -37,4 +37,4 @@ Found while setting up checks; none is a requirement until the owner says so.
 - `npm run check` reports 3 hints: two uses of a deprecated Zod method (`z.string().url()`) in `src/content.config.ts`, and one `<script>` in `src/pages/index.astro` that Astro treats as `is:inline`.
 - Several images in `public/` are 4 to 8 MB. `bin/conventions_audit.sh` lists them.
 - Astro, `@astrojs/react` and TypeScript each have a newer major on npm (see [architecture.md](architecture.md)).
-- The Pages workflow redeploys on tooling-only pushes (proposal in [deployment.md](deployment.md)).
+- The Pages workflow's new `paths-ignore` and `concurrency` settings (CP-20, [deployment.md](deployment.md)) have not yet run; the first push to `main` after the merge is their first test.
