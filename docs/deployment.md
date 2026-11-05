@@ -1,6 +1,6 @@
 # Deployment
 
-**Status:** Living document. Describes what exists; the proposal at the end is **not applied**.
+**Status:** Living document. Describes what exists, including the workflow change applied on 2026-11-05 (CP-20), which has not yet run.
 
 ## Where it runs
 
@@ -39,9 +39,9 @@ npm run build && npm run preview
 
 TBD, ask owner. The usual route would be reverting the merge commit on `main` and pushing, which redeploys the previous site.
 
-## Proposal: stop tooling-only merges redeploying the site (NOT APPLIED)
+## Workflow change: tooling-only pushes no longer redeploy (APPLIED, not yet observed)
 
-The workflow redeploys on any push to `main`, including pushes that only change docs or tooling. Proposed change to the `on:` block and an added `concurrency:` block. **`deploy.yml` has not been touched; this needs the owner's separate approval.**
+Applied on `cp/20-pages-workflow` at the owner's approval on 2026-11-05. It was previously a proposal. Two additions to `.github/workflows/deploy.yml`; nothing else in the workflow changed (same two jobs, same build steps, same secret):
 
 ```diff
  on:
@@ -62,4 +62,11 @@ The workflow redeploys on any push to `main`, including pushes that only change 
  permissions:
 ```
 
-Notes: `paths-ignore` only skips a run when every changed file matches; a push mixing docs and `src/` still deploys. `cancel-in-progress: false` lets a running deploy finish rather than leave Pages half-updated.
+How it behaves, from GitHub's documented rules for filter patterns:
+
+- `paths-ignore` skips a run only when **every** changed file matches. A push that mixes docs with `src/` or `public/` still deploys.
+- `*` does not match `/`, so `*.md` covers Markdown at the repo root (such as `README.md`) and **not** project pages under `src/content/projects/`, which still deploy.
+- `cancel-in-progress: false` lets a running deploy finish rather than leave Pages half-updated; a second one queues.
+- `workflow_dispatch` is unaffected.
+
+**Not yet observed:** the YAML parses and the structure was checked, but the workflow has not run with these changes. The first push to `main` after this merge is the first run under it. The workflow remains a protected file: any further change needs the owner's separate approval.
