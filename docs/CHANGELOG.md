@@ -13,6 +13,10 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ## [Unreleased]
 
+### Changed
+
+- The repository root is now the `zainaltaf-portfolio/` folder itself instead of a `website/` subfolder inside it, so the project's files sit at the top level. Every tracked path, branch and the `origin` remote are unchanged; the deployed site, its build and the Pages workflow are unaffected. Local planning notes that sit in `docs/` are gitignored by name. No visitor-facing change.
+
 ### Fixed
 
 - The merge/branch guard hook no longer silently stops enforcing when Claude is launched from the wrong directory; it now resolves itself safely or refuses the affected git commands loudly, and CLAUDE.md and docs/git-workflow.md now say which guard enforces what and that the git hooks are shared across worktrees. No visitor-facing change.
