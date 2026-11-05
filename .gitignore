@@ -39,3 +39,14 @@ secrets*
 # session handoffs stay local (may name in-progress work); the README is tracked
 docs/handoffs/*
 !docs/handoffs/README.md
+
+# local planning material that lives in docs/ beside the tracked docs. Listed BY NAME so the
+# tracked docs (overview, prd, architecture, ...) stay tracked and a new tracked doc is not
+# silently ignored. Add a name here to keep a file local; do not ignore docs/ as a whole.
+docs/portfolio-structural-plan.md
+docs/design-language.md
+docs/new-project-page-template.md
+docs/project-blueprint-TEMPLATE.md
+docs/project-blueprints/
+docs/Downloadable CV.pdf
+docs/ai generated - iteration 6.png
