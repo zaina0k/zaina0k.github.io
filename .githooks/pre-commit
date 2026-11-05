@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+#
+# Refuses a non-merge commit when the current branch is main or dev.
+#
+# Nothing is committed directly to main or dev (docs/git-workflow.md): both only
+# receive --no-ff merges, because the merge commit is what marks where a piece of
+# work began and ended. Commits go on a cp/<n>-<slug> branch.
+#
+# Merge commits are allowed. A clean `git merge --no-ff` does not run this hook at
+# all (git runs pre-merge-commit instead). A conflicted merge finished with
+# `git commit` does run it, and is recognised by MERGE_HEAD existing.
+#
+# This also stops `git commit --amend` on main or dev. It does NOT see commits made
+# by cherry-pick or revert, or a fast-forward: see "Other ways a commit can land" in
+# docs/git-workflow.md.
+#
+# Install (once per clone): git config core.hooksPath .githooks
+# Escape: SKIP_BRANCH_GUARD=1 git commit ...  - for the one-time bootstrap and genuine
+# emergencies only, and tell the owner when it was used.
+#
+# Fails open: a detached HEAD or an unreadable branch is allowed.
+set -uo pipefail
+
+branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '')"
+case "$branch" in
+    main|dev) ;;
+    *) exit 0 ;;
+esac
+
+if [ "${SKIP_BRANCH_GUARD:-}" = "1" ]; then
+    echo "pre-commit: SKIP_BRANCH_GUARD=1 - committing directly on $branch, on purpose." >&2
+    exit 0
+fi
+
+# Finishing a conflicted merge: that is a merge commit.
+if git rev-parse -q --verify MERGE_HEAD >/dev/null 2>&1; then
+    exit 0
+fi
+
+cat >&2 <<MSG
+
+  ------------------------------------------------------------------------
+  Refusing to commit directly on '$branch'.
+
+  main and dev only ever receive --no-ff merges. Put the work on a branch:
+
+      git switch -c cp/<n>-<slug> dev        (or use a worktree)
+
+  then commit there and merge it back with --no-ff.
+
+  For the one-time bootstrap or a genuine emergency only:
+      SKIP_BRANCH_GUARD=1 git commit ...
+  ------------------------------------------------------------------------
+
+MSG
+exit 1

@@ -13,12 +13,29 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# environment variables
+# environment variables - everything .env-shaped except the blank template
 .env
-.env.production
+.env.*
+!.env.example
 
 # macOS-specific files
 .DS_Store
 
 # jetbrains setting folder
 .idea/
+
+# credentials and keys - this repo and its host are public
+*.pem
+*.key
+*.p12
+id_rsa*
+credentials*
+secrets*
+
+# Claude Code: worktrees and local settings
+.claude/worktrees/
+.claude/settings.local.json
+
+# session handoffs stay local (may name in-progress work); the README is tracked
+docs/handoffs/*
+!docs/handoffs/README.md
