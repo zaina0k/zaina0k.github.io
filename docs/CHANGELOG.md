@@ -13,6 +13,10 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ## [Unreleased]
 
+### Fixed
+
+- The merge/branch guard hook no longer silently stops enforcing when Claude is launched from the wrong directory; it now resolves itself safely or refuses the affected git commands loudly, and CLAUDE.md and docs/git-workflow.md now say which guard enforces what and that the git hooks are shared across worktrees. No visitor-facing change.
+
 ### Added
 
 - The repo now has a written working agreement for Claude Code sessions: a lean `CLAUDE.md`, a `docs/` set (overview, requirements, architecture, roadmap, testing, git workflow, deployment), three-level branching (`cp/<n>-<slug>` into `dev` into `main`), a pair of guards that refuse a merge into `main` with no changelog entry, and a second pair that refuse a commit made directly on `main` or `dev`. No visitor-facing change.
