@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+#
+# Refuses a merge into `main` that carries no changelog entry.
+#
+# A merge into main is what deploys the public site (docs/deployment.md), so the
+# change is written down first. A Claude Code hook only sees commands Claude
+# runs; this one fires for any merge in any terminal.
+#
+# Git runs this AFTER the merge is resolved and BEFORE the commit - the only
+# place it offers. A refusal therefore leaves a merge in progress; the message
+# says how to leave it.
+#
+# It does not run for fast-forward merges. The workflow is always --no-ff
+# (docs/git-workflow.md), and bin/claude_merge_guard.sh refuses a merge into
+# main that lacks it.
+#
+# Install (once per clone, from the repo root):
+#   git config core.hooksPath .githooks
+# Uninstall: git config --unset core.hooksPath
+# Bypass one merge on purpose: SKIP_CHANGELOG_CHECK=1 git merge ...
+#
+# Fails open: if the checker is missing or the branch cannot be read, allow.
+set -uo pipefail
+
+branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '')"
+
+# Only main. Merges into dev happen many times a checkpoint and carry no
+# release; guarding them would teach everyone to reach for --no-verify.
+[ "$branch" = "main" ] || exit 0
+
+repo_root="$(git rev-parse --show-toplevel 2>/dev/null || echo '')"
+checker="$repo_root/bin/check_changelog.sh"
+[ -x "$checker" ] || exit 0
+
+if "$checker"; then
+    exit 0
+fi
+
+cat >&2 <<'MSG'
+  The merge has NOT been committed. Nothing is lost. To get out of it:
+
+    git merge --abort
+
+  then add the changelog entry on the branch you were merging, commit it
+  there, and merge again.
+
+MSG
+exit 1
