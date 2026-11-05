@@ -2,6 +2,8 @@
 
 Zain Altaf's personal portfolio, live at https://zainaltaf.dev. Astro 6 + React 19 islands + Tailwind CSS 4 + TypeScript, built to static files and served by GitHub Pages. This file holds rules and pointers only; detail lives in `docs/`.
 
+Launch Claude from this worktree's or the repo's own root, never the parent folder that contains the worktrees — the guard hook resolves relative to it and a wrong launch directory can weaken the guard silently.
+
 ## Where to look
 
 | File | Answers |
