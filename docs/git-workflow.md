@@ -65,7 +65,7 @@ Merging `dev` into `main` is the release. Before it:
 
 A merge into `main` is refused unless the incoming side adds at least one entry line to `docs/CHANGELOG.md`. Two guards share one checker, `bin/check_changelog.sh`:
 
-- `.githooks/pre-merge-commit`: any terminal. Enable once per clone: `git config core.hooksPath .githooks`; that one setting enables both hooks. Git has no hook that runs before a merge starts, so a refusal leaves the merge resolved but uncommitted: `git merge --abort`, add the entry on the branch, merge again. It does not run for fast-forward merges, which is why the workflow is always `--no-ff`.
+- `.githooks/pre-merge-commit`: any terminal. Enable once per clone: `git config core.hooksPath .githooks`; that one setting enables both hooks. `core.hooksPath` lives in the shared `.git/config`, not in a worktree's own files, so it is set once for the whole repository and already applies in every worktree, including one created after it was set — there is nothing to re-enable there. Git has no hook that runs before a merge starts, so a refusal leaves the merge resolved but uncommitted: `git merge --abort`, add the entry on the branch, merge again. It does not run for fast-forward merges, which is why the workflow is always `--no-ff`.
 - `bin/claude_merge_guard.sh`: a Claude Code `PreToolUse` hook that refuses a merge into `main` before it starts, and refuses one without `--no-ff`. It is also the branch guard (next section).
 
 Both fail open when they cannot parse something. A release that changes nothing a visitor would notice is let through deliberately with `SKIP_CHANGELOG_CHECK=1 git merge ...`. Merges into `dev` carry no changelog requirement.
@@ -114,6 +114,8 @@ ln -s ../../../node_modules node_modules
 ```
 
 `.claude/worktrees/` is gitignored. Do not `cd` out of a worktree into another checkout and then run a state-changing git command.
+
+A new worktree already has the git hooks enabled (`core.hooksPath` is repository-wide, not per-worktree) — don't re-run `git config core.hooksPath .githooks` there. Launch Claude from the new worktree's own root, not from the parent folder that holds all the worktrees: `bin/claude_merge_guard.sh` is located relative to the launch directory, and the wrong one weakens that guard (see CLAUDE.md).
 
 ## One-time bootstrap exceptions (CP-16)
 
