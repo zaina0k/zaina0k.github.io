@@ -179,7 +179,8 @@ export default function MediaCarousel({ media, fallback }: Props) {
       <div className="group">
         {/* Main viewer */}
         <div
-          className="relative w-full aspect-video bg-black rounded-lg overflow-hidden"
+          className="relative w-full aspect-video bg-[#1e1e2e] rounded-[10px] border border-[var(--border-color)] overflow-hidden"
+          style={{ boxShadow: 'var(--shadow-md)' }}
           onTouchStart={handleCarouselTouchStart}
           onTouchEnd={handleCarouselTouchEnd}
         >
