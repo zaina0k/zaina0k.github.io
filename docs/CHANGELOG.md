@@ -13,6 +13,10 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ## [Unreleased]
 
+### Fixed
+
+- The main image in a project's gallery now shows the whole picture instead of cropping its edges, so screenshots and diagrams are no longer cut off.
+
 ### Changed
 
 - The working agreement now says to use a plain branch in the main checkout by default, and a worktree only for a significantly large feature while another session or feature is open in the repo. No visitor-facing change.

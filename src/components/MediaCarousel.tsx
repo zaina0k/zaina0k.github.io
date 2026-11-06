@@ -197,7 +197,7 @@ export default function MediaCarousel({ media, fallback }: Props) {
               <img
                 src={active.src}
                 alt={active.alt ?? ''}
-                className="w-full h-full object-cover cursor-pointer"
+                className="w-full h-full object-contain cursor-pointer"
                 onClick={openLightbox}
                 onError={onImgError}
               />
