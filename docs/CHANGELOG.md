@@ -15,6 +15,7 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ### Changed
 
+- The CV on `/cv/` and the `/cv.pdf` download are now the current edition. (PF7)
 - The Pages workflow no longer redeploys the site for pushes that only change docs, Claude tooling, scripts, git hooks or root-level Markdown, and a second deploy now waits for a running one instead of overlapping it. The build, the secret and the deploy steps are unchanged. No visitor-facing change.
 - The repository root is now the `zainaltaf-portfolio/` folder itself instead of a `website/` subfolder inside it, so the project's files sit at the top level. Every tracked path, branch and the `origin` remote are unchanged; the deployed site, its build and the Pages workflow are unaffected. Local planning notes that sit in `docs/` are gitignored by name. No visitor-facing change.
 
