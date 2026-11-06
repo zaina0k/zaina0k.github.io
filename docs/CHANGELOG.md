@@ -21,6 +21,7 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ### Fixed
 
+- On phones, the profile photo's frame on the home and About pages now fits snugly around the photo instead of stretching into an empty box beside it.
 - The main image in a project's gallery now shows the whole picture instead of cropping its edges, so screenshots and diagrams are no longer cut off.
 
 ### Changed
