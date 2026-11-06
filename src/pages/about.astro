@@ -3,8 +3,7 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FooterCTA from '../components/FooterCTA.astro';
 import ProjectsTimeline from '../components/ProjectsTimeline.astro';
-import profileReal   from '../assets/profile real.png';
-import profileSketch from '../assets/profile sketch.png';
+import profile2026 from '../assets/profile-2026.jpeg';
 
 const skillRows = [
   { category: 'Languages',   skills: ['Python', 'JavaScript', 'TypeScript', 'C++', 'SQL', 'HTML', 'CSS'] },
@@ -75,27 +74,19 @@ const skillRows = [
         </div>
       </div>
 
-      <!-- Right: profile photo (light = real photo, dark = sketch) -->
+      <!-- Right: profile photo (same photo as the home page, in light and dark) -->
       <div class="shrink-0 order-first md:order-last mb-8 md:mb-0">
         <div
           class="p-1.5 rounded-[16px] bg-[var(--bg-card)] border border-[var(--border-color)]"
           style="box-shadow: var(--shadow-lg);"
         >
           <Image
-            src={profileReal}
+            src={profile2026}
             alt="Zain Altaf"
             width={512}
             height={512}
             densities={[1, 2, 3]}
-            class="w-48 h-48 md:w-64 md:h-64 rounded-[12px] object-cover dark:hidden"
-          />
-          <Image
-            src={profileSketch}
-            alt="Zain Altaf"
-            width={512}
-            height={512}
-            densities={[1, 2, 3]}
-            class="w-48 h-48 md:w-64 md:h-64 rounded-[12px] object-cover hidden dark:block"
+            class="w-48 h-48 md:w-64 md:h-64 rounded-[12px] object-cover"
           />
         </div>
       </div>
