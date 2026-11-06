@@ -57,7 +57,7 @@ const ogImageAbsolute = new URL(ogImage, Astro.site).href;
       (function () {
         var stored = localStorage.getItem('theme');
         var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (stored === 'dark' || (!stored && prefersDark)) {
+        if (stored === 'dark' || (stored !== 'light' && prefersDark)) {
           document.documentElement.classList.add('dark');
         }
       })();
