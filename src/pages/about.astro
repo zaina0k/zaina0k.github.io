@@ -22,21 +22,24 @@ const skillRows = [
 
       <!-- Left: status, heading, bio -->
       <div class="flex-1">
-        <!-- Status badge -->
-        <div class="flex items-center gap-2 mb-8">
-          <span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-          <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">
+        <!-- Status badge (Template 5.5 .badge-green) -->
+        <div class="mb-7">
+          <span
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-[20px] text-[11px] font-semibold tracking-wide uppercase"
+            style="background: var(--health-green-bg); color: var(--health-green); border: 1px solid var(--health-green-border);"
+          >
+            <span class="inline-block w-2 h-2 rounded-full bg-[var(--health-green)] animate-pulse"></span>
             CS Graduate · Open to opportunities
           </span>
         </div>
 
         <!-- Heading -->
-        <h1 class="text-4xl md:text-5xl font-semibold leading-tight tracking-tight text-[var(--color-text)] mb-10">
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-[-0.03em] text-[var(--text-primary)] mb-8">
           Zain Altaf
         </h1>
 
         <!-- Bio paragraphs -->
-        <div class="space-y-5 text-[var(--color-text-muted)] leading-relaxed">
+        <div class="space-y-4 text-[14px] text-[var(--text-secondary)] leading-relaxed">
           <p>
             I'm a Computer Science graduate from the University of Leicester with nine years
             of programming experience and a particular focus on cloud systems, data analytics,
@@ -74,131 +77,170 @@ const skillRows = [
 
       <!-- Right: profile photo (light = real photo, dark = sketch) -->
       <div class="shrink-0 order-first md:order-last mb-8 md:mb-0">
-        <Image
-          src={profileReal}
-          alt="Zain Altaf"
-          width={512}
-          height={512}
-          densities={[1, 2, 3]}
-          class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-[var(--color-border)] dark:hidden"
-        />
-        <Image
-          src={profileSketch}
-          alt="Zain Altaf"
-          width={512}
-          height={512}
-          densities={[1, 2, 3]}
-          class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-[var(--color-border)] hidden dark:block"
-        />
+        <div
+          class="p-1.5 rounded-[16px] bg-[var(--bg-card)] border border-[var(--border-color)]"
+          style="box-shadow: var(--shadow-lg);"
+        >
+          <Image
+            src={profileReal}
+            alt="Zain Altaf"
+            width={512}
+            height={512}
+            densities={[1, 2, 3]}
+            class="w-48 h-48 md:w-64 md:h-64 rounded-[12px] object-cover dark:hidden"
+          />
+          <Image
+            src={profileSketch}
+            alt="Zain Altaf"
+            width={512}
+            height={512}
+            densities={[1, 2, 3]}
+            class="w-48 h-48 md:w-64 md:h-64 rounded-[12px] object-cover hidden dark:block"
+          />
+        </div>
       </div>
 
     </div>
 
-    <!-- Skills grid -->
+    <!-- Skills grid (Template 5.2 .card & 5.4 .data-table) -->
     <div class="mt-16">
-      <div class="flex items-baseline gap-4 mb-8">
-        <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">Skills</span>
-        <h2 class="text-xl font-semibold tracking-tight text-[var(--color-text)]">What I Work With</h2>
+      <div class="flex items-center gap-3 mb-6">
+        <span
+          class="inline-flex items-center px-2.5 py-0.5 rounded-[20px] text-[11px] font-semibold uppercase tracking-[0.05em]"
+          style="background: var(--primary-light); color: var(--primary); border: 1px solid var(--border-focus);"
+        >
+          Skills
+        </span>
+        <h2 class="text-xl font-bold tracking-[-0.02em] text-[var(--text-primary)]">What I Work With</h2>
       </div>
-      <div class="flex flex-col divide-y divide-[var(--color-border)]">
-        {skillRows.map(({ category, skills }) => (
-          <div class="flex flex-col sm:flex-row sm:items-baseline gap-3 sm:gap-8 py-5">
-            <span class="w-28 shrink-0 text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">
-              {category}
-            </span>
-            <div class="flex flex-wrap gap-x-4 gap-y-2">
-              {skills.map((skill) => (
-                <span class="text-sm text-[var(--color-text)]">{skill}</span>
-              ))}
+      <div
+        class="rounded-[10px] border border-[var(--border-color)] bg-[var(--bg-card)] overflow-hidden"
+        style="box-shadow: var(--shadow-sm);"
+      >
+        <div class="flex flex-col divide-y divide-[var(--border-color)]">
+          {skillRows.map(({ category, skills }) => (
+            <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8 px-4 py-3.5 hover:bg-[var(--bg-hover)] transition-colors duration-150">
+              <span class="w-28 shrink-0 text-[11px] font-bold tracking-[0.05em] uppercase text-[var(--text-secondary)]">
+                {category}
+              </span>
+              <div class="flex flex-wrap gap-2">
+                {skills.map((skill) => (
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-[20px] text-[12px] font-semibold text-[var(--text-primary)] bg-[var(--bg-tertiary)] border border-[var(--border-color)]">
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
 
     <!-- Project timeline -->
     <div class="mt-16">
-      <div class="flex items-baseline gap-4 mb-8">
-        <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">Projects</span>
-        <h2 class="text-xl font-semibold tracking-tight text-[var(--color-text)]">Project Timeline</h2>
+      <div class="flex items-center gap-3 mb-6">
+        <span
+          class="inline-flex items-center px-2.5 py-0.5 rounded-[20px] text-[11px] font-semibold uppercase tracking-[0.05em]"
+          style="background: var(--primary-light); color: var(--primary); border: 1px solid var(--border-focus);"
+        >
+          Projects
+        </span>
+        <h2 class="text-xl font-bold tracking-[-0.02em] text-[var(--text-primary)]">Project Timeline</h2>
       </div>
-      <ProjectsTimeline />
+      <div
+        class="rounded-[10px] border border-[var(--border-color)] bg-[var(--bg-card)] p-6"
+        style="box-shadow: var(--shadow-sm);"
+      >
+        <ProjectsTimeline />
+      </div>
     </div>
 
     <!-- Education + milestones timeline -->
     <div class="mt-16">
-      <div class="flex items-baseline gap-4 mb-8">
-        <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">Timeline</span>
-        <h2 class="text-xl font-semibold tracking-tight text-[var(--color-text)]">Education & Milestones</h2>
+      <div class="flex items-center gap-3 mb-6">
+        <span
+          class="inline-flex items-center px-2.5 py-0.5 rounded-[20px] text-[11px] font-semibold uppercase tracking-[0.05em]"
+          style="background: var(--primary-light); color: var(--primary); border: 1px solid var(--border-focus);"
+        >
+          Timeline
+        </span>
+        <h2 class="text-xl font-bold tracking-[-0.02em] text-[var(--text-primary)]">Education & Milestones</h2>
       </div>
 
-      <div class="relative flex flex-col gap-0">
-        <!-- Vertical rule -->
-        <div class="absolute left-[7px] top-2 bottom-2 w-px bg-[var(--color-border)]"></div>
+      <div
+        class="rounded-[10px] border border-[var(--border-color)] bg-[var(--bg-card)] p-6"
+        style="box-shadow: var(--shadow-sm);"
+      >
+        <div class="relative flex flex-col gap-0">
+          <!-- Vertical rule -->
+          <div class="absolute left-[7px] top-2 bottom-2 w-px bg-[var(--border-color)]"></div>
 
-        <!-- University of Leicester -->
-        <div class="relative flex gap-6 pb-10">
-          <div class="mt-1.5 w-4 h-4 shrink-0 rounded-full border-2 border-[var(--color-accent)] bg-[var(--color-bg)]"></div>
-          <div>
-            <p class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-1">2022 – 2025</p>
-            <h3 class="text-base font-semibold text-[var(--color-text)]">University of Leicester</h3>
-            <p class="text-sm text-[var(--color-text-muted)] mt-0.5">BSc Computer Science — graduated 2025</p>
+          <!-- University of Leicester -->
+          <div class="relative flex gap-6 pb-8">
+            <div class="mt-1.5 w-4 h-4 shrink-0 rounded-full border-2 border-[var(--primary)] bg-[var(--bg-card)]"></div>
+            <div>
+              <p class="text-[10px] font-bold tracking-[0.05em] uppercase text-[var(--text-secondary)] mb-1">2022 – 2025</p>
+              <h3 class="text-[15px] font-bold text-[var(--text-primary)]">University of Leicester</h3>
+              <p class="text-[13px] text-[var(--text-secondary)] mt-0.5">BSc Computer Science — graduated 2025</p>
+            </div>
           </div>
-        </div>
 
-        <!-- Let's Hack Leicester -->
-        <div class="relative flex gap-6 pb-10">
-          <div class="mt-1.5 w-4 h-4 shrink-0 rounded-full border-2 border-[var(--color-border)] bg-[var(--color-bg)]"></div>
-          <div>
-            <p class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-1">2024</p>
-            <h3 class="text-base font-semibold text-[var(--color-text)]">Let's Hack Leicester</h3>
-            <p class="text-sm text-[var(--color-text-muted)] mt-0.5">
-              Led a team of 5 to build a full-stack collaborative platform in 24 hours.
-              Next.js, Flask, SQLite. Capital One–sponsored hackathon.
-            </p>
+          <!-- Let's Hack Leicester -->
+          <div class="relative flex gap-6 pb-8">
+            <div class="mt-1.5 w-4 h-4 shrink-0 rounded-full border-2 border-[var(--accent-cyan)] bg-[var(--bg-card)]"></div>
+            <div>
+              <p class="text-[10px] font-bold tracking-[0.05em] uppercase text-[var(--text-secondary)] mb-1">2024</p>
+              <h3 class="text-[15px] font-bold text-[var(--text-primary)]">Let's Hack Leicester</h3>
+              <p class="text-[13px] text-[var(--text-secondary)] mt-0.5">
+                Led a team of 5 to build a full-stack collaborative platform in 24 hours.
+                Next.js, Flask, SQLite. Capital One–sponsored hackathon.
+              </p>
+            </div>
           </div>
-        </div>
 
-        <!-- Morgan Stanley Coding Challenge -->
-        <div class="relative flex gap-6 pb-10">
-          <div class="mt-1.5 w-4 h-4 shrink-0 rounded-full border-2 border-[var(--color-border)] bg-[var(--color-bg)]"></div>
-          <div>
-            <p class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-1">2024</p>
-            <h3 class="text-base font-semibold text-[var(--color-text)]">Morgan Stanley Coding Challenge</h3>
-            <p class="text-sm text-[var(--color-text-muted)] mt-0.5">
-              Built an EMA-based algorithmic trading bot. Placed 7th out of 27 teams.
-            </p>
+          <!-- Morgan Stanley Coding Challenge -->
+          <div class="relative flex gap-6 pb-8">
+            <div class="mt-1.5 w-4 h-4 shrink-0 rounded-full border-2 border-[var(--accent-cyan)] bg-[var(--bg-card)]"></div>
+            <div>
+              <p class="text-[10px] font-bold tracking-[0.05em] uppercase text-[var(--text-secondary)] mb-1">2024</p>
+              <h3 class="text-[15px] font-bold text-[var(--text-primary)]">Morgan Stanley Coding Challenge</h3>
+              <p class="text-[13px] text-[var(--text-secondary)] mt-0.5">
+                Built an EMA-based algorithmic trading bot. Placed 7th out of 27 teams.
+              </p>
+            </div>
           </div>
-        </div>
 
-        <!-- Graduation -->
-        <div class="relative flex gap-6">
-          <div class="mt-1.5 w-4 h-4 shrink-0 rounded-full border-2 border-[var(--color-accent)] bg-[var(--color-accent)]"></div>
-          <div>
-            <p class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-1">2025</p>
-            <h3 class="text-base font-semibold text-[var(--color-text)]">Graduated — open to opportunities</h3>
-            <p class="text-sm text-[var(--color-text-muted)] mt-0.5">
-              Now looking for a first software engineering role.
-            </p>
+          <!-- Graduation -->
+          <div class="relative flex gap-6">
+            <div class="mt-1.5 w-4 h-4 shrink-0 rounded-full border-2 border-[var(--primary)] bg-[var(--primary)]"></div>
+            <div>
+              <p class="text-[10px] font-bold tracking-[0.05em] uppercase text-[var(--text-secondary)] mb-1">2025</p>
+              <h3 class="text-[15px] font-bold text-[var(--text-primary)]">Graduated — open to opportunities</h3>
+              <p class="text-[13px] text-[var(--text-secondary)] mt-0.5">
+                Now looking for a first software engineering role.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- CTA + social links -->
-    <div class="mt-16 pt-10 border-t border-[var(--color-border)]">
+    <div class="mt-16 pt-10 border-t border-[var(--border-color)]">
       <!-- Primary CTAs -->
       <div class="flex flex-wrap gap-3 mb-8">
         <a
           href="/cv/"
           download
-          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold bg-[var(--color-accent)] text-[var(--color-bg)] hover:bg-[var(--color-accent-hover)] transition-colors"
+          class="inline-flex items-center px-5 py-2.5 rounded-[6px] text-[13px] font-semibold bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] hover:-translate-y-px transition-all duration-150"
+          style="box-shadow: var(--shadow-sm);"
         >
           Download CV ↗
         </a>
         <a
           href="/contact/"
-          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold border border-[var(--color-border)] text-[var(--color-text)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+          class="inline-flex items-center px-5 py-2.5 rounded-[6px] text-[13px] font-semibold border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] hover:bg-[var(--bg-hover)] hover:border-[var(--border-focus)] hover:text-[var(--primary)] transition-all duration-150"
+          style="box-shadow: var(--shadow-sm);"
         >
           Get in touch →
         </a>
@@ -208,7 +250,7 @@ const skillRows = [
       <div class="flex flex-wrap items-center gap-6">
         <a
           href="mailto:dev@zainaltaf.com"
-          class="inline-flex items-center gap-1 text-sm font-semibold text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
+          class="inline-flex items-center gap-1 text-[13px] font-semibold text-[var(--primary)] hover:text-[var(--primary-hover)] transition-colors"
         >
           dev@zainaltaf.com →
         </a>
@@ -216,7 +258,7 @@ const skillRows = [
           href="https://www.linkedin.com/in/m-z-altaf/"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+          class="inline-flex items-center gap-1 text-[13px] font-medium text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors"
         >
           LinkedIn ↗
         </a>
@@ -224,7 +266,7 @@ const skillRows = [
           href="https://github.com/zaina0k"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+          class="inline-flex items-center gap-1 text-[13px] font-medium text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors"
         >
           GitHub ↗
         </a>
