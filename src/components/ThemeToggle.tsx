@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 type Theme = 'light' | 'dark' | 'system';
 
-const NEXT: Record<Theme, Theme> = { light: 'dark', dark: 'system', system: 'light' };
+const NEXT: Record<Theme, Theme> = { system: 'dark', dark: 'light', light: 'system' };
 const LABEL: Record<Theme, string> = { light: 'Light', dark: 'Dark', system: 'System' };
 
 function getStoredTheme(): Theme {

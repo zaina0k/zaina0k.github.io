@@ -15,7 +15,7 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ### Added
 
-- The theme button now cycles Light, Dark and System; System follows the visitor's device setting and updates if it changes (PF8).
+- The theme button now cycles System, Dark and Light; System follows the visitor's device setting and updates if it changes (PF8).
 
 ### Fixed
 
