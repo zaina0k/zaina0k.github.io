@@ -15,6 +15,7 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ### Changed
 
+- The About page now shows the same profile photo as the home page in both light and dark mode, instead of a separate photo and sketch.
 - The working agreement now says to use a plain branch in the main checkout by default, and a worktree only for a significantly large feature while another session or feature is open in the repo. No visitor-facing change.
 - Claude's project permissions are now only a deny list (push, bulk staging, `--no-verify`, stash, workflow runs, secrets, and edits to the deploy workflow) plus the guard hook; the allow-list lives in the owner's global settings, and git switch, checkout, merge and config no longer prompt. No visitor-facing change.
 - The site's visual design and colour scheme now use the Dark Blue and Indigo style system (`#4f46e5` primary, `#0891b2` cyan secondary, `#f4f6f9` light surfaces, and `#1e1e2e` / `#13131f` dark navy surfaces) across the header, footer, cards, KPI metrics, badges, filters, forms, and all pages in both light and dark themes. (PF1, PF2, PF3, PF5, PF6, PF7, PF8, PF9)
