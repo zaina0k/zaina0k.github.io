@@ -12,49 +12,59 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]">
-  <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <!-- Initials mark + name + role badge -->
+<header
+  class="sticky top-0 z-50 border-b border-white/10"
+  style="background: linear-gradient(135deg, #1e1e2e 0%, #2d2b55 50%, #4f46e5 100%); box-shadow: 0 2px 12px rgba(30, 30, 46, 0.15);"
+>
+  <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-3.5">
+    <!-- Brand mark + name + subtitle (Template 4.2 Brand Header & 4.3 Top Bar) -->
     <a href="/" class="flex items-center gap-3 group">
-      <span class="inline-flex items-center justify-center w-8 h-8 rounded text-xs font-bold tracking-widest border border-[var(--color-accent)] text-[var(--color-accent)] group-hover:bg-[var(--color-accent)] group-hover:text-[var(--color-bg)] transition-colors">
+      <span
+        class="inline-flex items-center justify-center w-9 h-9 rounded-[10px] text-xs font-extrabold tracking-wider text-white shadow-md transition-transform duration-150 group-hover:-translate-y-px"
+        style="background: linear-gradient(135deg, #4f46e5, #0891b2);"
+      >
         ZA
       </span>
-      <span class="hidden sm:flex flex-col leading-none">
-        <span class="text-sm font-semibold tracking-tight text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
+      <span class="hidden sm:flex flex-col leading-tight">
+        <span class="text-[16px] font-bold tracking-[-0.02em] text-white group-hover:text-white/90 transition-colors">
           Zain Altaf
         </span>
-        <span class="text-[10px] font-medium tracking-widest text-[var(--color-text-muted)] uppercase mt-0.5">
-          CS Graduate · SWE
+        <span class="text-[11px] font-normal text-white/60">
+          CS Graduate · Software Engineer
         </span>
       </span>
     </a>
 
     <!-- Nav links + ThemeToggle + CTA (desktop) -->
-    <div class="flex items-center gap-4">
-      <ul class="hidden sm:flex items-center gap-6 text-sm font-medium">
-        {navLinks.map(({ href, label }) => (
-          <li>
-            <a
-              href={href}
-              class:list={[
-                'transition-colors hover:text-[var(--color-accent)]',
-                currentPath === href
-                  ? 'text-[var(--color-accent)]'
-                  : 'text-[var(--color-text-muted)]',
-              ]}
-            >
-              {label}
-            </a>
-          </li>
-        ))}
+    <div class="flex items-center gap-3">
+      <ul class="hidden sm:flex items-center gap-1.5">
+        {navLinks.map(({ href, label }) => {
+          const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
+          return (
+            <li>
+              <a
+                href={href}
+                class:list={[
+                  'inline-flex items-center px-3 py-1.5 rounded-[10px] text-[13px] transition-all duration-150',
+                  isActive
+                    ? 'bg-white/20 text-white font-semibold shadow-xs'
+                    : 'text-[#cbd5e1] font-medium hover:bg-white/10 hover:text-white',
+                ]}
+              >
+                {label}
+              </a>
+            </li>
+          );
+        })}
       </ul>
 
       <ThemeToggle client:load />
 
       <a
         href="/contact/"
-        class="hidden sm:inline-flex items-center gap-1 rounded px-3 py-1.5 text-xs font-semibold tracking-wide border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-colors"
+        class="hidden sm:inline-flex items-center gap-2 rounded-[6px] px-3.5 py-1.5 text-[12px] font-semibold text-white bg-white/12 border border-white/25 hover:bg-white/22 hover:border-white/35 transition-all duration-150"
       >
+        <span class="inline-block w-[7px] h-[7px] rounded-full bg-[#10b981] animate-pulse"></span>
         Get in touch →
       </a>
 
@@ -63,7 +73,7 @@ const currentPath = Astro.url.pathname;
         id="menu-toggle"
         aria-label="Toggle menu"
         aria-expanded="false"
-        class="sm:hidden rounded-md p-2 text-[var(--color-text-muted)] hover:text-[var(--color-accent)] hover:bg-[var(--color-bg-subtle)] transition-colors"
+        class="sm:hidden rounded-[6px] p-2 text-white/80 bg-white/10 border border-white/20 hover:text-white hover:bg-white/20 transition-all duration-150"
       >
         <!-- Hamburger icon -->
         <svg id="icon-open" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -80,29 +90,33 @@ const currentPath = Astro.url.pathname;
     </div>
   </nav>
 
-  <!-- Mobile nav drawer -->
-  <div id="mobile-nav" class="hidden sm:hidden border-t border-[var(--color-border)] bg-[var(--color-bg)]">
-    <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium">
-      {navLinks.map(({ href, label }) => (
-        <li>
-          <a
-            href={href}
-            class:list={[
-              'block transition-colors hover:text-[var(--color-accent)]',
-              currentPath === href
-                ? 'text-[var(--color-accent)]'
-                : 'text-[var(--color-text-muted)]',
-            ]}
-          >
-            {label}
-          </a>
-        </li>
-      ))}
-      <li>
+  <!-- Mobile nav drawer (Template 4.2 dark panel #1e1e2e) -->
+  <div id="mobile-nav" class="hidden sm:hidden border-t border-white/10 bg-[#1e1e2e]">
+    <ul class="flex flex-col px-6 py-4 gap-1.5">
+      {navLinks.map(({ href, label }) => {
+        const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
+        return (
+          <li>
+            <a
+              href={href}
+              class:list={[
+                'block px-3 py-2 rounded-[10px] text-[13px] transition-all duration-150',
+                isActive
+                  ? 'bg-[#4f46e5]/25 text-white font-semibold'
+                  : 'text-[#cbd5e1] font-medium hover:bg-white/6 hover:text-white',
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        );
+      })}
+      <li class="pt-2">
         <a
           href="/contact/"
-          class="inline-flex items-center gap-1 rounded px-3 py-1.5 text-xs font-semibold tracking-wide border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-colors"
+          class="inline-flex items-center gap-2 rounded-[6px] px-3.5 py-2 text-[12px] font-semibold text-white bg-[#4f46e5] hover:bg-[#4338ca] transition-all duration-150 shadow-sm"
         >
+          <span class="inline-block w-[7px] h-[7px] rounded-full bg-[#10b981] animate-pulse"></span>
           Get in touch →
         </a>
       </li>
