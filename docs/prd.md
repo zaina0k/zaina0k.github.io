@@ -21,7 +21,7 @@ Status values: **Built** (in the codebase, cited), **Proposed** (a draft for the
 | PF4 | Project media carousel (images and YouTube) on project pages. | Built | `MediaCarousel.tsx` |
 | PF5 | About page. | Built | `src/pages/about.astro` |
 | PF6 | Contact page with a form that sends messages through Web3Forms. | Built | `src/pages/contact.astro`, `ContactForm.tsx` |
-| PF7 | CV page with an in-page PDF viewer and a download link. | Built | `src/pages/cv.astro`, `public/cv.pdf` |
+| PF7 | CV page with an in-page PDF viewer and a download link. | Built | `src/pages/cv.astro`, `public/Zain Altaf CV.pdf` |
 | PF8 | Dark and light theme, switchable by the visitor. | Built | `ThemeToggle.tsx`, `src/styles/global.css` |
 | PF9 | Basic discoverability: sitemap, page titles and descriptions, Open Graph metadata. | Built | `@astrojs/sitemap`, `BaseLayout.astro` |
 | PF10 | Old project URLs from the previous site redirect to their new pages. | Built | `redirects` in `astro.config.mjs` |
@@ -39,7 +39,7 @@ Written 2026-11-05, **only from what could be checked in the repository**: the b
 | PF4 | Project pages include `MediaCarousel` (`client:visible`). It accepts items of type `image` or `youtube`, and the source handles arrow keys, Escape and touch swipes. | Whether it works in a browser and on a phone. |
 | PF5 | `/about/` builds, with the title "About \| Zain Altaf". | Whether the content is current and accurate. |
 | PF6 | `/contact/` builds with the `ContactForm` island (`client:visible`). The form requires a name, a valid-looking email and a message before it sends. It posts to `https://api.web3forms.com/submit` with `PUBLIC_WEB3FORMS_KEY`, and shows success or error states. | **That a message reaches the owner.** This needs a live key and a real submission, which was not done. Where messages go. |
-| PF7 | `/cv/` builds, embeds `/cv.pdf` and has a download link. `public/cv.pdf` exists. | Whether the CV is current; how the viewer behaves on a phone. |
+| PF7 | `/cv/` builds, embeds `/Zain%20Altaf%20CV.pdf` and has a download link. `public/Zain Altaf CV.pdf` exists. | Whether the CV is current; how the viewer behaves on a phone. |
 | PF8 | The toggle cycles System, Dark, Light. It adds or removes the `dark` class; Light and Dark are stored under `theme` in `localStorage`, System clears it and follows the system's colour-scheme preference live. An inline script in `BaseLayout.astro` applies it before first paint. | Whether both themes look right and meet contrast (see PF14). |
 | PF9 | `sitemap-index.xml` and `sitemap-0.xml` are generated (14 URLs). Six pages sampled (home, about, contact, cv, projects index, one project) each have a `<title>`, a description, `og:title` and a canonical link. | Whether all 15 pages have them (only six were sampled); whether the descriptions are good; how the Open Graph cards look when shared. |
 | PF10 | The 7 old slugs configured in `astro.config.mjs` each build to a redirect page. Five targets were read from the output: four map to the new slugs and `/projects/unity_flappy_bird/` to `/projects/`. The other two follow the config. | How the redirects behave for a visitor on GitHub Pages; whether any old URL is missing from the list. |

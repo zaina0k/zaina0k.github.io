@@ -44,7 +44,7 @@ npm run dev        # starts local dev server at localhost:4321
 zainaltaf-portfolio/
 ├── public/
 │   ├── CNAME                    # Custom domain → zainaltaf.dev
-│   ├── cv.pdf                   # CV served at /cv.pdf
+│   ├── Zain Altaf CV.pdf        # CV served at /Zain%20Altaf%20CV.pdf
 │   ├── favicon.svg / favicon.ico
 │   └── og-default.png           # Default OG image (1200×630)
 ├── scripts/
