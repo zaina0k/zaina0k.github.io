@@ -20,7 +20,7 @@ Four pages and a CV page, with no blog:
 | Projects (index, filterable, and one page per project) | `/projects/`, `/projects/<slug>/` |
 | About | `/about/` |
 | Contact | `/contact/` |
-| CV | `/cv/` (viewer) and `/cv.pdf` (download) |
+| CV | `/cv/` (viewer) and `/Zain%20Altaf%20CV.pdf` (download) |
 
 Plus a 404 page. Project pages are generated from Markdown files with typed frontmatter.
 

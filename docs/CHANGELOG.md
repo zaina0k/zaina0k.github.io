@@ -13,6 +13,12 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ## [Unreleased]
 
+### Added
+
+- The CV PDF is now named "Zain Altaf CV.pdf" (served at `/Zain%20Altaf%20CV.pdf`), so a downloaded copy carries a proper name; the old `/cv.pdf` address no longer exists. (PF7)
+- The theme button now cycles System, Dark and Light; System follows the visitor's device setting and updates if it changes (PF8).
+- The About timeline now shows graduation in 2026 and a new entry for the AI Integration Consultant role at DG Private Hire.
+
 ### Fixed
 
 - The main image in a project's gallery now shows the whole picture instead of cropping its edges, so screenshots and diagrams are no longer cut off.
@@ -23,7 +29,7 @@ All notable changes to the portfolio site and the way it is built are recorded h
 - The working agreement now says to use a plain branch in the main checkout by default, and a worktree only for a significantly large feature while another session or feature is open in the repo. No visitor-facing change.
 - Claude's project permissions are now only a deny list (push, bulk staging, `--no-verify`, stash, workflow runs, secrets, and edits to the deploy workflow) plus the guard hook; the allow-list lives in the owner's global settings, and git switch, checkout, merge and config no longer prompt. No visitor-facing change.
 - The site's visual design and colour scheme now use the Dark Blue and Indigo style system (`#4f46e5` primary, `#0891b2` cyan secondary, `#f4f6f9` light surfaces, and `#1e1e2e` / `#13131f` dark navy surfaces) across the header, footer, cards, KPI metrics, badges, filters, forms, and all pages in both light and dark themes. (PF1, PF2, PF3, PF5, PF6, PF7, PF8, PF9)
-- The CV on `/cv/` and the `/cv.pdf` download are now the current edition. (PF7)
+- The CV on `/cv/` and the PDF download are now the current edition. (PF7)
 - The Pages workflow no longer redeploys the site for pushes that only change docs, Claude tooling, scripts, git hooks or root-level Markdown, and a second deploy now waits for a running one instead of overlapping it. The build, the secret and the deploy steps are unchanged. No visitor-facing change.
 - The repository root is now the `zainaltaf-portfolio/` folder itself instead of a `website/` subfolder inside it, so the project's files sit at the top level. Every tracked path, branch and the `origin` remote are unchanged; the deployed site, its build and the Pages workflow are unaffected. Local planning notes that sit in `docs/` are gitignored by name. No visitor-facing change.
 
