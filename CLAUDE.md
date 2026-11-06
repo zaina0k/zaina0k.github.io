@@ -2,7 +2,7 @@
 
 Zain Altaf's personal portfolio, live at https://zainaltaf.dev. Astro 6 + React 19 islands + Tailwind CSS 4 + TypeScript, built to static files and served by GitHub Pages. This file holds rules and pointers only; detail lives in `docs/`.
 
-Launch Claude from the repo root (`zainaltaf-portfolio/`) or from a worktree's own root, not from a subdirectory such as `.claude/worktrees/` — the guard hook resolves relative to the launch directory and a wrong one can weaken the guard silently.
+Launch Claude from the repo root (`zainaltaf-portfolio/`), or from a worktree's own root if you are in one — never from a subdirectory such as `.claude/worktrees/`. *Why: the guard hook resolves relative to the launch directory, and a wrong one weakens the guard silently.*
 
 ## Where to look
 
@@ -33,7 +33,7 @@ Do not invent requirements. If a behaviour is not in `docs/prd.md`, it is not in
 **Process**
 - Ask before anything that costs money or reaches a paid or external service, including any added later. State how many calls it will make and a rough cost, then wait. Approval covers the size named, not the task: if the volume grows, ask again. *Why: the amount can be trivial and the consent still wrong.*
 - Stage explicit paths only; never `git add -A` or `git add .`. *Why: another session may have uncommitted work in the same checkout.*
-- Before any state-changing git operation, run `ListAgents` and `git worktree list`, and never run git in a checkout another session is using. Build in a worktree under `.claude/worktrees/`. *Why: two sessions in one checkout overwrite each other's work.*
+- Before any state-changing git operation, run `ListAgents` and `git worktree list`, and never run git in a checkout another session is using. Default to a plain `cp/<n>-<slug>` branch in the main checkout; use a worktree under `.claude/worktrees/` only for a significantly large feature while another session or feature is open in the repo. *Why: two sessions in one checkout overwrite each other's work, but a worktree for every small change adds launch-folder and guard problems for no gain.*
 - Nothing is committed directly to `dev` or `main`; commits go on `cp/<n>-<slug>`. `.githooks/pre-commit` blocks a non-merge commit there at the git level; `bin/claude_merge_guard.sh` (a Claude Code hook) blocks the same for Claude-run commands and also catches routes the git hook can't see, such as `--no-verify`, cherry-pick, revert, rebase, or a fast-forward merge. `SKIP_BRANCH_GUARD=1` is for the one-time bootstrap and genuine emergencies only, and the owner is told. *Why: the merge commit is what marks where work began and ended.*
 
 **Code**
