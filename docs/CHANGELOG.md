@@ -13,6 +13,10 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ## [Unreleased]
 
+### Fixed
+
+- The main image in a project's gallery now shows the whole picture instead of cropping its edges, so screenshots and diagrams are no longer cut off.
+
 ### Changed
 
 - The About page now shows the same profile photo as the home page in both light and dark mode, instead of a separate photo and sketch.
