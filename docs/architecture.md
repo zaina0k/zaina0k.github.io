@@ -29,7 +29,7 @@ src/
   content.config.ts the Zod schema for a project (the contract)
   assets/           images processed at build time
   styles/global.css Tailwind entry and theme tokens
-public/             files served as-is: CNAME, cv.pdf, favicons, OG images, project media
+public/             files served as-is: CNAME, Zain Altaf CV.pdf, favicons, OG images, project media
 scripts/            one-off generators (favicons, OG images, thumbnails) using sharp
 ```
 
