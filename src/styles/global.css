@@ -1,58 +1,198 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@import "@fontsource/inter/300.css";
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/inter/800.css";
 @import "@fontsource/jetbrains-mono/400.css";
 
 /* Class-based dark mode — toggles on <html class="dark"> */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Light theme */
+/* Light theme — HRQuickScope / Dark Blue & Indigo Style Guide tokens */
 :root {
-  --color-bg:          #f5f0e8;  /* cream */
-  --color-bg-subtle:   #ede8df;  /* slightly darker cream for cards/sections */
-  --color-text:        #2c2c2c;  /* near-black */
-  --color-text-muted:  #6b6b6b;  /* secondary text */
-  --color-accent:      #6b7c4a;  /* olive */
-  --color-accent-hover:#556139;  /* darker olive on hover */
-  --color-border:      #a8a099;  /* border — increased contrast against cream bg */
-  --color-surface:     #ffffff;  /* card/panel backgrounds */
+  /* Brand Colors */
+  --primary:             #4f46e5;
+  --primary-hover:       #4338ca;
+  --primary-light:       rgba(79, 70, 229, 0.08);
+  --primary-glow:        rgba(79, 70, 229, 0.18);
+  --accent-primary:      #4f46e5;
+  --accent-primary-glow: rgba(79, 70, 229, 0.18);
+  --accent-secondary:    #0891b2;
+  --accent-cyan:         #0891b2;
+
+  /* Surfaces */
+  --bg-primary:          #f4f6f9;
+  --bg-secondary:        #ffffff;
+  --bg-tertiary:         #f0f2f5;
+  --bg-card:             #ffffff;
+  --bg-glass:            rgba(255, 255, 255, 0.85);
+  --bg-hover:            #f7f8fa;
+  --bg-input:            #f8f9fb;
+
+  /* Text */
+  --text-primary:        #1e1e2e;
+  --text-secondary:      #4b5563;
+  --text-muted:          #6b7280;
+  --text-inverse:        #ffffff;
+
+  /* Borders */
+  --border-color:        #e5e7eb;
+  --border-focus:        rgba(79, 70, 229, 0.45);
+
+  /* Health / Status */
+  --health-green:        #059669;
+  --health-green-bg:     rgba(5, 150, 105, 0.08);
+  --health-green-border: rgba(5, 150, 105, 0.2);
+  --health-amber:        #d97706;
+  --health-amber-bg:     rgba(217, 119, 6, 0.08);
+  --health-amber-border: rgba(217, 119, 6, 0.2);
+  --health-red:          #e11d48;
+  --health-red-bg:       rgba(225, 29, 72, 0.06);
+  --health-red-border:   rgba(225, 29, 72, 0.2);
+  --health-blue:         #3b82f6;
+  --health-blue-bg:      rgba(59, 130, 246, 0.1);
+  --health-blue-border:  rgba(59, 130, 246, 0.2);
+  --health-gray:         #6b7280;
+  --health-gray-bg:      rgba(107, 114, 128, 0.1);
+  --health-gray-border:  rgba(107, 114, 128, 0.2);
+
+  /* Dark Navy Chrome (Header / Footer / Sidebar tokens) */
+  --sidebar-width:       260px;
+  --sidebar-bg:          #1e1e2e;
+  --sidebar-text:        #cbd5e1;
+  --sidebar-text-muted:  rgba(255, 255, 255, 0.55);
+  --sidebar-hover:       rgba(255, 255, 255, 0.08);
+  --sidebar-active:      rgba(79, 70, 229, 0.28);
+  --sidebar-active-text: #ffffff;
+  --topbar-gradient:     linear-gradient(135deg, #1e1e2e 0%, #2d2b55 50%, #4f46e5 100%);
+  --brand-gradient:      linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+
+  /* Sizing & Radii */
+  --header-height:       64px;
+  --radius-sm:           6px;
+  --radius-md:           10px;
+  --radius-lg:           14px;
+  --radius-xl:           20px;
+
+  /* Shadows */
+  --shadow-sm:           0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md:           0 4px 6px rgba(0, 0, 0, 0.04), 0 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg:           0 10px 25px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(0, 0, 0, 0.04);
+  --shadow-glow:         0 0 16px var(--primary-glow);
+
+  /* Transitions */
+  --transition-fast:     150ms ease;
+  --transition-base:     250ms ease;
+  --transition-slow:     400ms ease;
+
+  /* Semantic aliases mapped to template tokens */
+  --color-bg:            var(--bg-primary);
+  --color-bg-subtle:     var(--bg-tertiary);
+  --color-text:          var(--text-primary);
+  --color-text-muted:    var(--text-secondary);
+  --color-accent:        var(--primary);
+  --color-accent-hover:  var(--primary-hover);
+  --color-accent-cyan:   var(--accent-cyan);
+  --color-border:        var(--border-color);
+  --color-surface:       var(--bg-card);
 }
 
-/* Dark theme */
+/* Dark theme — Deep Navy & Indigo companion palette */
 .dark {
-  --color-bg:          #1a1a16;  /* near-black with warm tint */
-  --color-bg-subtle:   #232320;  /* slightly lighter for cards/sections */
-  --color-text:        #e8e3d8;  /* warm off-white */
-  --color-text-muted:  #9e9b93;  /* muted warm grey */
-  --color-accent:      #8fa05e;  /* lighter olive for dark bg */
-  --color-accent-hover:#a3b670;  /* even lighter on hover */
-  --color-border:      #4d4d47;  /* border — increased contrast against dark bg */
-  --color-surface:     #252520;  /* card/panel backgrounds */
+  /* Brand Colors */
+  --primary:             #6366f1;
+  --primary-hover:       #818cf8;
+  --primary-light:       rgba(99, 102, 241, 0.14);
+  --primary-glow:        rgba(99, 102, 241, 0.28);
+  --accent-primary:      #6366f1;
+  --accent-primary-glow: rgba(99, 102, 241, 0.28);
+  --accent-secondary:    #22d3ee;
+  --accent-cyan:         #06b6d4;
+
+  /* Surfaces */
+  --bg-primary:          #13131f;
+  --bg-secondary:        #1e1e2e;
+  --bg-tertiary:         #181828;
+  --bg-card:             #1e1e2e;
+  --bg-glass:            rgba(30, 30, 46, 0.85);
+  --bg-hover:            #26263a;
+  --bg-input:            #181828;
+
+  /* Text */
+  --text-primary:        #f1f5f9;
+  --text-secondary:      #cbd5e1;
+  --text-muted:          #94a3b8;
+  --text-inverse:        #ffffff;
+
+  /* Borders */
+  --border-color:        #2e2e45;
+  --border-focus:        rgba(99, 102, 241, 0.55);
+
+  /* Health / Status */
+  --health-green:        #34d399;
+  --health-green-bg:     rgba(16, 185, 129, 0.12);
+  --health-green-border: rgba(16, 185, 129, 0.3);
+  --health-amber:        #fbbf24;
+  --health-amber-bg:     rgba(245, 158, 11, 0.12);
+  --health-amber-border: rgba(245, 158, 11, 0.3);
+  --health-red:          #fb7185;
+  --health-red-bg:       rgba(244, 63, 94, 0.12);
+  --health-red-border:   rgba(244, 63, 94, 0.3);
+  --health-blue:         #60a5fa;
+  --health-blue-bg:      rgba(59, 130, 246, 0.15);
+  --health-blue-border:  rgba(59, 130, 246, 0.3);
+  --health-gray:         #94a3b8;
+  --health-gray-bg:      rgba(148, 163, 184, 0.12);
+  --health-gray-border:  rgba(148, 163, 184, 0.25);
+
+  /* Shadows */
+  --shadow-sm:           0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md:           0 4px 12px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.25);
+  --shadow-lg:           0 10px 25px rgba(0, 0, 0, 0.45), 0 4px 10px rgba(0, 0, 0, 0.3);
+  --shadow-glow:         0 0 18px var(--primary-glow);
+
+  /* Semantic aliases */
+  --color-bg:            var(--bg-primary);
+  --color-bg-subtle:     var(--bg-tertiary);
+  --color-text:          var(--text-primary);
+  --color-text-muted:    var(--text-secondary);
+  --color-accent:        var(--primary);
+  --color-accent-hover:  var(--primary-hover);
+  --color-accent-cyan:   var(--accent-cyan);
+  --color-border:        var(--border-color);
+  --color-surface:       var(--bg-card);
 }
 
 /* Map CSS vars into Tailwind theme tokens */
 @theme inline {
-  --color-bg:          var(--color-bg);
-  --color-bg-subtle:   var(--color-bg-subtle);
-  --color-text:        var(--color-text);
-  --color-text-muted:  var(--color-text-muted);
-  --color-accent:      var(--color-accent);
-  --color-accent-hover:var(--color-accent-hover);
-  --color-border:      var(--color-border);
-  --color-surface:     var(--color-surface);
+  --color-bg:            var(--color-bg);
+  --color-bg-subtle:     var(--color-bg-subtle);
+  --color-text:          var(--color-text);
+  --color-text-muted:    var(--color-text-muted);
+  --color-accent:        var(--color-accent);
+  --color-accent-hover:  var(--color-accent-hover);
+  --color-accent-cyan:   var(--color-accent-cyan);
+  --color-border:        var(--color-border);
+  --color-surface:       var(--color-surface);
 }
 
 /* Base resets */
 html {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 code, pre, kbd, samp {
@@ -61,9 +201,9 @@ code, pre, kbd, samp {
 
 /* Keyboard focus — visible ring for all interactive elements */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--primary);
   outline-offset: 3px;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 @keyframes mc-fade-in {

@@ -7,35 +7,57 @@ import FooterCTA from '../components/FooterCTA.astro';
   <div class="mx-auto max-w-5xl px-6 py-20">
 
     <!-- Header row -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight tracking-tight text-[var(--color-text)]">
-        Curriculum Vitae
-      </h1>
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <div>
+        <span
+          class="inline-flex items-center px-2.5 py-0.5 rounded-[20px] text-[11px] font-semibold uppercase tracking-[0.05em] mb-2"
+          style="background: var(--primary-light); color: var(--primary); border: 1px solid var(--border-focus);"
+        >
+          Resume / Document
+        </span>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-[-0.03em] text-[var(--text-primary)]">
+          Curriculum Vitae
+        </h1>
+      </div>
       <a
         href="/cv.pdf"
         download
-        class="inline-flex items-center gap-2 px-5 py-2.5 rounded text-sm font-semibold bg-[var(--color-accent)] text-[var(--color-bg)] hover:bg-[var(--color-accent-hover)] transition-colors self-start sm:self-auto"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-[6px] text-[13px] font-semibold bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] hover:-translate-y-px transition-all duration-150 self-start sm:self-auto"
+        style="box-shadow: var(--shadow-sm);"
       >
         Download PDF ↗
       </a>
     </div>
 
-    <!-- PDF embed -->
-    <div class="rounded-lg border border-[var(--color-border)] overflow-hidden" style="height: 80vh; min-height: 500px;">
+    <!-- PDF embed card (Template 5.2 .card) -->
+    <div
+      class="rounded-[10px] border border-[var(--border-color)] bg-[var(--bg-card)] overflow-hidden flex flex-col"
+      style="height: 80vh; min-height: 500px; box-shadow: var(--shadow-md);"
+    >
+      <div class="px-4 py-2.5 border-b border-[var(--border-color)] bg-[var(--bg-tertiary)] flex items-center justify-between shrink-0">
+        <span class="text-[12px] font-bold tracking-[-0.01em] text-[var(--text-primary)]">cv.pdf — Preview</span>
+        <span
+          class="inline-flex items-center px-2 py-0.5 rounded-[20px] text-[10px] font-semibold"
+          style="background: var(--health-green-bg); color: var(--health-green); border: 1px solid var(--health-green-border);"
+        >
+          Updated Jun 2026
+        </span>
+      </div>
       <object
         data="/cv.pdf"
         type="application/pdf"
-        class="w-full h-full"
+        class="w-full flex-1"
       >
         <!-- Fallback for browsers that can't render the PDF inline -->
-        <div class="flex flex-col items-center justify-center h-full gap-4 bg-[var(--color-bg-subtle)] p-8 text-center">
-          <p class="text-[var(--color-text-muted)] text-sm leading-relaxed max-w-sm">
+        <div class="flex flex-col items-center justify-center h-full gap-4 bg-[var(--bg-tertiary)] p-8 text-center">
+          <p class="text-[var(--text-secondary)] text-[13px] leading-relaxed max-w-sm">
             Your browser doesn't support inline PDF viewing.
           </p>
           <a
             href="/cv.pdf"
             download
-            class="inline-flex items-center gap-2 px-5 py-2.5 rounded text-sm font-semibold bg-[var(--color-accent)] text-[var(--color-bg)] hover:bg-[var(--color-accent-hover)] transition-colors"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-[6px] text-[13px] font-semibold bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] transition-colors"
+            style="box-shadow: var(--shadow-sm);"
           >
             Download PDF instead ↗
           </a>
@@ -43,7 +65,7 @@ import FooterCTA from '../components/FooterCTA.astro';
       </object>
     </div>
 
-    <p class="mt-4 text-xs text-[var(--color-text-muted)]">Last updated: June 2026</p>
+    <p class="mt-4 text-xs text-[var(--text-muted)]">Last updated: June 2026</p>
 
   </div>
   <FooterCTA />

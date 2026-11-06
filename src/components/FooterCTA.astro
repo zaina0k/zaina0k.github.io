@@ -3,38 +3,67 @@
 ---
 
 <section class="mx-auto max-w-5xl px-6 py-16">
-  <div class="max-w-xl">
-    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-[var(--color-text)] mb-4">
-      Open to opportunities.<br />Let's connect.
-    </h2>
-    <p class="text-[var(--color-text-muted)] leading-relaxed mb-8">
-      I'm looking for my first software engineering role and open to conversations
-      about engineering, collaboration, and interesting problems. I read every message.
-    </p>
+  <div
+    class="relative overflow-hidden rounded-[14px] border border-[var(--border-color)] bg-[var(--bg-card)] p-8 sm:p-10"
+    style="box-shadow: var(--shadow-md); border-top: 3px solid var(--primary);"
+  >
+    <!-- Decorative radial blobs from template section 9 -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -top-32 -right-32 h-72 w-72 rounded-full"
+      style="background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);"
+    ></div>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full"
+      style="background: radial-gradient(circle, rgba(8, 145, 178, 0.08) 0%, transparent 70%);"
+    ></div>
 
-    <div class="flex flex-wrap items-center gap-4">
-      <a
-        href="mailto:dev@zainaltaf.com"
-        class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
+    <div class="relative z-10 max-w-xl">
+      <span
+        class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[20px] text-[11px] font-semibold mb-4"
+        style="background: var(--health-green-bg); color: var(--health-green); border: 1px solid var(--health-green-border);"
       >
-        dev@zainaltaf.com →
-      </a>
-      <a
-        href="https://www.linkedin.com/in/m-z-altaf/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
-      >
-        LinkedIn ↗
-      </a>
-      <a
-        href="https://github.com/zaina0k"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
-      >
-        GitHub ↗
-      </a>
+        <span class="w-1.5 h-1.5 rounded-full bg-[var(--health-green)] animate-pulse"></span>
+        Available for Roles
+      </span>
+
+      <h2 class="text-2xl sm:text-3xl font-extrabold tracking-[-0.02em] text-[var(--text-primary)] mb-3">
+        Open to opportunities.<br />
+        <span class="text-[var(--primary)]">Let's connect.</span>
+      </h2>
+      <p class="text-[14px] text-[var(--text-secondary)] leading-relaxed mb-6">
+        I'm looking for my first software engineering role and open to conversations
+        about engineering, collaboration, and interesting problems. I read every message.
+      </p>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <a
+          href="mailto:dev@zainaltaf.com"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-[6px] text-[13px] font-semibold bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] hover:-translate-y-px transition-all duration-150"
+          style="box-shadow: var(--shadow-sm);"
+        >
+          dev@zainaltaf.com →
+        </a>
+        <a
+          href="https://www.linkedin.com/in/m-z-altaf/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 px-3.5 py-2 rounded-[6px] text-[13px] font-semibold bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] hover:bg-[var(--bg-hover)] hover:border-[var(--border-focus)] hover:text-[var(--primary)] transition-all duration-150"
+          style="box-shadow: var(--shadow-sm);"
+        >
+          LinkedIn ↗
+        </a>
+        <a
+          href="https://github.com/zaina0k"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 px-3.5 py-2 rounded-[6px] text-[13px] font-semibold bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] hover:bg-[var(--bg-hover)] hover:border-[var(--border-focus)] hover:text-[var(--primary)] transition-all duration-150"
+          style="box-shadow: var(--shadow-sm);"
+        >
+          GitHub ↗
+        </a>
+      </div>
     </div>
   </div>
 </section>
