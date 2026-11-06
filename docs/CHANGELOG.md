@@ -13,6 +13,10 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ## [Unreleased]
 
+### Added
+
+- The theme button now cycles Light, Dark and System; System follows the visitor's device setting and updates if it changes (PF8).
+
 ### Fixed
 
 - The main image in a project's gallery now shows the whole picture instead of cropping its edges, so screenshots and diagrams are no longer cut off.
