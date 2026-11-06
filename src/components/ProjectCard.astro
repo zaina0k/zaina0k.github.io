@@ -18,10 +18,11 @@ const thumbnailAlt = `Screenshot of ${title}`;
 
 <a
   href={href}
-  class="group block rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] hover:ring-2 hover:ring-[var(--color-accent)] hover:scale-[1.02] transition-all duration-200 overflow-hidden"
+  class="group block rounded-[10px] border border-[var(--border-color)] bg-[var(--bg-card)] hover:border-[var(--border-focus)] hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
+  style="box-shadow: var(--shadow-sm);"
 >
   <!-- Image area with title overlay -->
-  <div class="relative aspect-video w-full overflow-hidden">
+  <div class="relative aspect-video w-full overflow-hidden border-b border-[var(--border-color)]">
     {thumbnail ? (
       <Image
         src={thumbnail}
@@ -29,32 +30,38 @@ const thumbnailAlt = `Screenshot of ${title}`;
         width={800}
         height={450}
         loading="lazy"
-        class="w-full h-full object-cover"
+        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
       />
     ) : (
-      <img src={UI_IMAGES.inProgressThumbnail} alt="Project in progress" width={800} height={450} loading="lazy" class="w-full h-full object-cover" />
+      <img src={UI_IMAGES.inProgressThumbnail} alt="Project in progress" width={800} height={450} loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
     )}
 
-    <!-- Accent banner behind title -->
-    <div class="absolute inset-x-0 bottom-0 bg-[var(--color-accent)]/90 px-4 py-3 z-10">
-      <h3 class="text-sm font-semibold text-white leading-snug group-hover:text-white/80 group-focus-visible:text-white/80 transition-colors">
+    <!-- Dark Blue / Indigo gradient banner behind title (Template section 9) -->
+    <div
+      class="absolute inset-x-0 bottom-0 px-4 py-3 z-10 flex items-center justify-between gap-2"
+      style="background: linear-gradient(135deg, rgba(30, 30, 46, 0.94) 0%, rgba(45, 43, 85, 0.94) 50%, rgba(79, 70, 229, 0.94) 100%);"
+    >
+      <h3 class="text-[14px] font-bold tracking-[-0.01em] text-white leading-snug group-hover:text-white/90 transition-colors">
         {title}
       </h3>
+      <span class="shrink-0 px-2 py-0.5 rounded-[20px] text-[10px] font-semibold bg-white/15 text-white/90">
+        {year}
+      </span>
     </div>
   </div>
 
-  <!-- Below-image strip -->
+  <!-- Below-image card body (Template 5.2 .card-body) -->
   <div class="p-4">
-    <!-- Year -->
-    <p class="text-xs text-[var(--color-text-muted)] tracking-wide mb-2">{year}</p>
-
     <!-- Summary -->
-    <p class="text-sm text-[var(--color-text)] leading-relaxed mb-4">{summary}</p>
+    <p class="text-[13px] text-[var(--text-secondary)] leading-relaxed mb-4">{summary}</p>
 
-    <!-- Tags -->
-    <div class="flex flex-wrap gap-2">
+    <!-- Tags (Template 5.5 .badge) -->
+    <div class="flex flex-wrap gap-1.5">
       {tags.map((tag) => (
-        <span class="text-[10px] font-semibold tracking-widest uppercase px-2 py-1 rounded bg-[var(--color-bg-subtle)] border border-[var(--color-border)] text-[var(--color-text-muted)]">
+        <span
+          class="inline-flex items-center px-2.5 py-0.5 rounded-[20px] text-[11px] font-semibold"
+          style="background: var(--primary-light); color: var(--primary); border: 1px solid var(--border-focus);"
+        >
           {tag}
         </span>
       ))}

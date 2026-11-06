@@ -5,88 +5,118 @@ import profileReal   from '../assets/profile real.png';
 import profileSketch from '../assets/profile sketch.png';
 ---
 
-<section class="bg-bg">
-  <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
-  <div class="flex flex-col md:flex-row md:items-start md:gap-16">
+<section class="relative overflow-hidden bg-[var(--bg-primary)]">
+  <!-- Decorative radial blobs from template section 5.13 / 9 -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-48 -right-32 h-[520px] w-[520px] rounded-full"
+    style="background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -bottom-40 -left-24 h-[420px] w-[420px] rounded-full"
+    style="background: radial-gradient(circle, rgba(8, 145, 178, 0.06) 0%, transparent 70%);"
+  ></div>
 
-    <!-- Left: text content -->
-    <div class="flex-1">
-      <!-- Status line -->
-      <div class="flex items-center gap-2 mb-8">
-        <span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-        <span class="text-xs font-semibold tracking-widest uppercase text-text-muted">
-          CS Graduate · Open to opportunities
-        </span>
-      </div>
+  <div class="relative z-10 mx-auto max-w-5xl px-6 py-16 md:py-24">
+    <div class="flex flex-col md:flex-row md:items-start md:gap-16">
 
-      <!-- Stacked headline -->
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight tracking-tight text-text mb-6">
-        Engineer.<br />
-        Problem solver.<br />
-        <span class="text-accent">Builder.</span>
-      </h1>
+      <!-- Left: text content -->
+      <div class="flex-1">
+        <!-- Status pill (Template 5.5 .badge-green + 6.1 pulse dot) -->
+        <div class="mb-7">
+          <span
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-[20px] text-[11px] font-semibold tracking-wide uppercase"
+            style="background: var(--health-green-bg); color: var(--health-green); border: 1px solid var(--health-green-border);"
+          >
+            <span class="inline-block w-2 h-2 rounded-full bg-[var(--health-green)] animate-pulse"></span>
+            CS Graduate · Open to opportunities
+          </span>
+        </div>
 
-      <!-- Subtitle -->
-      <p class="text-lg text-text-muted leading-relaxed max-w-md mb-10">
-        Computer Science graduate from The University of Leicester with experience in popular industry standard technologies,
-        such as Java, Python, JavaScript and more. Tailoring skills towards data science,
-        and agentic AI integrations.
-      </p>
+        <!-- Stacked headline -->
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.1] tracking-[-0.03em] text-[var(--text-primary)] mb-6">
+          Engineer.<br />
+          Problem solver.<br />
+          <span
+            class="bg-clip-text text-transparent"
+            style="background-image: linear-gradient(135deg, var(--primary), var(--accent-cyan));"
+          >
+            Builder.
+          </span>
+        </h1>
 
-      <!-- CTA buttons -->
-      <div class="flex flex-wrap gap-3 mb-12">
-        <a
-          href="/projects/"
-          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold bg-accent text-bg hover:bg-accent-hover transition-colors"
-        >
-          View Projects
-        </a>
-        <a
-          href="/cv/"
-          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold border border-border text-text hover:border-accent hover:text-accent transition-colors"
-        >
-          Download CV
-        </a>
-        <a
-          href="https://github.com/zaina0k"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center px-5 py-2.5 rounded text-sm font-semibold border border-border text-text hover:border-accent hover:text-accent transition-colors"
-        >
-          GitHub ↗
-        </a>
-      </div>
+        <!-- Subtitle -->
+        <p class="text-[15px] text-[var(--text-secondary)] leading-relaxed max-w-md mb-9">
+          Computer Science graduate from The University of Leicester with experience in popular industry standard technologies,
+          such as Java, Python, JavaScript and more. Tailoring skills towards data science,
+          and agentic AI integrations.
+        </p>
 
-      <!-- Achievements and Certifications -->
-      <div>
-        <p class="text-xs font-semibold tracking-widest uppercase text-text-muted mb-4">Achievements and Certifications</p>
-        <div class="flex flex-wrap gap-8 pt-8 border-t border-border">
-          <StatCard value="1st Class Honours" label="BSc Computer Science" />
-          <StatCard value="AWS Cloud Practitioner" label="In Progress" />
+        <!-- CTA buttons (Template 5.1 .btn-primary & .btn-secondary) -->
+        <div class="flex flex-wrap gap-3 mb-12">
+          <a
+            href="/projects/"
+            class="inline-flex items-center px-5 py-2.5 rounded-[6px] text-[13px] font-semibold bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] hover:-translate-y-px transition-all duration-150"
+            style="box-shadow: var(--shadow-sm);"
+          >
+            View Projects
+          </a>
+          <a
+            href="/cv/"
+            class="inline-flex items-center px-5 py-2.5 rounded-[6px] text-[13px] font-semibold bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] hover:bg-[var(--bg-hover)] hover:border-[var(--border-focus)] hover:text-[var(--primary)] transition-all duration-150"
+            style="box-shadow: var(--shadow-sm);"
+          >
+            Download CV
+          </a>
+          <a
+            href="https://github.com/zaina0k"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center px-5 py-2.5 rounded-[6px] text-[13px] font-semibold bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] hover:bg-[var(--bg-hover)] hover:border-[var(--border-focus)] hover:text-[var(--primary)] transition-all duration-150"
+            style="box-shadow: var(--shadow-sm);"
+          >
+            GitHub ↗
+          </a>
+        </div>
+
+        <!-- Achievements and Certifications (Template 5.3 KPI Grid) -->
+        <div>
+          <p class="text-[10px] font-bold tracking-[0.05em] uppercase text-[var(--text-secondary)] mb-3">
+            Achievements and Certifications
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg">
+            <StatCard value="1st Class Honours" label="BSc Computer Science" />
+            <StatCard value="AWS Cloud Practitioner" label="In Progress" />
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Right: profile photo (light = real photo, dark = sketch) -->
-    <div class="shrink-0 order-first md:order-last mb-8 md:mb-0">
-      <Image
-        src={profileReal}
-        alt="Zain Altaf"
-        width={512}
-        height={512}
-        densities={[1, 2, 3]}
-        class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-border dark:hidden"
-      />
-      <Image
-        src={profileSketch}
-        alt="Zain Altaf"
-        width={512}
-        height={512}
-        densities={[1, 2, 3]}
-        class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-border hidden dark:block"
-      />
-    </div>
+      <!-- Right: profile photo (light = real photo, dark = sketch) -->
+      <div class="shrink-0 order-first md:order-last mb-8 md:mb-0">
+        <div
+          class="p-1.5 rounded-[16px] bg-[var(--bg-card)] border border-[var(--border-color)]"
+          style="box-shadow: var(--shadow-lg);"
+        >
+          <Image
+            src={profileReal}
+            alt="Zain Altaf"
+            width={512}
+            height={512}
+            densities={[1, 2, 3]}
+            class="w-48 h-48 md:w-64 md:h-64 rounded-[12px] object-cover dark:hidden"
+          />
+          <Image
+            src={profileSketch}
+            alt="Zain Altaf"
+            width={512}
+            height={512}
+            densities={[1, 2, 3]}
+            class="w-48 h-48 md:w-64 md:h-64 rounded-[12px] object-cover hidden dark:block"
+          />
+        </div>
+      </div>
 
-  </div>
+    </div>
   </div>
 </section>

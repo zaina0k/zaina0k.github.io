@@ -9,25 +9,31 @@ const projects = allProjects.sort((a, b) => a.data.sortOrder - b.data.sortOrder)
 <section class="mx-auto max-w-5xl px-6 py-16">
 
   <!-- Section header -->
-  <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-10 gap-4">
-    <div class="flex items-baseline gap-4">
-      <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">02 / Projects</span>
-      <h2 class="text-2xl font-semibold tracking-tight text-[var(--color-text)]">Selected Work</h2>
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
+    <div class="flex items-center gap-3">
+      <span
+        class="inline-flex items-center px-2.5 py-0.5 rounded-[20px] text-[11px] font-semibold uppercase tracking-[0.05em]"
+        style="background: var(--primary-light); color: var(--primary); border: 1px solid var(--border-focus);"
+      >
+        02 / Projects
+      </span>
+      <h2 class="text-2xl font-bold tracking-[-0.02em] text-[var(--text-primary)]">Selected Work</h2>
     </div>
     <a
       href="/projects/"
-      class="text-sm font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
+      class="inline-flex items-center gap-1 self-start sm:self-auto px-3.5 py-1.5 rounded-[6px] text-[12px] font-semibold bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)] hover:bg-[var(--bg-hover)] hover:border-[var(--border-focus)] hover:text-[var(--primary)] transition-all duration-150"
+      style="box-shadow: var(--shadow-sm);"
     >
       View all projects ↗
     </a>
   </div>
 
-  <p class="text-[var(--color-text-muted)] mb-10 max-w-lg">
+  <p class="text-[14px] text-[var(--text-secondary)] mb-8 max-w-lg">
     Four projects that show how I think, build, and collaborate.
   </p>
 
   <!-- Cards grid -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
     {projects.map((project) => (
       <ProjectCard
         title={project.data.title}
