@@ -1,8 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import StatCard from './StatCard.astro';
-import profileReal   from '../assets/profile real.png';
-import profileSketch from '../assets/profile sketch.png';
+import profile2026 from '../assets/profile-2026.jpeg';
 ---
 
 <section class="bg-bg">
@@ -67,10 +66,10 @@ import profileSketch from '../assets/profile sketch.png';
       </div>
     </div>
 
-    <!-- Right: profile photo (light = real photo, dark = sketch) -->
+    <!-- Right: profile photo (same photo in light and dark) -->
     <div class="shrink-0 order-first md:order-last mb-8 md:mb-0">
       <Image
-        src={profileReal}
+        src={profile2026}
         alt="Zain Altaf"
         width={512}
         height={512}
@@ -78,7 +77,7 @@ import profileSketch from '../assets/profile sketch.png';
         class="w-48 h-48 md:w-64 md:h-64 rounded-xl object-cover border border-border dark:hidden"
       />
       <Image
-        src={profileSketch}
+        src={profile2026}
         alt="Zain Altaf"
         width={512}
         height={512}
