@@ -35,7 +35,6 @@ Do not invent requirements. If a behaviour is not in `docs/prd.md`, it is not in
 - Stage explicit paths only; never `git add -A` or `git add .`. *Why: another session may have uncommitted work in the same checkout.*
 - Before any state-changing git operation, run `ListAgents` and `git worktree list`, and never run git in a checkout another session is using. Build in a worktree under `.claude/worktrees/`. *Why: two sessions in one checkout overwrite each other's work.*
 - Nothing is committed directly to `dev` or `main`; commits go on `cp/<n>-<slug>`. `.githooks/pre-commit` blocks a non-merge commit there at the git level; `bin/claude_merge_guard.sh` (a Claude Code hook) blocks the same for Claude-run commands and also catches routes the git hook can't see, such as `--no-verify`, cherry-pick, revert, rebase, or a fast-forward merge. `SKIP_BRANCH_GUARD=1` is for the one-time bootstrap and genuine emergencies only, and the owner is told. *Why: the merge commit is what marks where work began and ended.*
-- No `Co-Authored-By` or other AI attribution in commits. *Why: commits are authored by the owner alone.*
 
 **Code**
 - Content is data: projects are Markdown checked by the schema in `src/content.config.ts`; the build fails loudly if one is wrong. *Why: a broken project must not ship quietly.*

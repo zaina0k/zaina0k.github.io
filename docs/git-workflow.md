@@ -39,7 +39,6 @@ Refs: PF<n>
 - `type` is `feat`, `fix`, `docs`, `chore`, `style` or `content`; it should agree with the branch kind.
 - The `Checkpoint:` trailer is on every commit, merge commits included.
 - `Refs: PF<n>` appears when the commit touches a requirement in `docs/prd.md`; omit it otherwise.
-- **No AI attribution lines of any kind.** Commits are authored by the owner only.
 
 ## Commit as you build
 
