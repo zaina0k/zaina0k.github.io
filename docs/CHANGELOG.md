@@ -15,7 +15,7 @@ All notable changes to the portfolio site and the way it is built are recorded h
 
 ### Added
 
-- The CV PDF is now named "Zain Altaf CV.pdf" (served at `/Zain%20Altaf%20CV.pdf`), so a downloaded copy carries a proper name; the old `/cv.pdf` address no longer exists. (PF7)
+- The CV PDF is now named "Zain-Altaf-CV.pdf" (served at `/Zain-Altaf-CV.pdf`), so a downloaded copy carries a proper name; the old `/cv.pdf` address no longer exists. (PF7)
 - The theme button now cycles System, Dark and Light; System follows the visitor's device setting and updates if it changes (PF8).
 - The About timeline now shows graduation in 2026 and a new entry for the AI Integration Consultant role at DG Private Hire.
 

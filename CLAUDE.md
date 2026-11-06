@@ -49,7 +49,7 @@ src/pages/          index, about, contact, cv, 404, projects/index, projects/[sl
 src/components/     .astro (static) and .tsx (islands: ThemeToggle, ContactForm, MediaCarousel, ProjectFilter)
 src/content/projects/*.md   one file per project; schema in src/content.config.ts
 src/layouts/        BaseLayout.astro
-public/             served as-is (CNAME, Zain Altaf CV.pdf, favicons, OG and project images)
+public/             served as-is (CNAME, Zain-Altaf-CV.pdf, favicons, OG and project images)
 .claude/            settings.json (deny list and merge guard; the allow-list is in ~/.claude/settings.json) and skills/
 bin/                changelog checker, merge guard, conventions audit, and their tests
 ```
