@@ -9,26 +9,34 @@ const projectLinks = [
 ];
 ---
 
-<footer class="border-t border-[var(--color-border)] bg-[var(--color-bg)]">
+<footer class="border-t border-white/10 bg-[#1e1e2e] text-[#cbd5e1]">
   <div class="mx-auto max-w-5xl px-6 py-12">
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
 
-      <!-- Column 1: Branding -->
-      <div class="flex flex-col gap-2">
-        <span class="text-sm font-semibold text-[var(--color-text)]">© {year} Zain Altaf</span>
-        <span class="text-xs text-[var(--color-text-muted)]">Built in Leicester.</span>
-        <span class="text-xs text-[var(--color-text-muted)]">Code, coffee, and curiosity.</span>
+      <!-- Column 1: Branding (Template 4.2 Sidebar Brand / User Footer) -->
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-2.5">
+          <span
+            class="inline-flex items-center justify-center w-8 h-8 rounded-[8px] text-xs font-extrabold text-white shadow-sm"
+            style="background: linear-gradient(135deg, #4f46e5, #0891b2);"
+          >
+            ZA
+          </span>
+          <span class="text-sm font-bold text-white tracking-[-0.01em]">© {year} Zain Altaf</span>
+        </div>
+        <span class="text-xs text-white/55">Built in Leicester.</span>
+        <span class="text-xs text-white/55">Code, coffee, and curiosity.</span>
       </div>
 
       <!-- Column 2: Projects -->
       <div class="flex flex-col gap-3">
-        <span class="text-[10px] font-bold tracking-widest uppercase text-[var(--color-text-muted)]">Projects</span>
+        <span class="text-[10px] font-bold tracking-[0.05em] uppercase text-white/45">Projects</span>
         <ul class="flex flex-col gap-2">
           {projectLinks.map(({ href, label }) => (
             <li>
               <a
                 href={href}
-                class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+                class="text-[13px] font-medium text-[#cbd5e1] hover:text-white transition-colors duration-150"
               >
                 {label}
               </a>
@@ -39,12 +47,12 @@ const projectLinks = [
 
       <!-- Column 3: Connect -->
       <div class="flex flex-col gap-3">
-        <span class="text-[10px] font-bold tracking-widest uppercase text-[var(--color-text-muted)]">Connect</span>
+        <span class="text-[10px] font-bold tracking-[0.05em] uppercase text-white/45">Connect</span>
         <ul class="flex flex-col gap-2">
           <li>
             <a
               href="mailto:dev@zainaltaf.com"
-              class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+              class="text-[13px] font-medium text-[#cbd5e1] hover:text-[#22d3ee] transition-colors duration-150"
             >
               Email
             </a>
@@ -54,7 +62,7 @@ const projectLinks = [
               href="https://www.linkedin.com/in/m-z-altaf/"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+              class="text-[13px] font-medium text-[#cbd5e1] hover:text-[#22d3ee] transition-colors duration-150"
             >
               LinkedIn ↗
             </a>
@@ -64,7 +72,7 @@ const projectLinks = [
               href="https://github.com/zaina0k"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+              class="text-[13px] font-medium text-[#cbd5e1] hover:text-[#22d3ee] transition-colors duration-150"
             >
               GitHub ↗
             </a>

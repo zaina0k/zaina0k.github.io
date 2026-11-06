@@ -39,7 +39,6 @@ Refs: PF<n>
 - `type` is `feat`, `fix`, `docs`, `chore`, `style` or `content`; it should agree with the branch kind.
 - The `Checkpoint:` trailer is on every commit, merge commits included.
 - `Refs: PF<n>` appears when the commit touches a requirement in `docs/prd.md`; omit it otherwise.
-- **No AI attribution lines of any kind.** Commits are authored by the owner only.
 
 ## Commit as you build
 
@@ -101,9 +100,16 @@ So against a human at a terminal the hook is a guard rail, not a lock: five rout
 
 Rollback note: reverting a bad release on `main` therefore needs `SKIP_BRANCH_GUARD=1` for the revert commit, or a `cp/`-style branch with a `--no-ff` merge of the revert. The latter is preferred.
 
-## Worktrees
+## Branches, and when a worktree is warranted
 
-A second session must never share a checkout with the first. Use a worktree:
+**Default: a plain branch in the main checkout.** Cut `cp/<n>-<slug>` from `dev` with `git switch -c`, commit there, merge back with `--no-ff`. Most checkpoints are small and need nothing more.
+
+**Use a worktree only when both are true:**
+
+1. the feature is significantly large (it will stay open across many commits or sessions), **and**
+2. another session or another feature is being built in the same repo at the same time (`ListAgents` shows a peer on this repo, or `git worktree list` shows an open feature branch).
+
+If either is false, do not make a worktree. A session in the main checkout must still never run git in a checkout another session is using.
 
 ```bash
 git worktree list                                              # check first
@@ -113,9 +119,9 @@ cd .claude/worktrees/cp-16-slug
 ln -s ../../../node_modules node_modules
 ```
 
-`.claude/worktrees/` is gitignored. Do not `cd` out of a worktree into another checkout and then run a state-changing git command.
+`.claude/worktrees/` is gitignored. Do not `cd` out of a worktree into another checkout and then run a state-changing git command. A branch can be checked out in only one place, so remove the worktree (`git worktree remove`, with the owner's say-so) before switching to its branch in the main checkout.
 
-A new worktree already has the git hooks enabled (`core.hooksPath` is repository-wide, not per-worktree) — don't re-run `git config core.hooksPath .githooks` there. Launch Claude from the new worktree's own root (or the repo root), not from a subdirectory such as `.claude/worktrees/` that holds all the worktrees: `bin/claude_merge_guard.sh` is located relative to the launch directory, and the wrong one weakens that guard (see CLAUDE.md).
+If you do use a worktree: it already has the git hooks enabled (`core.hooksPath` is repository-wide, not per-worktree) — don't re-run `git config core.hooksPath .githooks` there. Launch Claude from the new worktree's own root (or the repo root), not from a subdirectory such as `.claude/worktrees/` that holds all the worktrees: `bin/claude_merge_guard.sh` is located relative to the launch directory, and the wrong one weakens that guard (see CLAUDE.md).
 
 ## One-time bootstrap exceptions (CP-16)
 

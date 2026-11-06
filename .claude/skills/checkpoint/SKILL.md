@@ -22,7 +22,7 @@ git worktree list
 
 - **Committed as built, or in one lump?** Compare the commit list with the diff. One commit for many concerns, or several commits stamped within a minute of the report, did not follow `docs/git-workflow.md`. Say so in part 4 of the report. Do not quietly commit the pile and present a tidy history.
 - **Anything uncommitted?** `git status` should be clean, or every remaining file has a nameable reason (for example, another session's work in a shared checkout; never stage that).
-- **Does every commit carry** `Checkpoint: CP-<n> - <name>` and no AI-attribution line? `git log dev..HEAD --format=%B | grep -c "Checkpoint:"` against the commit count; `grep -ci "co-authored"` must be 0.
+- **Does every commit carry** `Checkpoint: CP-<n> - <name>`? `git log dev..HEAD --format=%B | grep -c "Checkpoint:"` against the commit count.
 - **Changelog entry?** If anything a visitor would notice, or anything about how the repo is worked on, changed, `docs/CHANGELOG.md` needs an entry on this branch (use the `changelog-entry` skill).
 - **`docs/prd.md` revision log** updated if a requirement was added, changed or clarified.
 - **`CLAUDE.md`, `docs/architecture.md`, `docs/deployment.md` still true?** A new dependency, page, script or workflow change belongs in them.

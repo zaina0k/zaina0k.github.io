@@ -2,44 +2,87 @@
 // Copy updated manually each month — no props needed
 ---
 
-<section class="bg-[var(--color-bg-subtle)]">
+<section class="bg-[var(--bg-tertiary)] border-y border-[var(--border-color)]">
   <div class="mx-auto max-w-5xl px-6 py-16">
 
     <!-- Section header -->
-    <div class="flex items-baseline justify-between mb-10">
-      <div class="flex items-baseline gap-4">
-        <span class="text-xs font-semibold tracking-widest uppercase text-[var(--color-text-muted)]">01 / Now</span>
-        <h2 class="text-2xl font-semibold tracking-tight text-[var(--color-text)]">Currently</h2>
+    <div class="flex items-center justify-between mb-8">
+      <div class="flex items-center gap-3">
+        <span
+          class="inline-flex items-center px-2.5 py-0.5 rounded-[20px] text-[11px] font-semibold uppercase tracking-[0.05em]"
+          style="background: var(--primary-light); color: var(--primary); border: 1px solid var(--border-focus);"
+        >
+          01 / Now
+        </span>
+        <h2 class="text-2xl font-bold tracking-[-0.02em] text-[var(--text-primary)]">Currently</h2>
       </div>
-      <span class="text-xs text-[var(--color-text-muted)] tracking-wide hidden sm:block">Updated Jun 2026</span>
+      <span
+        class="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-[20px] text-[11px] font-semibold"
+        style="background: var(--health-gray-bg); color: var(--health-gray); border: 1px solid var(--health-gray-border);"
+      >
+        Updated Jun 2026
+      </span>
     </div>
 
-    <!-- Cards grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- KPI Cards grid (Template 5.3) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
       <!-- Building -->
-      <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 flex flex-col gap-3">
-        <span class="text-[10px] font-bold tracking-widest uppercase text-[var(--color-accent)]">Building</span>
-        <p class="text-sm font-medium text-[var(--color-text)]">Rebuilding my portfolio</p>
-        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+      <div
+        class="rounded-[10px] border border-[var(--border-color)] border-t-2 border-t-[var(--primary)] bg-[var(--bg-card)] p-5 flex flex-col gap-2.5 hover:-translate-y-px transition-all duration-200"
+        style="box-shadow: var(--shadow-sm);"
+      >
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-bold tracking-[0.05em] uppercase text-[var(--text-secondary)]">Building</span>
+          <span
+            class="inline-flex items-center px-2 py-0.5 rounded-[20px] text-[10px] font-semibold"
+            style="background: var(--primary-light); color: var(--primary);"
+          >
+            Active
+          </span>
+        </div>
+        <p class="text-[15px] font-bold tracking-[-0.01em] text-[var(--text-primary)]">Rebuilding my portfolio</p>
+        <p class="text-[13px] text-[var(--text-secondary)] leading-relaxed">
           Migrating from Jekyll to Astro with a custom design system. You're looking at it.
         </p>
       </div>
 
       <!-- Reading -->
-      <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 flex flex-col gap-3">
-        <span class="text-[10px] font-bold tracking-widest uppercase text-[var(--color-accent)]">Reading</span>
-        <p class="text-sm font-medium text-[var(--color-text)]">The Pragmatic Programmer</p>
-        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+      <div
+        class="rounded-[10px] border border-[var(--border-color)] border-t-2 border-t-[var(--accent-cyan)] bg-[var(--bg-card)] p-5 flex flex-col gap-2.5 hover:-translate-y-px transition-all duration-200"
+        style="box-shadow: var(--shadow-sm);"
+      >
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-bold tracking-[0.05em] uppercase text-[var(--text-secondary)]">Reading</span>
+          <span
+            class="inline-flex items-center px-2 py-0.5 rounded-[20px] text-[10px] font-semibold"
+            style="background: var(--health-blue-bg); color: var(--health-blue);"
+          >
+            Book
+          </span>
+        </div>
+        <p class="text-[15px] font-bold tracking-[-0.01em] text-[var(--text-primary)]">The Pragmatic Programmer</p>
+        <p class="text-[13px] text-[var(--text-secondary)] leading-relaxed">
           By Andy Hunt and Dave Thomas. Working through timeless advice on writing better software and growing as a developer.
         </p>
       </div>
 
       <!-- Prepping -->
-      <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 flex flex-col gap-3">
-        <span class="text-[10px] font-bold tracking-widest uppercase text-[var(--color-accent)]">Prepping</span>
-        <p class="text-sm font-medium text-[var(--color-text)]">Interview preparation</p>
-        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+      <div
+        class="rounded-[10px] border border-[var(--border-color)] border-t-2 border-t-[var(--health-green)] bg-[var(--bg-card)] p-5 flex flex-col gap-2.5 hover:-translate-y-px transition-all duration-200"
+        style="box-shadow: var(--shadow-sm);"
+      >
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-bold tracking-[0.05em] uppercase text-[var(--text-secondary)]">Prepping</span>
+          <span
+            class="inline-flex items-center px-2 py-0.5 rounded-[20px] text-[10px] font-semibold"
+            style="background: var(--health-green-bg); color: var(--health-green);"
+          >
+            Daily
+          </span>
+        </div>
+        <p class="text-[15px] font-bold tracking-[-0.01em] text-[var(--text-primary)]">Interview preparation</p>
+        <p class="text-[13px] text-[var(--text-secondary)] leading-relaxed">
           LeetCoding and practising interview questions to sharpen problem-solving and get ready for roles.
         </p>
       </div>
